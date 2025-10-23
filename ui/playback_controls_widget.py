@@ -51,8 +51,10 @@ class PlaybackControlsWidget(QtWidgets.QWidget):
         layout.setSpacing(10)
 
         # Play/Pause button
-        self.play_button = QtWidgets.QPushButton("Play")
-        self.play_button.setFixedWidth(60)
+        # Show combined label 'Play/Pause' as the default, but toggle to
+        # 'Pause' when playing and 'Play/Pause' when stopped for clarity.
+        self.play_button = QtWidgets.QPushButton("Play/Pause")
+        self.play_button.setFixedWidth(80)
 
         # Seek slider
         self.seek_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
@@ -150,7 +152,9 @@ class PlaybackControlsWidget(QtWidgets.QWidget):
     def _set_playing_state(self, is_playing: bool) -> None:
         """Update the play/pause button state."""
         self._is_playing = is_playing
-        self.play_button.setText("Pause" if is_playing else "Play")
+        # When playing, show 'Pause' to indicate available action.
+        # When not playing, show the combined label 'Play/Pause'.
+        self.play_button.setText("Pause" if is_playing else "Play/Pause")
 
     def set_playing(self, is_playing: bool) -> None:
         """

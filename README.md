@@ -1,201 +1,210 @@
-# Video Terminal - Pilot (Linux) — Python PyQt5 version
+# Video Terminal App
 
-Simple pilot application that displays a video player, text content from GitHub releases, a playlist, and an embedded terminal.
+This is a simple video player application that shows educational videos, text content, and includes a built-in terminal. It's designed for learning about computer security and programming topics.
 
-## Project Structure
+## ⚠️ IMPORTANT WARNING: This is NOT a Streaming App
 
-This application follows a modular, object-oriented architecture:
+**Videos are downloaded to your computer first, then played!**
 
-```text
-├── controllers/          # Application controllers
-│   └── app_controller.py # Main application controller
-├── models/              # Data models and configuration
-│   ├── config.py        # Application configuration
-│   └── release_video.py # Video release data model
-├── services/            # Business logic services
-│   ├── download_service.py  # Asset downloading
-│   ├── github_service.py    # GitHub API integration
-│   ├── terminal_service.py  # Terminal embedding
-│   └── video_service.py     # VLC video playback
-├── ui/                  # User interface components
-│   ├── main_window.py       # Main application window
-│   ├── playlist_widget.py   # Video playlist display
-│   ├── playback_controls_widget.py  # Video controls
-│   ├── terminal_widget.py   # Terminal embedding widget
-│   ├── text_content_widget.py       # Text display widget
-│   └── video_widget.py      # Video display widget
-├── tests/               # Comprehensive test suite
-│   ├── conftest.py      # Test fixtures and configuration
-│   ├── test_*.py        # Unit and integration tests
-│   └── test_integration.py
-├── main.py              # Application entry point
-├── requirements.txt     # Python dependencies
-├── run.sh              # Launcher script
-└── pytest.ini          # Test configuration
-```
+- Each video must be fully downloaded before it can play
+- Videos can be large (100MB-200MB each)
+- Downloads go to your `Downloads` folder and stay on your computer
+- You need enough free space and a good internet connection
+- First time playing a video may take several minutes to download
+- Once downloaded, videos play quickly on subsequent views
 
-## Features
+## What This App Does
 
-- Upper-left: video player (plays .webm downloaded from GitHub release assets using VLC)
-- Upper-right: textual content (release body or description from .txt files)
-- Lower-left: playlist of available releases with .webm assets
-- Lower-right: embedded terminal (uses xterm -into)
-- Playback controls: play/pause buttons, seek slider, volume slider
-- Download progress: progress bar shows download status
-- Course section selection: Choose from InfoSec, Python, Linux, etc.
+The app has 4 main sections:
 
-## Requirements (Linux)
+- **Top Left**: Video player that plays educational videos
+- **Top Right**: Text content that explains what's in the videos
+- **Bottom Left**: List of available videos you can choose from
+- **Bottom Right**: Built-in terminal (command line) for practicing commands
 
-- Python 3.8+
-- PyQt5
-- python-vlc (requires VLC installed)
-- requests
-- System: X11-based desktop (xterm embedding uses X11 window IDs)
-- VLC installed (for python-vlc to work)
-- xterm installed (or modify code to use another terminal emulator)
+## System Requirements
 
-## Install Python dependencies
+You need a Linux computer with:
 
-On newer Debian/Ubuntu systems, pip installs are restricted. Use a virtual environment:
+- Ubuntu, Debian, or similar Linux distribution
+- Internet connection
+- **At least 5GB free space on your hard drive** (videos are large and stored locally)
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
+## Step-by-Step Installation
 
-Or, if you prefer system-wide (not recommended), use:
+### Step 1: Install Required System Software
 
-```bash
-python3 -m pip install --break-system-packages -r requirements.txt
-```
-
-Install system packages (Debian/Ubuntu example)
+Open a terminal and run these commands one by one:
 
 ```bash
 sudo apt update
-sudo apt install -y vlc xterm
+sudo apt install -y python3 python3-pip vlc xterm
 ```
 
-## Running the app
+This installs Python, video player software, and terminal emulator.
 
-1. Optionally export the repo you want to point to:
+### Step 2: Install Python Libraries
+
+In the same terminal, go to the app folder and install the required libraries:
 
 ```bash
-export GITHUB_REPO="st93642/Assets"
+cd /home/altin/Desktop/InfoSec_Course
+pip3 install -r requirements.txt
 ```
 
-2. If using virtual environment, activate it:
+## How to Run the App
 
-```bash
-source venv/bin/activate
-```
+### Method 1: Using the Launcher Script (Easiest)
 
-3. Run:
+1. Open a terminal
+2. Go to the app folder:
 
-```bash
-python main.py
-```
+   ```bash
+   cd /home/altin/Desktop/InfoSec_Course
+   ```
 
-Or use the launcher script:
+3. Make the launcher script executable:
 
-```bash
-./run.sh
-```
+   ```bash
+   chmod +x run.sh
+   ```
 
-## Testing
+4. Run the app:
 
-The application includes a comprehensive test suite with unit tests, integration tests, and mocking for external dependencies.
+   ```bash
+   ./run.sh
+   ```
 
-### Running Tests
+### Method 2: Direct Python Run
 
-```bash
-# Install test dependencies (included in requirements.txt)
-pip install -r requirements.txt
+1. Open a terminal
+2. Go to the app folder:
 
-# Run all tests
-pytest
+   ```bash
+   cd /home/altin/Desktop/InfoSec_Course
+   ```
 
-# Run with coverage report
-pytest --cov=. --cov-report=html
+3. Run the app:
 
-# Run specific test categories
-pytest -m unit          # Unit tests only
-pytest -m integration   # Integration tests only
+   ```bash
+   python3 main.py
+   ```
 
-# Run tests for specific module
-pytest tests/test_models.py
-```
+## How to Use the App
 
-### Test Structure
+1. When the app opens, you'll see the main window with 4 sections
+2. Click on a video in the playlist (bottom left) to select it
+3. **The video will download first** (this may take several minutes for large videos)
+4. Once downloaded, the video will start playing automatically
+5. Use the play/pause button to control playback
+6. The text content (top right) will show information about the video
+7. The terminal (bottom right) lets you practice commands while watching
 
-- **Unit Tests**: Test individual components in isolation
-- **Integration Tests**: Test interactions between components
-- **Mocking**: External dependencies (VLC, GitHub API, filesystem) are mocked
-- **Coverage**: Target 80%+ code coverage across all modules
+## Controls
 
-## Architecture Overview
+- **Play/Pause Button**: Click to start or stop the video
+- **Seek Slider**: Drag to jump to different parts of the video
+- **Volume Slider**: Adjust the sound level
+- **Progress Bar**: Shows download progress for videos
 
-### Core Components
+## Troubleshooting
 
-1. **Application Controller** (`controllers/app_controller.py`)
-   - Manages application lifecycle
-   - Handles section selection dialog
-   - Coordinates between services
+### App Won't Start
 
-2. **Data Models** (`models/`)
-   - `ApplicationConfig`: Configuration management
-   - `ReleaseVideo`: GitHub release video data
+**Problem**: You see an error when trying to run the app
 
-3. **Services** (`services/`)
-   - `GitHubService`: GitHub API integration
-   - `DownloadService`: Asset downloading with progress
-   - `VideoService`: VLC video playback
-   - `TerminalService`: xterm embedding
+**Solutions**:
 
-4. **UI Components** (`ui/`)
-   - Modular widgets for each UI section
-   - Signal-based communication
-   - Qt event handling
+1. Make sure you installed all system requirements:
 
-### Key Design Patterns
+   ```bash
+   sudo apt install -y python3 python3-pip vlc xterm
+   ```
 
-- **Dependency Injection**: Services are injected into UI components
-- **Observer Pattern**: Qt signals for component communication
-- **Factory Pattern**: Service instantiation through configuration
-- **Strategy Pattern**: Different download/cache strategies
-- **Adapter Pattern**: VLC and xterm integration
+2. Install Python libraries:
 
-## Development
+   ```bash
+   pip3 install -r requirements.txt
+   ```
 
-### Code Quality
+3. Try running with Python 3 specifically:
 
-- Full type hints throughout codebase
-- Comprehensive docstrings for all public APIs
-- Modular architecture for maintainability
-- Extensive test coverage
+   ```bash
+   python3 main.py
+   ```
 
-### Adding New Features
+### Video Won't Play
 
-1. Create data models in `models/`
-2. Implement business logic in `services/`
-3. Build UI components in `ui/`
-4. Add comprehensive tests
-5. Update documentation
+**Problem**: Video downloads but won't play
 
-## Notes
+**Solutions**:
 
-- Downloads are cached in `~/Downloads/` so they are visible to the user.
-- The app uses VLC for video playback via python-vlc. Ensure VLC is installed and accessible.
-- Embedding terminals requires xterm. If you don't have xterm, the app will attempt to open an external terminal.
-- If python-vlc cannot find VLC, ensure VLC is installed and available on the PATH.
+1. Make sure VLC is installed:
 
-## Limitations and next steps
+   ```bash
+   sudo apt install -y vlc
+   ```
 
-- Add better error handling and progress UI when downloading large assets.
-- Support authentication for private repositories.
-- Add play/pause/seek controls and video metadata UI.
-- Expand test coverage for UI components.
-- Add configuration file support.
-- Implement video format conversion.
-- Add offline mode with cached content.
+2. Check if the video file downloaded to your Downloads folder
+3. Try restarting the app
+
+### Terminal Not Working
+
+**Problem**: The built-in terminal section is blank or not responding
+
+**Solutions**:
+
+1. Make sure xterm is installed:
+
+   ```bash
+   sudo apt install -y xterm
+   ```
+
+2. The terminal should work automatically when the app starts
+
+### App Runs But Looks Wrong
+
+**Problem**: Windows don't appear correctly or text is cut off
+
+**Solutions**:
+
+1. Make sure you're running on a Linux desktop (not server)
+2. Try resizing the main window
+3. Restart the app
+
+### Videos Don't Download
+
+**Problem**: Clicking videos doesn't start download
+
+**Solutions**:
+
+1. Check your internet connection
+2. **Make sure you have enough free space (at least 5GB recommended)**
+3. Videos download to your Downloads folder automatically
+4. **Large videos may take several minutes to download**
+5. Watch the progress bar at the bottom to see download status
+
+## Getting Help
+
+If you run into problems:
+
+1. Check the terminal output for error messages
+2. Make sure all installation steps were completed
+3. Try restarting your computer and running the app again
+
+## What Gets Downloaded
+
+**⚠️ Videos are stored permanently on your computer!**
+
+- Videos are downloaded to your `Downloads` folder and stay there
+- Each video can be 100MB-200MB in size
+- Text content is also saved to your Downloads folder
+- The app remembers what you've downloaded for faster loading next time
+- **You can delete downloaded videos from your Downloads folder to free up space**
+
+## Safety Notes
+
+- This app only downloads from the specified GitHub repository
+- All downloads go to your Downloads folder
+- No personal information is sent anywhere
+- The terminal is just for learning - be careful with commands you type
