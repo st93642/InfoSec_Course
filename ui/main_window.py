@@ -561,14 +561,10 @@ class MainWindow(QtWidgets.QMainWindow):
         
         # Create display name
         if numbering_parts:
-            # Skip first number (release) for display, use rest as numbering
-            if len(numbering_parts) > 1:
-                display_numbers = '.'.join(numbering_parts[1:])
-                text_part = ' '.join(parts[text_start_idx:])
-                return f"{display_numbers} {text_part}".strip()
-            else:
-                text_part = ' '.join(parts[text_start_idx:])
-                return text_part.strip()
+            # Use all numbering parts for display (don't skip first number)
+            display_numbers = '.'.join(numbering_parts)
+            text_part = ' '.join(parts[text_start_idx:])
+            return f"{display_numbers} {text_part}".strip()
         
         return description
 
