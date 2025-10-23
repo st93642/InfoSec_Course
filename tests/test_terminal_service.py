@@ -4,6 +4,7 @@ import subprocess
 import pytest
 from unittest.mock import MagicMock, patch
 
+from models.config import ApplicationConfig
 from services.terminal_service import TerminalService
 
 
@@ -11,9 +12,14 @@ class TestTerminalService:
     """Test cases for TerminalService."""
 
     @pytest.fixture
-    def terminal_service(self):
+    def config(self):
+        """Create a test configuration."""
+        return ApplicationConfig()
+
+    @pytest.fixture
+    def terminal_service(self, config):
         """Create a terminal service instance."""
-        return TerminalService()
+        return TerminalService(config)
 
     @patch('services.terminal_service.platform.system')
     @patch('services.terminal_service.subprocess.Popen')
@@ -35,7 +41,13 @@ class TestTerminalService:
         assert terminal_service.widget_win_id == widget_win_id
 
         # Check subprocess call
-        mock_popen.assert_called_with(["xterm", "-into", str(widget_win_id), "-geometry", geometry])
+        mock_popen.assert_called_with([
+            "xterm", 
+            "-into", str(widget_win_id), 
+            "-geometry", geometry,
+            "-fa", "Monospace-14",
+            "-fs", "14"
+        ])
 
     @patch('services.terminal_service.platform.system')
     def test_embed_in_widget_non_linux(self, mock_platform_system, terminal_service):

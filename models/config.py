@@ -22,6 +22,7 @@ class ApplicationConfig:
         text_extensions (tuple): Supported text file extensions for descriptions
         network_timeout (int): Timeout in seconds for network requests
         download_chunk_size (int): Size of download chunks in bytes
+        terminal_font_size (int): Font size for the embedded terminal
     """
     github_repo: str = "st93642/Assets"
     github_token: Optional[str] = None
@@ -30,6 +31,7 @@ class ApplicationConfig:
     text_extensions: tuple = (".txt", ".md")
     network_timeout: int = 30
     download_chunk_size: int = 8192
+    terminal_font_size: int = 14
 
     @classmethod
     def from_environment(cls) -> 'ApplicationConfig':
@@ -42,7 +44,8 @@ class ApplicationConfig:
         return cls(
             github_repo=os.environ.get('GITHUB_REPO', cls.github_repo),
             github_token=os.environ.get('GITHUB_TOKEN'),
-            cache_directory=Path(os.environ.get('CACHE_DIR', str(cls.cache_directory)))
+            cache_directory=Path(os.environ.get('CACHE_DIR', str(cls.cache_directory))),
+            terminal_font_size=int(os.environ.get('TERMINAL_FONT_SIZE', cls.terminal_font_size))
         )
 
     def ensure_cache_directory_exists(self) -> None:

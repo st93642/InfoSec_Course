@@ -6,6 +6,8 @@ import subprocess
 import sys
 from typing import Optional, Tuple
 
+from models.config import ApplicationConfig
+
 logger = logging.getLogger(__name__)
 
 
@@ -17,13 +19,20 @@ class TerminalService:
     and fallback to external terminals.
 
     Attributes:
+        config (ApplicationConfig): Application configuration
         process (Optional[subprocess.Popen]): The terminal process
         is_embedded (bool): Whether terminal is embedded in a widget
         widget_win_id (Optional[int]): Window ID of the embedding widget
     """
 
-    def __init__(self):
-        """Initialize the terminal service."""
+    def __init__(self, config: ApplicationConfig):
+        """
+        Initialize the terminal service.
+
+        Args:
+            config (ApplicationConfig): Application configuration
+        """
+        self.config = config
         self.process: Optional[subprocess.Popen] = None
         self.is_embedded = False
         self.widget_win_id: Optional[int] = None
@@ -51,13 +60,20 @@ class TerminalService:
             if geometry is None:
                 geometry = "80x24"
 
-            # Launch xterm embedded in the widget
-            cmd = ["xterm", "-into", str(widget_win_id), "-geometry", geometry]
+            # Launch xterm embedded in the widget with font settings
+            font_size = self.config.terminal_font_size
+            cmd = [
+                "xterm",
+                "-into", str(widget_win_id),
+                "-geometry", geometry,
+                "-fa", f"Monospace-{font_size}",
+                "-fs", str(font_size)
+            ]
             self.process = subprocess.Popen(cmd)
             self.is_embedded = True
             self.widget_win_id = widget_win_id
 
-            logger.info(f"Embedded terminal in widget (win_id: {widget_win_id}, geometry: {geometry})")
+            logger.info(f"Embedded terminal in widget (win_id: {widget_win_id}, geometry: {geometry}, font_size: {font_size})")
             return True
 
         except (subprocess.SubprocessError, OSError) as e:

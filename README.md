@@ -33,46 +33,58 @@ You need a Linux computer with:
 - Internet connection
 - **At least 5GB free space on your hard drive** (videos are large and stored locally)
 
+## Getting the Code
+
+### Step 1: Clone the Repository
+
+First, clone this repository to your computer:
+
+```bash
+git clone https://github.com/st93642/InfoSec_Course.git
+cd InfoSec_Course
+```
+
+This will download all the application code and configuration files.
+
 ## Step-by-Step Installation
 
-### Step 1: Install Required System Software
+### Step 2: Install Required System Software
 
 Open a terminal and run these commands one by one:
 
 ```bash
 sudo apt update
-sudo apt install -y python3 python3-pip vlc xterm
+sudo apt install -y python3 python3-pip vlc xterm python3-full python3-venv
 ```
 
 This installs Python, video player software, and terminal emulator.
 
-### Step 2: Install Python Libraries
+### Step 3: Install Python Libraries
 
-In the same terminal, go to the app folder and install the required libraries:
+Install the required Python libraries (you're already in the InfoSec_Course directory from cloning):
 
 ```bash
-cd /path/to/InfoSec_Course
 pip3 install -r requirements.txt
 ```
+
+This installs:
+
+- **PyQt5**: GUI framework for the application interface
+- **python-vlc**: Video playback library for playing videos
+- **requests**: HTTP library for downloading videos and content
+- **pytest** and related tools: Testing framework (for development)
 
 ## How to Run the App
 
 ### Method 1: Using the Launcher Script (Easiest)
 
-1. Open a terminal
-2. Go to the app folder:
-
-   ```bash
-   cd /path/to/InfoSec_Course
-   ```
-
-3. Make the launcher script executable:
+1. Make the launcher script executable (you're already in the InfoSec_Course directory):
 
    ```bash
    chmod +x run.sh
    ```
 
-4. Run the app:
+2. Run the app:
 
    ```bash
    ./run.sh
@@ -80,18 +92,11 @@ pip3 install -r requirements.txt
 
 ### Method 2: Direct Python Run
 
-1. Open a terminal
-2. Go to the app folder:
+Run the app directly with Python 3 (you're already in the InfoSec_Course directory):
 
-   ```bash
-   cd /path/to/InfoSec_Course
-   ```
-
-3. Run the app:
-
-   ```bash
-   python3 main.py
-   ```
+```bash
+python3 main.py
+```
 
 ## How to Use the App
 

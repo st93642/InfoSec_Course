@@ -55,7 +55,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.github_service = None  # No longer needed with static data
         self.download_service = DownloadService(config)
         self.video_service = VideoService()
-        self.terminal_service = TerminalService()
+        self.terminal_service = TerminalService(config)
 
         # Track current playback and background prefetching
         self.current_video: Optional[ReleaseVideo] = None
@@ -104,28 +104,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Playlist widget (left side of lower section)
         self.playlist_widget = PlaylistWidget()
-        lower_layout.addWidget(self.playlist_widget, 1)  # Equal stretch
+        lower_layout.addWidget(self.playlist_widget, 1)  # Stretch factor 1
 
         # Terminal widget (right side of lower section)
         self.terminal_widget = TerminalWidget()
         self.terminal_widget.set_terminal_service(self.terminal_service)
-        lower_layout.addWidget(self.terminal_widget, 1)  # Equal stretch
+        lower_layout.addWidget(self.terminal_widget, 2)  # Stretch factor 2 (wider than playlist)
 
         main_layout.addWidget(lower_section, 2)  # Lower section
-
-        # Status section at bottom
-        status_section = QtWidgets.QWidget()
-        status_layout = QtWidgets.QHBoxLayout(status_section)
-
-        self.status_label = QtWidgets.QLabel("Ready")
-        self.status_label.setStyleSheet("color: white;")
-        status_layout.addWidget(self.status_label)
-
-        self.progress_bar = QtWidgets.QProgressBar()
-        self.progress_bar.setVisible(False)
-        status_layout.addWidget(self.progress_bar)
-
-        main_layout.addWidget(status_section)
 
         self.setCentralWidget(central_widget)
 
@@ -187,7 +173,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         try:
             self.controls_widget.show_download_progress(True)
-            self.status_label.setText(f"Downloading {video.asset_name}...")
+            logger.info(f"Downloading {video.asset_name}...")
 
             # Check if video is already cached
             cache_path = self.download_service.get_cached_asset_path(video.asset_name)
@@ -223,7 +209,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         except Exception as e:
             logger.error(f"Error initiating download: {e}")
-            self.status_label.setText(f"Error: {e}")
             self.controls_widget.show_download_progress(False)
 
     def _download_video(
@@ -367,7 +352,7 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.pyqtSlot(str)
     def _on_download_error(self, error_message: str) -> None:
         """Handle download error in main thread."""
-        self.status_label.setText(f"Download error: {error_message}")
+        logger.error(f"Download error: {error_message}")
         self.controls_widget.show_download_progress(False)
 
     @QtCore.pyqtSlot(int, int)
@@ -389,17 +374,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.video_service.play()
                 self.controls_widget.enable_controls(True)
                 self.controls_widget.reset_position()
-                self.status_label.setText(f"Playing: {video.display_name}")
-                logger.info(f"Started playing: {video.display_name}")
+                logger.info(f"Playing: {video.display_name}")
                 self.current_video = video
                 self._prefetch_next_video(video)
             else:
-                self.status_label.setText("Failed to load video")
                 logger.error("Failed to load video for playback")
 
         except Exception as e:
             logger.error(f"Error playing video: {e}")
-            self.status_label.setText(f"Playback error: {e}")
 
     def _on_play_requested(self) -> None:
         """Handle play button press."""
@@ -500,7 +482,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 sections = VideoLibrary.get_release_sections(release_tag)
                 section_count = len(sections)
                 video_count = sum(len(v) for v in sections.values())
-                release_item = self.playlist_widget.add_category(f"{release_title} ({section_count} sections, {video_count} videos)")
+                release_item = self.playlist_widget.add_category(f"{release_title}")
                 
                 # Sort sections within release
                 for section_key in sorted(sections.keys(), key=self._sort_section_key):
@@ -509,7 +491,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     section_videos = sections[section_key]
                     section_item = self.playlist_widget.add_subcategory(
                         release_item, 
-                        f"{section_name} ({len(section_videos)} videos)"
+                        f"{section_name}"
                     )
                     
                     # Add videos under this section (sorted)
@@ -531,12 +513,10 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.playlist_widget.add_video_to_category(section_item, video)
                             total_videos += 1
             
-            self.status_label.setText(f"Loaded {total_videos} videos from {len(releases)} main folders")
             logger.info(f"Loaded {total_videos} videos in concise tree structure from {len(releases)} main folders")
             
         except Exception as e:
             logger.error(f"Error loading videos tree: {e}")
-            self.status_label.setText(f"Error loading videos: {e}")
     
     @staticmethod
     def _sort_section_key(section_key: str) -> tuple:
