@@ -189,6 +189,29 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
         parent_item.addChild(video_item)
         self.all_items.append(video_item)
 
+    def get_next_video(self, current_video: Optional[ReleaseVideo]) -> Optional[ReleaseVideo]:
+        """Return the next video item after the given video in tree order."""
+        if current_video is None:
+            return None
+
+        iterator = QtWidgets.QTreeWidgetItemIterator(self.tree_widget)
+        found_current = False
+
+        while iterator.value():
+            item = iterator.value()
+            video = item.data(0, QtCore.Qt.UserRole)
+
+            if video:
+                if found_current and video.asset_url != current_video.asset_url:
+                    return video
+
+                if video.asset_url == current_video.asset_url:
+                    found_current = True
+
+            iterator += 1
+
+        return None
+
     def get_selected_video(self) -> Optional[ReleaseVideo]:
         """
         Get the currently selected video.

@@ -14,6 +14,7 @@ This is a simple video player application that shows educational videos, text co
 - You need enough free space and a good internet connection
 - First time playing a video may take several minutes to download
 - Once downloaded, videos play quickly on subsequent views
+- **Smart Prefetching**: When a video starts playing, the app automatically downloads the next video in the playlist in the background (if not already cached), so you can seamlessly continue watching
 
 ## What This App Does
 

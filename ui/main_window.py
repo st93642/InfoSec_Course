@@ -57,6 +57,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.video_service = VideoService()
         self.terminal_service = TerminalService()
 
+        # Track current playback and background prefetching
+        self.current_video: Optional[ReleaseVideo] = None
+        self._prefetch_lock = threading.Lock()
+        self._prefetching_asset: Optional[str] = None
+
         # Setup UI
         self._setup_ui()
         self._connect_signals()
@@ -151,6 +156,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Update selected tag for this video
         self.selected_tag = video.tag
+        self.current_video = video
 
         # Start download and playback
         self._download_and_play_video(video)
@@ -385,6 +391,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.controls_widget.reset_position()
                 self.status_label.setText(f"Playing: {video.display_name}")
                 logger.info(f"Started playing: {video.display_name}")
+                self.current_video = video
+                self._prefetch_next_video(video)
             else:
                 self.status_label.setText("Failed to load video")
                 logger.error("Failed to load video for playback")
@@ -428,6 +436,47 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.video_service.is_playing():
             position = self.video_service.get_position()
             self.controls_widget.set_position(position)
+
+    def _prefetch_next_video(self, current_video: ReleaseVideo) -> None:
+        """Start a background download for the next video if not cached."""
+        try:
+            next_video = self.playlist_widget.get_next_video(current_video)
+        except Exception as exc:
+            logger.error(f"Unable to determine next video: {exc}")
+            return
+
+        if not next_video:
+            return
+
+        asset_name = next_video.asset_name
+        if self.download_service.is_asset_cached(asset_name):
+            logger.debug(f"Next video already cached: {asset_name}")
+            return
+
+        with self._prefetch_lock:
+            if self._prefetching_asset is not None:
+                # Already downloading something else in the background
+                if self._prefetching_asset == asset_name:
+                    logger.debug(f"Prefetch already in progress for {asset_name}")
+                else:
+                    logger.debug("Background prefetch in progress; skipping new request")
+                return
+            self._prefetching_asset = asset_name
+
+        cache_path = self.download_service.get_cached_asset_path(asset_name)
+
+        def _prefetch_worker() -> None:
+            try:
+                logger.info(f"Prefetching next video: {next_video.display_name}")
+                self.download_service.download_asset(next_video.asset_url, cache_path)
+                logger.info(f"Prefetch complete: {next_video.display_name}")
+            except Exception as e:
+                logger.warning(f"Failed to prefetch video {asset_name}: {e}")
+            finally:
+                with self._prefetch_lock:
+                    self._prefetching_asset = None
+
+        threading.Thread(target=_prefetch_worker, daemon=True).start()
 
     def load_all_videos_tree(self) -> None:
         """Load all videos organized in a concise tree: 13 main folders (releases) with sections underneath."""
