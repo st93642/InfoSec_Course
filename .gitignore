@@ -143,3 +143,4 @@ test_*.log
 
 # Downloaded videos (typically stored in ~/Downloads)
 Downloads/
+.github/

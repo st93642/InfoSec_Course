@@ -120,7 +120,7 @@ pip3 install -r requirements.txt
 1. Make sure you installed all system requirements:
 
    ```bash
-   sudo apt install -y python3 python3-pip vlc xterm
+   sudo apt install -y python3 python3-pip vlc xterm python3-full python3-venv
    ```
 
 2. Install Python libraries:
@@ -134,6 +134,43 @@ pip3 install -r requirements.txt
    ```bash
    python3 main.py
    ```
+
+### "externally-managed-environment" Error
+
+**Problem**: You see this error when running the app:
+
+```text
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+```
+
+**Solutions**:
+
+This error occurs on newer Ubuntu/Debian systems with Python 3.11+. The system Python is protected from pip installs.
+
+1. Install the full Python environment:
+
+   ```bash
+   sudo apt install -y python3-full python3-venv
+   ```
+
+2. Remove any existing broken virtual environment:
+
+   ```bash
+   rm -rf venv
+   ```
+
+3. Run the app using the launcher script:
+
+   ```bash
+   ./run.sh
+   ```
+
+The launcher script will create a proper virtual environment and install dependencies correctly.
 
 ### Video Won't Play
 
@@ -372,7 +409,9 @@ The app automatically loads **725 educational videos** from the GitHub repositor
 
 ---
 
-**Summary: 725 videos across 13 releases with 95+ sections**
+## Summary
+
+725 videos across 13 releases with 95+ sections
 
 ### Recommended Learning Paths
 

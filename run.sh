@@ -9,6 +9,9 @@ fi
 # Activate virtual environment
 source venv/bin/activate
 
+# Ensure we're using the virtual environment's pip and python
+export PATH="venv/bin:$PATH"
+
 # Install Python dependencies in venv
 pip install -r requirements.txt
 
