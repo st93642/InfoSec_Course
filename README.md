@@ -108,24 +108,6 @@ python3 main.py
 6. The text content (top right) will show information about the video
 7. The terminal (bottom right) lets you practice commands while watching
 
-## Terminal Customization
-
-The embedded terminal comes with a default color scheme (green text on black background with white cursor) that is easy on the eyes. You can customize it further by setting environment variables before running the app:
-
-### Terminal Colors
-
-```bash
-# Override the default colors (optional - defaults shown)
-export TERMINAL_BG_COLOR="black"      # Default: black
-export TERMINAL_FG_COLOR="green"      # Default: green  
-export TERMINAL_CURSOR_COLOR="white"  # Default: white
-```
-
-**Supported color formats:**
-
-- Color names: `black`, `white`, `red`, `green`, `blue`, `yellow`, `cyan`, `magenta`, etc.
-- Hex colors: `#RRGGBB` format (e.g., `#00FF00` for green)
-
 ### Terminal Font Size
 
 ```bash
