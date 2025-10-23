@@ -23,9 +23,11 @@ class TestTerminalService:
 
     @patch('services.terminal_service.platform.system')
     @patch('services.terminal_service.subprocess.Popen')
-    def test_embed_in_widget_linux_success(self, mock_popen, mock_platform_system, terminal_service):
+    @patch('services.terminal_service.subprocess.run')
+    def test_embed_in_widget_linux_success(self, mock_run, mock_popen, mock_platform_system, terminal_service):
         """Test successful terminal embedding on Linux."""
         mock_platform_system.return_value = "Linux"
+        mock_run.return_value = None  # Mock xrdb call
 
         # Mock successful process creation
         mock_process = MagicMock()

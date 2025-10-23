@@ -23,6 +23,9 @@ class ApplicationConfig:
         network_timeout (int): Timeout in seconds for network requests
         download_chunk_size (int): Size of download chunks in bytes
         terminal_font_size (int): Font size for the embedded terminal
+        terminal_bg_color (Optional[str]): Background color for the terminal (name or #RRGGBB)
+        terminal_fg_color (Optional[str]): Foreground/text color for the terminal (name or #RRGGBB)
+        terminal_cursor_color (Optional[str]): Cursor color for the terminal (name or #RRGGBB)
     """
     github_repo: str = "st93642/Assets"
     github_token: Optional[str] = None
@@ -32,6 +35,9 @@ class ApplicationConfig:
     network_timeout: int = 30
     download_chunk_size: int = 8192
     terminal_font_size: int = 14
+    terminal_bg_color: Optional[str] = "#000000"
+    terminal_fg_color: Optional[str] = "#00FF00"
+    terminal_cursor_color: Optional[str] = "#FFFFFF"
 
     @classmethod
     def from_environment(cls) -> 'ApplicationConfig':
@@ -45,7 +51,10 @@ class ApplicationConfig:
             github_repo=os.environ.get('GITHUB_REPO', cls.github_repo),
             github_token=os.environ.get('GITHUB_TOKEN'),
             cache_directory=Path(os.environ.get('CACHE_DIR', str(cls.cache_directory))),
-            terminal_font_size=int(os.environ.get('TERMINAL_FONT_SIZE', cls.terminal_font_size))
+            terminal_font_size=int(os.environ.get('TERMINAL_FONT_SIZE', cls.terminal_font_size)),
+            terminal_bg_color=os.environ.get('TERMINAL_BG_COLOR'),
+            terminal_fg_color=os.environ.get('TERMINAL_FG_COLOR'),
+            terminal_cursor_color=os.environ.get('TERMINAL_CURSOR_COLOR')
         )
 
     def ensure_cache_directory_exists(self) -> None:

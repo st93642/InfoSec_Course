@@ -23,6 +23,7 @@ class TerminalService:
         process (Optional[subprocess.Popen]): The terminal process
         is_embedded (bool): Whether terminal is embedded in a widget
         widget_win_id (Optional[int]): Window ID of the embedding widget
+        last_geometry (Optional[str]): Last geometry used for terminal
     """
 
     def __init__(self, config: ApplicationConfig):
@@ -36,6 +37,7 @@ class TerminalService:
         self.process: Optional[subprocess.Popen] = None
         self.is_embedded = False
         self.widget_win_id: Optional[int] = None
+        self.last_geometry: Optional[str] = None
 
     def embed_in_widget(self, widget_win_id: int, geometry: Optional[str] = None) -> bool:
         """
@@ -60,6 +62,24 @@ class TerminalService:
             if geometry is None:
                 geometry = "80x24"
 
+            # Set X resources globally for embedded terminal colors
+            import subprocess
+            xrdb_cmd = ["xrdb", "-merge", "-"]
+            xrdb_input = ""
+            if self.config.terminal_bg_color:
+                xrdb_input += f"xterm*background: {self.config.terminal_bg_color}\n"
+            if self.config.terminal_fg_color:
+                xrdb_input += f"xterm*foreground: {self.config.terminal_fg_color}\n"
+            if self.config.terminal_cursor_color:
+                xrdb_input += f"xterm*cursorColor: {self.config.terminal_cursor_color}\n"
+            
+            if xrdb_input:
+                try:
+                    subprocess.run(xrdb_cmd, input=xrdb_input, text=True, check=True)
+                except (subprocess.SubprocessError, OSError):
+                    # xrdb might not be available, continue without it
+                    pass
+
             # Launch xterm embedded in the widget with font settings
             font_size = self.config.terminal_font_size
             cmd = [
@@ -69,9 +89,11 @@ class TerminalService:
                 "-fa", f"Monospace-{font_size}",
                 "-fs", str(font_size)
             ]
+            
             self.process = subprocess.Popen(cmd)
             self.is_embedded = True
             self.widget_win_id = widget_win_id
+            self.last_geometry = geometry
 
             logger.info(f"Embedded terminal in widget (win_id: {widget_win_id}, geometry: {geometry}, font_size: {font_size})")
             return True
@@ -111,18 +133,66 @@ class TerminalService:
             width (int): Widget width in pixels
             height (int): Widget height in pixels
         """
-        if not self.is_embedded or not self.process:
+        if not self.is_embedded or not self.widget_win_id:
             return
 
         try:
-            # Calculate terminal dimensions
-            # Approximate: 8 pixels per character width, 16 pixels per line height
+            # Calculate new terminal dimensions
             cols = max(80, width // 8)
             rows = max(24, height // 16)
+            new_geometry = f"{cols}x{rows}"
 
-            # Note: xterm doesn't support dynamic geometry changes after launch
-            # This is a placeholder for future enhancements
-            logger.debug(f"Calculated terminal geometry: {cols}x{rows} for widget {width}x{height}")
+            # Only restart if geometry changed significantly (more than 10 cols/rows difference)
+            # or if this is the first time setting geometry
+            should_restart = False
+            if self.last_geometry is None:
+                should_restart = True
+            else:
+                old_cols, old_rows = map(int, self.last_geometry.split('x'))
+                if abs(cols - old_cols) >= 10 or abs(rows - old_rows) >= 5:
+                    should_restart = True
+
+            if should_restart:
+                logger.info(f"Restarting terminal with new geometry: {new_geometry} (was {self.last_geometry})")
+                self.last_geometry = new_geometry
+
+                # Restart terminal with new geometry
+                if self.process and self.is_running():
+                    self.process.terminate()
+                    try:
+                        self.process.wait(timeout=1.0)
+                    except subprocess.TimeoutExpired:
+                        self.process.kill()
+                        self.process.wait()
+
+                # Set X resources globally for embedded terminal colors
+                xrdb_cmd = ["xrdb", "-merge", "-"]
+                xrdb_input = ""
+                if self.config.terminal_bg_color:
+                    xrdb_input += f"xterm*background: {self.config.terminal_bg_color}\n"
+                if self.config.terminal_fg_color:
+                    xrdb_input += f"xterm*foreground: {self.config.terminal_fg_color}\n"
+                if self.config.terminal_cursor_color:
+                    xrdb_input += f"xterm*cursorColor: {self.config.terminal_cursor_color}\n"
+                
+                if xrdb_input:
+                    try:
+                        subprocess.run(xrdb_cmd, input=xrdb_input, text=True, check=True)
+                    except (subprocess.SubprocessError, OSError):
+                        # xrdb might not be available, continue without it
+                        pass
+
+                # Launch with new geometry
+                font_size = self.config.terminal_font_size
+                cmd = [
+                    "xterm",
+                    "-into", str(self.widget_win_id),
+                    "-geometry", new_geometry,
+                    "-fa", f"Monospace-{font_size}",
+                    "-fs", str(font_size)
+                ]
+                
+                self.process = subprocess.Popen(cmd)
 
         except Exception as e:
             logger.error(f"Error updating terminal geometry: {e}")
@@ -189,6 +259,7 @@ class TerminalService:
                 self.process = None
                 self.is_embedded = False
                 self.widget_win_id = None
+                self.last_geometry = None
 
     def __del__(self):
         """Destructor to ensure cleanup."""
