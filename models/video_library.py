@@ -1,0 +1,7467 @@
+"""
+Static video library containing all InfoSec course videos.
+This module contains hardcoded video data organized by full video names.
+"""
+
+from typing import Dict, List, Any, Optional
+
+
+class VideoLibrary:
+    """Static video library with all course videos organized by full name."""
+
+    # Release titles mapping
+    RELEASE_TITLES: Dict[str, str] = {
+        '13.0.0': 'Git, Python & Network Programming',
+        '12.0.0': 'Application Security Analysis',
+        '11.0.0': 'Information Security Compliance',
+        '10.0.0': 'Security Solutions & Monitoring',
+        '9.0.0': 'Security Solutions & Testing',
+        '8.0.0': 'Active Directory & Access Management',
+        '7.0.0': 'Information Security Processes',
+        '6.0.0': 'Python Programming Fundamentals',
+        '5.0.0': 'Database Management & SQL',
+        '4.0.0': 'Group Policy & Administration',
+        '3.0.0': 'Network Security & Monitoring',
+        '2.0.0': 'Linux System Administration',
+        '1.0.0': 'Linux Basics & Terminal'
+    }
+
+    # Section names mapping by release
+    SECTION_NAMES: Dict[str, Dict[str, str]] = {
+        '13.0.0': {
+            'Section 1': 'Git Version Control',
+            'Section 2': 'Python Programming',
+            'Section 3': 'Network Security'
+        },
+        '12.0.0': {
+            'Section 1': 'Security Analysis Fundamentals',
+            'Section 2': 'Web Application Security',
+            'Section 3': 'Advanced Security Testing',
+            'Section 4': 'Penetration Testing',
+            'Section 5': 'Security Assessment',
+            'Section 6': 'Reporting & Documentation',
+            'Section 7': 'Security Tools',
+            'Section 8': 'Case Studies'
+        },
+        '11.0.0': {
+            'Section 1': 'Compliance Framework',
+            'Section 2': 'Threat Modeling',
+            'Section 3': 'Risk Assessment',
+            'Section 4': 'Security Controls',
+            'Section 5': 'Audit & Compliance',
+            'Section 6': 'Legal Aspects'
+        },
+        '10.0.0': {
+            'Section 1': 'Security Solutions Overview',
+            'Section 2': 'Threat Modeling',
+            'Section 3': 'Monitoring & Alerting',
+            'Section 4': 'Incident Response',
+            'Section 5': 'Security Assessment',
+            'Section 6': 'Implementation',
+            'Section 7': 'Testing & Validation',
+            'Section 8': 'Best Practices'
+        },
+        '9.0.0': {
+            'Section 1': 'Security Solutions',
+            'Section 2': 'Testing Environment',
+            'Section 3': 'Security Assessment',
+            'Section 4': 'Implementation'
+        },
+        '8.0.0': {
+            'Section 1': 'Access Management',
+            'Section 2': 'Active Directory Fundamentals',
+            'Section 3': 'User Management',
+            'Section 4': 'Group Management',
+            'Section 5': 'Security Policies',
+            'Section 6': 'Advanced Configuration',
+            'Section 7': 'Troubleshooting',
+            'Section 8': 'Best Practices',
+            'Section 9': 'Integration',
+            'Section 10': 'Active Directory Services',
+            'Section 11': 'Monitoring',
+            'Section 12': 'Backup & Recovery',
+            'Section 13': 'Migration'
+        },
+        '7.0.0': {
+            'Section 1': 'Process Fundamentals',
+            'Section 2': 'Security Processes',
+            'Section 3': 'Operational Security',
+            'Section 4': 'Incident Management',
+            'Section 5': 'Compliance Processes'
+        },
+        '6.0.0': {
+            'Section 1': 'Python Introduction',
+            'Section 2': 'Basic Programming',
+            'Section 3': 'Data Structures',
+            'Section 4': 'Control Flow',
+            'Section 5': 'Functions',
+            'Section 6': 'File Operations',
+            'Section 7': 'Error Handling',
+            'Section 8': 'Advanced Topics',
+            'Section 9': 'Libraries',
+            'Section 10': 'Loops & Iteration',
+            'Section 11': 'String Processing',
+            'Section 12': 'Data Processing',
+            'Section 13': 'Project Development'
+        },
+        '5.0.0': {
+            'Section 1': 'Database Fundamentals',
+            'Section 2': 'SQL & MySQL',
+            'Section 3': 'Database Design',
+            'Section 4': 'Advanced SQL',
+            'Section 5': 'Database Administration'
+        },
+        '4.0.0': {
+            'Section 1': 'Local Administration',
+            'Section 2': 'Group Policy Management',
+            'Section 3': 'Advanced Policies',
+            'Section 4': 'Security Policies',
+            'Section 5': 'Troubleshooting',
+            'Section 6': 'Best Practices',
+            'Section 7': 'Integration',
+            'Section 8': 'Advanced Configuration'
+        },
+        '3.0.0': {
+            'Section 1': 'Network Fundamentals',
+            'Section 2': 'Network Protocols',
+            'Section 3': 'Network Design',
+            'Section 4': 'Network Services',
+            'Section 5': 'Security Implementation',
+            'Section 6': 'Monitoring & IDS'
+        },
+        '2.0.0': {
+            'Section 1': 'Linux Administration',
+            'Section 2': 'System Management',
+            'Section 3': 'Network Configuration',
+            'Section 4': 'Security',
+            'Section 5': 'Services',
+            'Section 6': 'Monitoring',
+            'Section 7': 'Backup',
+            'Section 8': 'Troubleshooting',
+            'Section 9': 'Advanced Topics',
+            'Section 10': 'Forensics',
+            'Section 11': 'Covering Tracks'
+        },
+        '1.0.0': {
+            'Introduction': 'Linux Introduction',
+            'Section 4': 'Terminal & Shell',
+            'Section 5': 'Devices',
+            'Section 6': 'Storage Management',
+            'Section 7': 'File Systems'
+        }
+    }
+
+    # Static video data - organized by full video name (including release numbers)
+    VIDEOS: Dict[str, Dict[str, Any]] = {
+        "1.1.Principles.of.Building.Networks.mp4": {
+            "name": "1.1.Principles.of.Building.Networks.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/1.1.Principles.of.Building.Networks.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/1.1.Principles.of.Building.Networks.txt",
+            "size": 66967353,
+            "description": "1 1 Principles of Building Networks",
+            "clean_name": "1.1.Principles.of.Building.Networks.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 1"
+        },
+        "1.2.OSI.Model.mp4": {
+            "name": "1.2.OSI.Model.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/1.2.OSI.Model.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/1.2.OSI.Model.txt",
+            "size": 57871564,
+            "description": "1 2 OSI Model",
+            "clean_name": "1.2.OSI.Model.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 1"
+        },
+        "1.3.Network.File.System.mp4": {
+            "name": "1.3.Network.File.System.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/1.3.Network.File.System.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/1.3.Network.File.System.txt",
+            "size": 7892575,
+            "description": "1 3 Network File System",
+            "clean_name": "1.3.Network.File.System.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 1"
+        },
+        "1.Area.of.use.Linux.webm": {
+            "name": "1.Area.of.use.Linux.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/1.Area.of.use.Linux.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/1.Area.of.use.Linux.txt",
+            "size": 91516994,
+            "description": "1 Area of use Linux",
+            "clean_name": "1.Area.of.use.Linux.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "10.1.1.Introduction.to.the.Course.mp4": {
+            "name": "10.1.1.Introduction.to.the.Course.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.1.Introduction.to.the.Course.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.1.Introduction.to.the.Course.txt",
+            "size": 76021779,
+            "description": "10 1 1 Introduction to the Course",
+            "clean_name": "Introduction.to.the.Course.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.1.2.Module.Introduction.mp4": {
+            "name": "10.1.2.Module.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.2.Module.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.2.Module.Introduction.txt",
+            "size": 43813369,
+            "description": "10 1 2 Module Introduction",
+            "clean_name": "Module.Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.1.3.Data.Collection.for.Inventory.mp4": {
+            "name": "10.1.3.Data.Collection.for.Inventory.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.3.Data.Collection.for.Inventory.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.3.Data.Collection.for.Inventory.txt",
+            "size": 105857633,
+            "description": "10 1 3 Data Collection for Inventory",
+            "clean_name": "Data.Collection.for.Inventory.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.1.4.Preparation.for.Monitoring.System.mp4": {
+            "name": "10.1.4.Preparation.for.Monitoring.System.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.4.Preparation.for.Monitoring.System.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.4.Preparation.for.Monitoring.System.txt",
+            "size": 66243640,
+            "description": "10 1 4 Preparation for Monitoring System",
+            "clean_name": "Preparation.for.Monitoring.System.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.1.5.Module.Summary.mp4": {
+            "name": "10.1.5.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.5.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.1.5.Module.Summary.txt",
+            "size": 43265837,
+            "description": "10 1 5 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.1.Monitoring.and.Alerts.mp4": {
+            "name": "10.1.Monitoring.and.Alerts.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/10.1.Monitoring.and.Alerts.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/10.1.Monitoring.and.Alerts.txt",
+            "size": 39310617,
+            "description": "10 1 Monitoring and Alerts",
+            "clean_name": "10.1.Monitoring.and.Alerts.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 10"
+        },
+        "10.1.Services.Configuration.Files.and.Device.Manager.Linux.webm": {
+            "name": "10.1.Services.Configuration.Files.and.Device.Manager.Linux.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.1.Services.Configuration.Files.and.Device.Manager.Linux.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.1.Services.Configuration.Files.and.Device.Manager.Linux.txt",
+            "size": 364736472,
+            "description": "10 1 Services Configuration Files and Device Manager Linux",
+            "clean_name": "10.1.Services.Configuration.Files.and.Device.Manager.Linux.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 10"
+        },
+        "10.2.1.Introduction.mp4": {
+            "name": "10.2.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.1.Introduction.txt",
+            "size": 44542802,
+            "description": "10 2 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.2.2.Threat.Modeling.mp4": {
+            "name": "10.2.2.Threat.Modeling.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.2.Threat.Modeling.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.2.Threat.Modeling.txt",
+            "size": 71894577,
+            "description": "10 2 2 Threat Modeling",
+            "clean_name": "Threat.Modeling.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.2.3.Monitoring.Priorities.mp4": {
+            "name": "10.2.3.Monitoring.Priorities.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.3.Monitoring.Priorities.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.3.Monitoring.Priorities.txt",
+            "size": 73009286,
+            "description": "10 2 3 Monitoring Priorities",
+            "clean_name": "Monitoring.Priorities.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.2.4.Monitoring.System.Planning.2.mp4": {
+            "name": "10.2.4.Monitoring.System.Planning.2.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.4.Monitoring.System.Planning.2.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.4.Monitoring.System.Planning.2.txt",
+            "size": 64870298,
+            "description": "10 2 4 Monitoring System Planning 2",
+            "clean_name": "Monitoring.System.Planning.2.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.2.4.Monitoring.System.Planning.3.mp4": {
+            "name": "10.2.4.Monitoring.System.Planning.3.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.4.Monitoring.System.Planning.3.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.4.Monitoring.System.Planning.3.txt",
+            "size": 71475676,
+            "description": "10 2 4 Monitoring System Planning 3",
+            "clean_name": "Monitoring.System.Planning.3.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.2.4.Monitoring.System.Planning.mp4": {
+            "name": "10.2.4.Monitoring.System.Planning.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.4.Monitoring.System.Planning.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.4.Monitoring.System.Planning.txt",
+            "size": 126375654,
+            "description": "10 2 4 Monitoring System Planning",
+            "clean_name": "Monitoring.System.Planning.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.2.5.Module.Summary.mp4": {
+            "name": "10.2.5.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.5.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.2.5.Module.Summary.txt",
+            "size": 49732496,
+            "description": "10 2 5 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.2.Installation.and.Configuration.of.NIDS.mp4": {
+            "name": "10.2.Installation.and.Configuration.of.NIDS.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/10.2.Installation.and.Configuration.of.NIDS.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/10.2.Installation.and.Configuration.of.NIDS.txt",
+            "size": 79396426,
+            "description": "10 2 Installation and Configuration of NIDS",
+            "clean_name": "10.2.Installation.and.Configuration.of.NIDS.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 10"
+        },
+        "10.2.Loaded.Kernel.Modules.webm": {
+            "name": "10.2.Loaded.Kernel.Modules.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.2.Loaded.Kernel.Modules.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.2.Loaded.Kernel.Modules.txt",
+            "size": 110308167,
+            "description": "10 2 Loaded Kernel Modules",
+            "clean_name": "10.2.Loaded.Kernel.Modules.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 10"
+        },
+        "10.3.1.Introduction.mp4": {
+            "name": "10.3.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.1.Introduction.txt",
+            "size": 50881219,
+            "description": "10 3 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.3.2.Sources.Events.Monitoring.Types.mp4": {
+            "name": "10.3.2.Sources.Events.Monitoring.Types.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.2.Sources.Events.Monitoring.Types.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.2.Sources.Events.Monitoring.Types.txt",
+            "size": 94241110,
+            "description": "10 3 2 Sources Events Monitoring Types",
+            "clean_name": "Sources.Events.Monitoring.Types.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.3.3.Monitoring.Technologies.mp4": {
+            "name": "10.3.3.Monitoring.Technologies.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.3.Monitoring.Technologies.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.3.Monitoring.Technologies.txt",
+            "size": 192848123,
+            "description": "10 3 3 Monitoring Technologies",
+            "clean_name": "Monitoring.Technologies.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.3.4.Event.Transport.Network.Changes.mp4": {
+            "name": "10.3.4.Event.Transport.Network.Changes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.4.Event.Transport.Network.Changes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.4.Event.Transport.Network.Changes.txt",
+            "size": 65996878,
+            "description": "10 3 4 Event Transport Network Changes",
+            "clean_name": "Event.Transport.Network.Changes.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.3.5.Module.Summary.mp4": {
+            "name": "10.3.5.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.5.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.3.5.Module.Summary.txt",
+            "size": 16256697,
+            "description": "10 3 5 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.3.Checking.System.Performance.mp4": {
+            "name": "10.3.Checking.System.Performance.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/10.3.Checking.System.Performance.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/10.3.Checking.System.Performance.txt",
+            "size": 265224988,
+            "description": "10 3 Checking System Performance",
+            "clean_name": "10.3.Checking.System.Performance.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 10"
+        },
+        "10.3.Upstart.webm": {
+            "name": "10.3.Upstart.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.3.Upstart.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.3.Upstart.txt",
+            "size": 25459743,
+            "description": "10 3 Upstart",
+            "clean_name": "10.3.Upstart.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 10"
+        },
+        "10.4.1.Introduction.mp4": {
+            "name": "10.4.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.1.Introduction.txt",
+            "size": 35729223,
+            "description": "10 4 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.4.2.Event.Normalization.and.Log.Parsers.mp4": {
+            "name": "10.4.2.Event.Normalization.and.Log.Parsers.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.2.Event.Normalization.and.Log.Parsers.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.2.Event.Normalization.and.Log.Parsers.txt",
+            "size": 60800685,
+            "description": "10 4 2 Event Normalization and Log Parsers",
+            "clean_name": "Event.Normalization.and.Log.Parsers.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.4.3.Use.Case.mp4": {
+            "name": "10.4.3.Use.Case.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.3.Use.Case.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.3.Use.Case.txt",
+            "size": 31117472,
+            "description": "10 4 3 Use Case",
+            "clean_name": "Use.Case.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.4.4.Correlation.mp4": {
+            "name": "10.4.4.Correlation.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.4.Correlation.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.4.Correlation.txt",
+            "size": 69538690,
+            "description": "10 4 4 Correlation",
+            "clean_name": "Correlation.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.4.5.Enrichment.mp4": {
+            "name": "10.4.5.Enrichment.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.5.Enrichment.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.5.Enrichment.txt",
+            "size": 34970113,
+            "description": "10 4 5 Enrichment",
+            "clean_name": "Enrichment.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.4.6.Testing.and.Normal.Levels.mp4": {
+            "name": "10.4.6.Testing.and.Normal.Levels.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.6.Testing.and.Normal.Levels.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.6.Testing.and.Normal.Levels.txt",
+            "size": 36643068,
+            "description": "10 4 6 Testing and Normal Levels",
+            "clean_name": "Testing.and.Normal.Levels.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.4.7.Module.Summary.mp4": {
+            "name": "10.4.7.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.7.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.4.7.Module.Summary.txt",
+            "size": 10385896,
+            "description": "10 4 7 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.4.Date.and.Time.in.Linux.System.webm": {
+            "name": "10.4.Date.and.Time.in.Linux.System.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.4.Date.and.Time.in.Linux.System.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.4.Date.and.Time.in.Linux.System.txt",
+            "size": 38179137,
+            "description": "10 4 Date and Time in Linux System",
+            "clean_name": "10.4.Date.and.Time.in.Linux.System.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 10"
+        },
+        "10.5.1.Introduction.mp4": {
+            "name": "10.5.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.1.Introduction.txt",
+            "size": 48352765,
+            "description": "10 5 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.5.2.Manual.and.Automated.Response.mp4": {
+            "name": "10.5.2.Manual.and.Automated.Response.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.2.Manual.and.Automated.Response.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.2.Manual.and.Automated.Response.txt",
+            "size": 131825845,
+            "description": "10 5 2 Manual and Automated Response",
+            "clean_name": "Manual.and.Automated.Response.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.5.3.Incident.Enrichment.mp4": {
+            "name": "10.5.3.Incident.Enrichment.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.3.Incident.Enrichment.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.3.Incident.Enrichment.txt",
+            "size": 145097539,
+            "description": "10 5 3 Incident Enrichment",
+            "clean_name": "Incident.Enrichment.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.5.4.Playbook.Structure.mp4": {
+            "name": "10.5.4.Playbook.Structure.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.4.Playbook.Structure.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.4.Playbook.Structure.txt",
+            "size": 131648715,
+            "description": "10 5 4 Playbook Structure",
+            "clean_name": "Playbook.Structure.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.5.5.Anomalies.and.Undescribed.Incidents.mp4": {
+            "name": "10.5.5.Anomalies.and.Undescribed.Incidents.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.5.Anomalies.and.Undescribed.Incidents.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.5.Anomalies.and.Undescribed.Incidents.txt",
+            "size": 25705917,
+            "description": "10 5 5 Anomalies and Undescribed Incidents",
+            "clean_name": "Anomalies.and.Undescribed.Incidents.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.5.6.Playbook.Socialization.and.Exercises.mp4": {
+            "name": "10.5.6.Playbook.Socialization.and.Exercises.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.6.Playbook.Socialization.and.Exercises.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.6.Playbook.Socialization.and.Exercises.txt",
+            "size": 262916736,
+            "description": "10 5 6 Playbook Socialization and Exercises",
+            "clean_name": "Playbook.Socialization.and.Exercises.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.5.7.Module.Summary.mp4": {
+            "name": "10.5.7.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.7.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.5.7.Module.Summary.txt",
+            "size": 33147461,
+            "description": "10 5 7 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.5.Cron.Task.Scheduler.webm": {
+            "name": "10.5.Cron.Task.Scheduler.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.5.Cron.Task.Scheduler.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.5.Cron.Task.Scheduler.txt",
+            "size": 61689402,
+            "description": "10 5 Cron Task Scheduler",
+            "clean_name": "10.5.Cron.Task.Scheduler.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 10"
+        },
+        "10.6.1.Introduction.mp4": {
+            "name": "10.6.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.1.Introduction.txt",
+            "size": 31189680,
+            "description": "10 6 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.6.2.Types.of.Security.Analysis.Additional.Analytical.Information.for.Report.mp4": {
+            "name": "10.6.2.Types.of.Security.Analysis.Additional.Analytical.Information.for.Report.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.2.Types.of.Security.Analysis.Additional.Analytical.Information.for.Report.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.2.Types.of.Security.Analysis.Additional.Analytical.Information.for.Report.txt",
+            "size": 37340686,
+            "description": "10 6 2 Types of Security Analysis Additional Analytical Information for Report",
+            "clean_name": "Types.of.Security.Analysis.Additional.Analytical.Information.for.Report.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.6.3.Concept.of.Security.Analysis.Report.Customers.mp4": {
+            "name": "10.6.3.Concept.of.Security.Analysis.Report.Customers.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.3.Concept.of.Security.Analysis.Report.Customers.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.3.Concept.of.Security.Analysis.Report.Customers.txt",
+            "size": 66455997,
+            "description": "10 6 3 Concept of Security Analysis Report Customers",
+            "clean_name": "Concept.of.Security.Analysis.Report.Customers.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.6.4.Report.Formatting.and.Access.Provisioning.mp4": {
+            "name": "10.6.4.Report.Formatting.and.Access.Provisioning.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.4.Report.Formatting.and.Access.Provisioning.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.4.Report.Formatting.and.Access.Provisioning.txt",
+            "size": 47791088,
+            "description": "10 6 4 Report Formatting and Access Provisioning",
+            "clean_name": "Report.Formatting.and.Access.Provisioning.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.6.5.Module.Summary.mp4": {
+            "name": "10.6.5.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.5.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.6.5.Module.Summary.txt",
+            "size": 55419369,
+            "description": "10 6 5 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.6.At.Task.Scheduler.webm": {
+            "name": "10.6.At.Task.Scheduler.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.6.At.Task.Scheduler.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.6.At.Task.Scheduler.txt",
+            "size": 51639104,
+            "description": "10 6 At Task Scheduler",
+            "clean_name": "10.6.At.Task.Scheduler.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 10"
+        },
+        "10.7.1.Introduction.mp4": {
+            "name": "10.7.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.1.Introduction.txt",
+            "size": 46246734,
+            "description": "10 7 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.3.Preparation.of.the.Investigation.Environment.mp4": {
+            "name": "10.7.3.Preparation.of.the.Investigation.Environment.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.3.Preparation.of.the.Investigation.Environment.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.3.Preparation.of.the.Investigation.Environment.txt",
+            "size": 148121677,
+            "description": "10 7 3 Preparation of the Investigation Environment",
+            "clean_name": "Preparation.of.the.Investigation.Environment.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.4.Determining.the.Time.of.Attack.Onset.mp4": {
+            "name": "10.7.4.Determining.the.Time.of.Attack.Onset.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.4.Determining.the.Time.of.Attack.Onset.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.4.Determining.the.Time.of.Attack.Onset.txt",
+            "size": 124672394,
+            "description": "10 7 4 Determining the Time of Attack Onset",
+            "clean_name": "Determining.the.Time.of.Attack.Onset.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.5.Determining.Distorted.Added.Deleted.Data.mp4": {
+            "name": "10.7.5.Determining.Distorted.Added.Deleted.Data.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.5.Determining.Distorted.Added.Deleted.Data.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.5.Determining.Distorted.Added.Deleted.Data.txt",
+            "size": 76431761,
+            "description": "10 7 5 Determining Distorted Added Deleted Data",
+            "clean_name": "Determining.Distorted.Added.Deleted.Data.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.6.Building.the.Chain.of.Attack.Development.mp4": {
+            "name": "10.7.6.Building.the.Chain.of.Attack.Development.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.6.Building.the.Chain.of.Attack.Development.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.6.Building.the.Chain.of.Attack.Development.txt",
+            "size": 27319212,
+            "description": "10 7 6 Building the Chain of Attack Development",
+            "clean_name": "Building.the.Chain.of.Attack.Development.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.7.Collecting.the.Attack.Attribution.Base.mp4": {
+            "name": "10.7.7.Collecting.the.Attack.Attribution.Base.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.7.Collecting.the.Attack.Attribution.Base.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.7.Collecting.the.Attack.Attribution.Base.txt",
+            "size": 111006165,
+            "description": "10 7 7 Collecting the Attack Attribution Base",
+            "clean_name": "Collecting.the.Attack.Attribution.Base.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.8.Building.the.Chain.of.Attack.Development.Formatting.Digital.Evidence.mp4": {
+            "name": "10.7.8.Building.the.Chain.of.Attack.Development.Formatting.Digital.Evidence.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.8.Building.the.Chain.of.Attack.Development.Formatting.Digital.Evidence.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.8.Building.the.Chain.of.Attack.Development.Formatting.Digital.Evidence.txt",
+            "size": 31181577,
+            "description": "10 7 8 Building the Chain of Attack Development Formatting Digital Evidence",
+            "clean_name": "Building.the.Chain.of.Attack.Development.Formatting.Digital.Evidence.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.9.Module.Summary.mp4": {
+            "name": "10.7.9.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.9.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.7.9.Module.Summary.txt",
+            "size": 34814103,
+            "description": "10 7 9 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.7.Creating.a.Backdoor.webm": {
+            "name": "10.7.Creating.a.Backdoor.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.7.Creating.a.Backdoor.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/10.7.Creating.a.Backdoor.txt",
+            "size": 92038947,
+            "description": "10 7 Creating a Backdoor",
+            "clean_name": "10.7.Creating.a.Backdoor.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 10"
+        },
+        "10.8.1.Introduction.mp4": {
+            "name": "10.8.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.1.Introduction.txt",
+            "size": 60917902,
+            "description": "10 8 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.8.2.Establishing.the.Causes.of.the.Incident.mp4": {
+            "name": "10.8.2.Establishing.the.Causes.of.the.Incident.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.2.Establishing.the.Causes.of.the.Incident.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.2.Establishing.the.Causes.of.the.Incident.txt",
+            "size": 20861891,
+            "description": "10 8 2 Establishing the Causes of the Incident",
+            "clean_name": "Establishing.the.Causes.of.the.Incident.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.8.3.Improving.Security.Measures.and.Preventing.Future.Incidents.mp4": {
+            "name": "10.8.3.Improving.Security.Measures.and.Preventing.Future.Incidents.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.3.Improving.Security.Measures.and.Preventing.Future.Incidents.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.3.Improving.Security.Measures.and.Preventing.Future.Incidents.txt",
+            "size": 38036128,
+            "description": "10 8 3 Improving Security Measures and Preventing Future Incidents",
+            "clean_name": "Improving.Security.Measures.and.Preventing.Future.Incidents.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.8.4.Recovery.After.Incident.mp4": {
+            "name": "10.8.4.Recovery.After.Incident.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.4.Recovery.After.Incident.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.4.Recovery.After.Incident.txt",
+            "size": 64440992,
+            "description": "10 8 4 Recovery After Incident",
+            "clean_name": "Recovery.After.Incident.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.8.5.Analysis.of.Elimination.Results.and.Conclusions.After.Incident.mp4": {
+            "name": "10.8.5.Analysis.of.Elimination.Results.and.Conclusions.After.Incident.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.5.Analysis.of.Elimination.Results.and.Conclusions.After.Incident.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.5.Analysis.of.Elimination.Results.and.Conclusions.After.Incident.txt",
+            "size": 35769234,
+            "description": "10 8 5 Analysis of Elimination Results and Conclusions After Incident",
+            "clean_name": "Analysis.of.Elimination.Results.and.Conclusions.After.Incident.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.8.6.Module.Summary.mp4": {
+            "name": "10.8.6.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.6.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.6.Module.Summary.txt",
+            "size": 39059697,
+            "description": "10 8 6 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.8.7.Course.Summary.mp4": {
+            "name": "10.8.7.Course.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.7.Course.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/10.0.0/10.8.7.Course.Summary.txt",
+            "size": 49254117,
+            "description": "10 8 7 Course Summary",
+            "clean_name": "Course.Summary.mp4",
+            "release_tag": "10.0.0",
+            "section": "Section 10"
+        },
+        "10.User.webm": {
+            "name": "10.User.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/10.User.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/10.User.txt",
+            "size": 73548284,
+            "description": "10 User",
+            "clean_name": "10.User.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "11.1.1.Introduction.mp4": {
+            "name": "11.1.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.1.Introduction.txt",
+            "size": 21704414,
+            "description": "11 1 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.1.2.Compliance.in.Organization.Activities.mp4": {
+            "name": "11.1.2.Compliance.in.Organization.Activities.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.2.Compliance.in.Organization.Activities.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.2.Compliance.in.Organization.Activities.txt",
+            "size": 46521062,
+            "description": "11 1 2 Compliance in Organization Activities",
+            "clean_name": "Compliance.in.Organization.Activities.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.1.3.Hierarchy.of.Normative.Legal.Acts.in.the.Field.of.Information.Security.mp4": {
+            "name": "11.1.3.Hierarchy.of.Normative.Legal.Acts.in.the.Field.of.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.3.Hierarchy.of.Normative.Legal.Acts.in.the.Field.of.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.3.Hierarchy.of.Normative.Legal.Acts.in.the.Field.of.Information.Security.txt",
+            "size": 9691275,
+            "description": "11 1 3 Hierarchy of Normative Legal Acts in the Field of Information Security",
+            "clean_name": "Hierarchy.of.Normative.Legal.Acts.in.the.Field.of.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.1.4.Standards.and.International.Acts.on.Information.Security.mp4": {
+            "name": "11.1.4.Standards.and.International.Acts.on.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.4.Standards.and.International.Acts.on.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.4.Standards.and.International.Acts.on.Information.Security.txt",
+            "size": 5869611,
+            "description": "11 1 4 Standards and International Acts on Information Security",
+            "clean_name": "Standards.and.International.Acts.on.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.1.5.Liability.for.Violation.of.Information.Security.Requirements.mp4": {
+            "name": "11.1.5.Liability.for.Violation.of.Information.Security.Requirements.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.5.Liability.for.Violation.of.Information.Security.Requirements.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.1.5.Liability.for.Violation.of.Information.Security.Requirements.txt",
+            "size": 5957897,
+            "description": "11 1 5 Liability for Violation of Information Security Requirements",
+            "clean_name": "Liability.for.Violation.of.Information.Security.Requirements.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.1.Logging.and.Monitoring.webm": {
+            "name": "11.1.Logging.and.Monitoring.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.1.Logging.and.Monitoring.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.1.Logging.and.Monitoring.txt",
+            "size": 156814062,
+            "description": "11 1 Logging and Monitoring",
+            "clean_name": "11.1.Logging.and.Monitoring.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.10.Covering.Tracks.webm": {
+            "name": "11.10.Covering.Tracks.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.10.Covering.Tracks.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.10.Covering.Tracks.txt",
+            "size": 172222666,
+            "description": "11 10 Covering Tracks",
+            "clean_name": "11.10.Covering.Tracks.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.11.Threat.Hunting.and.Forensics.webm": {
+            "name": "11.11.Threat.Hunting.and.Forensics.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.11.Threat.Hunting.and.Forensics.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.11.Threat.Hunting.and.Forensics.txt",
+            "size": 48636769,
+            "description": "11 11 Threat Hunting and Forensics",
+            "clean_name": "11.11.Threat.Hunting.and.Forensics.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.2.1.Classification.of.Organization.Information.Resources.mp4": {
+            "name": "11.2.1.Classification.of.Organization.Information.Resources.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.1.Classification.of.Organization.Information.Resources.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.1.Classification.of.Organization.Information.Resources.txt",
+            "size": 4340595,
+            "description": "11 2 1 Classification of Organization Information Resources",
+            "clean_name": "Classification.of.Organization.Information.Resources.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.2.2.Basic.Concepts.of.Threat.Modeling.mp4": {
+            "name": "11.2.2.Basic.Concepts.of.Threat.Modeling.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.2.Basic.Concepts.of.Threat.Modeling.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.2.Basic.Concepts.of.Threat.Modeling.txt",
+            "size": 91694425,
+            "description": "11 2 2 Basic Concepts of Threat Modeling",
+            "clean_name": "Basic.Concepts.of.Threat.Modeling.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.2.3.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.1.mp4": {
+            "name": "11.2.3.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.1.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.3.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.1.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.3.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.1.txt",
+            "size": 47515469,
+            "description": "11 2 3 Development of a List of Threats to Organization Information Resources Part 1",
+            "clean_name": "Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.1.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.2.4.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.2.mp4": {
+            "name": "11.2.4.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.2.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.4.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.2.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.2.4.Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.2.txt",
+            "size": 6063965,
+            "description": "11 2 4 Development of a List of Threats to Organization Information Resources Part 2",
+            "clean_name": "Development.of.a.List.of.Threats.to.Organization.Information.Resources.Part.2.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.2.Structure.of.etc.webm": {
+            "name": "11.2.Structure.of.etc.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.2.Structure.of.etc.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.2.Structure.of.etc.txt",
+            "size": 23666111,
+            "description": "11 2 Structure of etc",
+            "clean_name": "11.2.Structure.of.etc.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.3.1.Application.of.Controls.in.Ensuring.Compliance.with.Information.Security.Requirements.mp4": {
+            "name": "11.3.1.Application.of.Controls.in.Ensuring.Compliance.with.Information.Security.Requirements.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.1.Application.of.Controls.in.Ensuring.Compliance.with.Information.Security.Requirements.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.1.Application.of.Controls.in.Ensuring.Compliance.with.Information.Security.Requirements.txt",
+            "size": 12162283,
+            "description": "11 3 1 Application of Controls in Ensuring Compliance with Information Security Requirements",
+            "clean_name": "Application.of.Controls.in.Ensuring.Compliance.with.Information.Security.Requirements.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.3.2.Algorithm.for.Compiling.a.List.of.Types.of.Control.for.Information.Security.Requirements.mp4": {
+            "name": "11.3.2.Algorithm.for.Compiling.a.List.of.Types.of.Control.for.Information.Security.Requirements.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.2.Algorithm.for.Compiling.a.List.of.Types.of.Control.for.Information.Security.Requirements.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.2.Algorithm.for.Compiling.a.List.of.Types.of.Control.for.Information.Security.Requirements.txt",
+            "size": 6874871,
+            "description": "11 3 2 Algorithm for Compiling a List of Types of Control for Information Security Requirements",
+            "clean_name": "Algorithm.for.Compiling.a.List.of.Types.of.Control.for.Information.Security.Requirements.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.3.3.Compiling.Lists.of.Controls.for.Various.Information.Security.Requirements.mp4": {
+            "name": "11.3.3.Compiling.Lists.of.Controls.for.Various.Information.Security.Requirements.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.3.Compiling.Lists.of.Controls.for.Various.Information.Security.Requirements.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.3.Compiling.Lists.of.Controls.for.Various.Information.Security.Requirements.txt",
+            "size": 153472819,
+            "description": "11 3 3 Compiling Lists of Controls for Various Information Security Requirements",
+            "clean_name": "Compiling.Lists.of.Controls.for.Various.Information.Security.Requirements.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.3.4.Module.Conclusions.mp4": {
+            "name": "11.3.4.Module.Conclusions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.4.Module.Conclusions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.3.4.Module.Conclusions.txt",
+            "size": 3387462,
+            "description": "11 3 4 Module Conclusions",
+            "clean_name": "Module.Conclusions.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.3.Searching.for.Open.Files.webm": {
+            "name": "11.3.Searching.for.Open.Files.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.3.Searching.for.Open.Files.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.3.Searching.for.Open.Files.txt",
+            "size": 96354500,
+            "description": "11 3 Searching for Open Files",
+            "clean_name": "11.3.Searching.for.Open.Files.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.4.1.Methodologies.and.Basic.Models.of.Threats.to.Information.Security.mp4": {
+            "name": "11.4.1.Methodologies.and.Basic.Models.of.Threats.to.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.1.Methodologies.and.Basic.Models.of.Threats.to.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.1.Methodologies.and.Basic.Models.of.Threats.to.Information.Security.txt",
+            "size": 89765043,
+            "description": "11 4 1 Methodologies and Basic Models of Threats to Information Security",
+            "clean_name": "Methodologies.and.Basic.Models.of.Threats.to.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.4.2.Developing.a.General.Model.of.Threats.to.Information.Security.mp4": {
+            "name": "11.4.2.Developing.a.General.Model.of.Threats.to.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.2.Developing.a.General.Model.of.Threats.to.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.2.Developing.a.General.Model.of.Threats.to.Information.Security.txt",
+            "size": 96967628,
+            "description": "11 4 2 Developing a General Model of Threats to Information Security",
+            "clean_name": "Developing.a.General.Model.of.Threats.to.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.4.3.Developing.Private.Models.of.Threats.to.Information.Security.mp4": {
+            "name": "11.4.3.Developing.Private.Models.of.Threats.to.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.3.Developing.Private.Models.of.Threats.to.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.3.Developing.Private.Models.of.Threats.to.Information.Security.txt",
+            "size": 105018654,
+            "description": "11 4 3 Developing Private Models of Threats to Information Security",
+            "clean_name": "Developing.Private.Models.of.Threats.to.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.4.4.Agreement.of.Threat.Models.with.Regulators.mp4": {
+            "name": "11.4.4.Agreement.of.Threat.Models.with.Regulators.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.4.Agreement.of.Threat.Models.with.Regulators.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.4.4.Agreement.of.Threat.Models.with.Regulators.txt",
+            "size": 88514783,
+            "description": "11 4 4 Agreement of Threat Models with Regulators",
+            "clean_name": "Agreement.of.Threat.Models.with.Regulators.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.4.Monitoring.Access.to.Resources.webm": {
+            "name": "11.4.Monitoring.Access.to.Resources.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.4.Monitoring.Access.to.Resources.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.4.Monitoring.Access.to.Resources.txt",
+            "size": 230108530,
+            "description": "11 4 Monitoring Access to Resources",
+            "clean_name": "11.4.Monitoring.Access.to.Resources.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.5.1.Hierarchy.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4": {
+            "name": "11.5.1.Hierarchy.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.1.Hierarchy.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.1.Hierarchy.of.Organizational.and.Administrative.Documents.on.Information.Security.txt",
+            "size": 11229329,
+            "description": "11 5 1 Hierarchy of Organizational and Administrative Documents on Information Security",
+            "clean_name": "Hierarchy.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.5.2.Structure.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4": {
+            "name": "11.5.2.Structure.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.2.Structure.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.2.Structure.of.Organizational.and.Administrative.Documents.on.Information.Security.txt",
+            "size": 3329917,
+            "description": "11 5 2 Structure of Organizational and Administrative Documents on Information Security",
+            "clean_name": "Structure.of.Organizational.and.Administrative.Documents.on.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.5.3.Development.of.the.Organization.s.Information.Security.Policy.mp4": {
+            "name": "11.5.3.Development.of.the.Organization.s.Information.Security.Policy.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.3.Development.of.the.Organization.s.Information.Security.Policy.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.3.Development.of.the.Organization.s.Information.Security.Policy.txt",
+            "size": 10105952,
+            "description": "11 5 3 Development of the Organization s Information Security Policy",
+            "clean_name": "Development.of.the.Organization.s.Information.Security.Policy.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.5.4.Development.of.Regulations.and.Instructions.on.Information.Security.for.the.Company.mp4": {
+            "name": "11.5.4.Development.of.Regulations.and.Instructions.on.Information.Security.for.the.Company.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.4.Development.of.Regulations.and.Instructions.on.Information.Security.for.the.Company.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.5.4.Development.of.Regulations.and.Instructions.on.Information.Security.for.the.Company.txt",
+            "size": 8506009,
+            "description": "11 5 4 Development of Regulations and Instructions on Information Security for the Company",
+            "clean_name": "Development.of.Regulations.and.Instructions.on.Information.Security.for.the.Company.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.5.Streams.webm": {
+            "name": "11.5.Streams.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.5.Streams.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.5.Streams.txt",
+            "size": 129015600,
+            "description": "11 5 Streams",
+            "clean_name": "11.5.Streams.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.6.1.Intro.mp4": {
+            "name": "11.6.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.1.Intro.txt",
+            "size": 7555601,
+            "description": "11 6 1 Intro",
+            "clean_name": "Intro.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.6.2.Audit.of.Information.Security.mp4": {
+            "name": "11.6.2.Audit.of.Information.Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.2.Audit.of.Information.Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.2.Audit.of.Information.Security.txt",
+            "size": 8692935,
+            "description": "11 6 2 Audit of Information Security",
+            "clean_name": "Audit.of.Information.Security.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.6.4.Regulatory.Checks.mp4": {
+            "name": "11.6.4.Regulatory.Checks.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.4.Regulatory.Checks.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.4.Regulatory.Checks.txt",
+            "size": 9386854,
+            "description": "11 6 4 Regulatory Checks",
+            "clean_name": "Regulatory.Checks.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.6.5.Attestation.and.Certification.mp4": {
+            "name": "11.6.5.Attestation.and.Certification.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.5.Attestation.and.Certification.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/11.0.0/11.6.5.Attestation.and.Certification.txt",
+            "size": 6777333,
+            "description": "11 6 5 Attestation and Certification",
+            "clean_name": "Attestation.and.Certification.mp4",
+            "release_tag": "11.0.0",
+            "section": "Section 11"
+        },
+        "11.6.Resource.Management.webm": {
+            "name": "11.6.Resource.Management.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.6.Resource.Management.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.6.Resource.Management.txt",
+            "size": 74510058,
+            "description": "11 6 Resource Management",
+            "clean_name": "11.6.Resource.Management.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.7.Systemd.Journal.webm": {
+            "name": "11.7.Systemd.Journal.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.7.Systemd.Journal.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.7.Systemd.Journal.txt",
+            "size": 124399921,
+            "description": "11 7 Systemd Journal",
+            "clean_name": "11.7.Systemd.Journal.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.8.Reading.rsyslogd.Log.Messages.webm": {
+            "name": "11.8.Reading.rsyslogd.Log.Messages.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.8.Reading.rsyslogd.Log.Messages.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.8.Reading.rsyslogd.Log.Messages.txt",
+            "size": 247419919,
+            "description": "11 8 Reading rsyslogd Log Messages",
+            "clean_name": "11.8.Reading.rsyslogd.Log.Messages.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.9.Collecting.Hardware.Data.webm": {
+            "name": "11.9.Collecting.Hardware.Data.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.9.Collecting.Hardware.Data.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/11.9.Collecting.Hardware.Data.txt",
+            "size": 28328326,
+            "description": "11 9 Collecting Hardware Data",
+            "clean_name": "11.9.Collecting.Hardware.Data.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 11"
+        },
+        "11.User.space.kernel.space.webm": {
+            "name": "11.User.space.kernel.space.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/11.User.space.kernel.space.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/11.User.space.kernel.space.txt",
+            "size": 53361495,
+            "description": "11 User space kernel space",
+            "clean_name": "11.User.space.kernel.space.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "12.1.1.Intro.to.the.Course.mp4": {
+            "name": "12.1.1.Intro.to.the.Course.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.1.Intro.to.the.Course.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.1.Intro.to.the.Course.txt",
+            "size": 11685326,
+            "description": "12 1 1 Intro to the Course",
+            "clean_name": "Intro.to.the.Course.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.1.2.Introduction.to.Application.Security.Analysis.mp4": {
+            "name": "12.1.2.Introduction.to.Application.Security.Analysis.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.2.Introduction.to.Application.Security.Analysis.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.2.Introduction.to.Application.Security.Analysis.txt",
+            "size": 3773419,
+            "description": "12 1 2 Introduction to Application Security Analysis",
+            "clean_name": "Introduction.to.Application.Security.Analysis.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.1.3.Security.Analysis.Using.White.Box.Method.mp4": {
+            "name": "12.1.3.Security.Analysis.Using.White.Box.Method.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.3.Security.Analysis.Using.White.Box.Method.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.3.Security.Analysis.Using.White.Box.Method.txt",
+            "size": 3116458,
+            "description": "12 1 3 Security Analysis Using White Box Method",
+            "clean_name": "Security.Analysis.Using.White.Box.Method.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.1.4.Process.of.Conducting.Security.Analysis.mp4": {
+            "name": "12.1.4.Process.of.Conducting.Security.Analysis.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.4.Process.of.Conducting.Security.Analysis.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.4.Process.of.Conducting.Security.Analysis.txt",
+            "size": 3900033,
+            "description": "12 1 4 Process of Conducting Security Analysis",
+            "clean_name": "Process.of.Conducting.Security.Analysis.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.1.5.Classification.of.Vulnerabilities.and.Ranking.by.Criticality.Levels.mp4": {
+            "name": "12.1.5.Classification.of.Vulnerabilities.and.Ranking.by.Criticality.Levels.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.5.Classification.of.Vulnerabilities.and.Ranking.by.Criticality.Levels.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.5.Classification.of.Vulnerabilities.and.Ranking.by.Criticality.Levels.txt",
+            "size": 3826644,
+            "description": "12 1 5 Classification of Vulnerabilities and Ranking by Criticality Levels",
+            "clean_name": "Classification.of.Vulnerabilities.and.Ranking.by.Criticality.Levels.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.1.6.Module.Summary.mp4": {
+            "name": "12.1.6.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.6.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.1.6.Module.Summary.txt",
+            "size": 10428492,
+            "description": "12 1 6 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.1.Package.Installation.Repositories.Package.Managers.webm": {
+            "name": "12.1.Package.Installation.Repositories.Package.Managers.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.1.Package.Installation.Repositories.Package.Managers.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.1.Package.Installation.Repositories.Package.Managers.txt",
+            "size": 118536957,
+            "description": "12 1 Package Installation Repositories Package Managers",
+            "clean_name": "12.1.Package.Installation.Repositories.Package.Managers.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.2.1.Intro.mp4": {
+            "name": "12.2.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.1.Intro.txt",
+            "size": 13634456,
+            "description": "12 2 1 Intro",
+            "clean_name": "Intro.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.2.2.Concept.and.Types.of.Cross-Site.Scripting.mp4": {
+            "name": "12.2.2.Concept.and.Types.of.Cross-Site.Scripting.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.2.Concept.and.Types.of.Cross-Site.Scripting.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.2.Concept.and.Types.of.Cross-Site.Scripting.txt",
+            "size": 6574515,
+            "description": "12 2 2 Concept and Types of Cross-Site Scripting",
+            "clean_name": "Concept.and.Types.of.Cross-Site.Scripting.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.2.3.Burp.Suite.Setup.mp4": {
+            "name": "12.2.3.Burp.Suite.Setup.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.3.Burp.Suite.Setup.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.3.Burp.Suite.Setup.txt",
+            "size": 35491113,
+            "description": "12 2 3 Burp Suite Setup",
+            "clean_name": "Burp.Suite.Setup.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.2.4.Finding.XSS.mp4": {
+            "name": "12.2.4.Finding.XSS.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.4.Finding.XSS.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.4.Finding.XSS.txt",
+            "size": 108277251,
+            "description": "12 2 4 Finding XSS",
+            "clean_name": "Finding.XSS.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.2.5.Preventing.XSS.mp4": {
+            "name": "12.2.5.Preventing.XSS.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.5.Preventing.XSS.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.5.Preventing.XSS.txt",
+            "size": 6091020,
+            "description": "12 2 5 Preventing XSS",
+            "clean_name": "Preventing.XSS.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.2.6.Module.Summary.mp4": {
+            "name": "12.2.6.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.6.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.2.6.Module.Summary.txt",
+            "size": 36718329,
+            "description": "12 2 6 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.2.RPM.Package.Manager.webm": {
+            "name": "12.2.RPM.Package.Manager.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.2.RPM.Package.Manager.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.2.RPM.Package.Manager.txt",
+            "size": 21905085,
+            "description": "12 2 RPM Package Manager",
+            "clean_name": "12.2.RPM.Package.Manager.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.3.1.Intro.mp4": {
+            "name": "12.3.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.1.Intro.txt",
+            "size": 4695245,
+            "description": "12 3 1 Intro",
+            "clean_name": "Intro.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.3.2.Web.Application.Structure.mp4": {
+            "name": "12.3.2.Web.Application.Structure.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.2.Web.Application.Structure.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.2.Web.Application.Structure.txt",
+            "size": 3799944,
+            "description": "12 3 2 Web Application Structure",
+            "clean_name": "Web.Application.Structure.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.3.3.Types.of.SQL.Injections.mp4": {
+            "name": "12.3.3.Types.of.SQL.Injections.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.3.Types.of.SQL.Injections.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.3.Types.of.SQL.Injections.txt",
+            "size": 61889213,
+            "description": "12 3 3 Types of SQL Injections",
+            "clean_name": "Types.of.SQL.Injections.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.3.4.Sqlmap.mp4": {
+            "name": "12.3.4.Sqlmap.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.4.Sqlmap.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.4.Sqlmap.txt",
+            "size": 51211178,
+            "description": "12 3 4 Sqlmap",
+            "clean_name": "Sqlmap.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.3.5.Detecting.SQL.Injections.mp4": {
+            "name": "12.3.5.Detecting.SQL.Injections.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.5.Detecting.SQL.Injections.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.5.Detecting.SQL.Injections.txt",
+            "size": 170761519,
+            "description": "12 3 5 Detecting SQL Injections",
+            "clean_name": "Detecting.SQL.Injections.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.3.6.Preventing.SQL.Injections.mp4": {
+            "name": "12.3.6.Preventing.SQL.Injections.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.6.Preventing.SQL.Injections.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.6.Preventing.SQL.Injections.txt",
+            "size": 23163171,
+            "description": "12 3 6 Preventing SQL Injections",
+            "clean_name": "Preventing.SQL.Injections.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.3.7.Module.Summary.mp4": {
+            "name": "12.3.7.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.7.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.3.7.Module.Summary.txt",
+            "size": 18828461,
+            "description": "12 3 7 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.3.DEB.Package.Manager.webm": {
+            "name": "12.3.DEB.Package.Manager.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.3.DEB.Package.Manager.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.3.DEB.Package.Manager.txt",
+            "size": 9037544,
+            "description": "12 3 DEB Package Manager",
+            "clean_name": "12.3.DEB.Package.Manager.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.4.1.Intro.mp4": {
+            "name": "12.4.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.1.Intro.txt",
+            "size": 28847698,
+            "description": "12 4 1 Intro",
+            "clean_name": "Intro.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.4.2.Web.Application.Structure.mp4": {
+            "name": "12.4.2.Web.Application.Structure.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.2.Web.Application.Structure.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.2.Web.Application.Structure.txt",
+            "size": 17149282,
+            "description": "12 4 2 Web Application Structure",
+            "clean_name": "Web.Application.Structure.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.4.3.Path.Traversal.mp4": {
+            "name": "12.4.3.Path.Traversal.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.3.Path.Traversal.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.3.Path.Traversal.txt",
+            "size": 60510418,
+            "description": "12 4 3 Path Traversal",
+            "clean_name": "Path.Traversal.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.4.4.IDOR.File.Enumeration.mp4": {
+            "name": "12.4.4.IDOR.File.Enumeration.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.4.IDOR.File.Enumeration.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.4.IDOR.File.Enumeration.txt",
+            "size": 73293007,
+            "description": "12 4 4 IDOR File Enumeration",
+            "clean_name": "IDOR.File.Enumeration.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.4.5.IDOR.for.Retrieving.Arbitrary.Data.from.Database.mp4": {
+            "name": "12.4.5.IDOR.for.Retrieving.Arbitrary.Data.from.Database.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.5.IDOR.for.Retrieving.Arbitrary.Data.from.Database.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.5.IDOR.for.Retrieving.Arbitrary.Data.from.Database.txt",
+            "size": 46455721,
+            "description": "12 4 5 IDOR for Retrieving Arbitrary Data from Database",
+            "clean_name": "IDOR.for.Retrieving.Arbitrary.Data.from.Database.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.4.6.Module.Summary.mp4": {
+            "name": "12.4.6.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.6.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.4.6.Module.Summary.txt",
+            "size": 58035388,
+            "description": "12 4 6 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.4.Compiling.Source.Code.webm": {
+            "name": "12.4.Compiling.Source.Code.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.4.Compiling.Source.Code.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.4.Compiling.Source.Code.txt",
+            "size": 109578170,
+            "description": "12 4 Compiling Source Code",
+            "clean_name": "12.4.Compiling.Source.Code.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.5.1.Intro.mp4": {
+            "name": "12.5.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.1.Intro.txt",
+            "size": 7140161,
+            "description": "12 5 1 Intro",
+            "clean_name": "Intro.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.5.2.User.Session.Management.in.Web.Applications.mp4": {
+            "name": "12.5.2.User.Session.Management.in.Web.Applications.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.2.User.Session.Management.in.Web.Applications.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.2.User.Session.Management.in.Web.Applications.txt",
+            "size": 4376506,
+            "description": "12 5 2 User Session Management in Web Applications",
+            "clean_name": "User.Session.Management.in.Web.Applications.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.5.3.CSRF.Attacks.in.Practice.mp4": {
+            "name": "12.5.3.CSRF.Attacks.in.Practice.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.3.CSRF.Attacks.in.Practice.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.3.CSRF.Attacks.in.Practice.txt",
+            "size": 115258469,
+            "description": "12 5 3 CSRF Attacks in Practice",
+            "clean_name": "CSRF.Attacks.in.Practice.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.5.4.Preventing.CSRF.Attacks.mp4": {
+            "name": "12.5.4.Preventing.CSRF.Attacks.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.4.Preventing.CSRF.Attacks.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.4.Preventing.CSRF.Attacks.txt",
+            "size": 3771641,
+            "description": "12 5 4 Preventing CSRF Attacks",
+            "clean_name": "Preventing.CSRF.Attacks.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.5.5.Module.Summary.mp4": {
+            "name": "12.5.5.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.5.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.5.5.Module.Summary.txt",
+            "size": 13977579,
+            "description": "12 5 5 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.5.APT.Package.Manager.webm": {
+            "name": "12.5.APT.Package.Manager.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.5.APT.Package.Manager.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.5.APT.Package.Manager.txt",
+            "size": 47515221,
+            "description": "12 5 APT Package Manager",
+            "clean_name": "12.5.APT.Package.Manager.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.6.1.Intro.mp4": {
+            "name": "12.6.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.1.Intro.txt",
+            "size": 40184410,
+            "description": "12 6 1 Intro",
+            "clean_name": "Intro.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.2.Web.Application.Structure.mp4": {
+            "name": "12.6.2.Web.Application.Structure.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.2.Web.Application.Structure.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.2.Web.Application.Structure.txt",
+            "size": 12286713,
+            "description": "12 6 2 Web Application Structure",
+            "clean_name": "Web.Application.Structure.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.3.Using.XML.Documents.in.Web.Applications.mp4": {
+            "name": "12.6.3.Using.XML.Documents.in.Web.Applications.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.3.Using.XML.Documents.in.Web.Applications.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.3.Using.XML.Documents.in.Web.Applications.txt",
+            "size": 15865352,
+            "description": "12 6 3 Using XML Documents in Web Applications",
+            "clean_name": "Using.XML.Documents.in.Web.Applications.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.4.Searching.and.Exploiting.XXE.mp4": {
+            "name": "12.6.4.Searching.and.Exploiting.XXE.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.4.Searching.and.Exploiting.XXE.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.4.Searching.and.Exploiting.XXE.txt",
+            "size": 46096939,
+            "description": "12 6 4 Searching and Exploiting XXE",
+            "clean_name": "Searching.and.Exploiting.XXE.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.5.Preventing.XXE.mp4": {
+            "name": "12.6.5.Preventing.XXE.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.5.Preventing.XXE.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.5.Preventing.XXE.txt",
+            "size": 17128731,
+            "description": "12 6 5 Preventing XXE",
+            "clean_name": "Preventing.XXE.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.6.Analysis.of.Log4j.Vulnerability.mp4": {
+            "name": "12.6.6.Analysis.of.Log4j.Vulnerability.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.6.Analysis.of.Log4j.Vulnerability.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.6.Analysis.of.Log4j.Vulnerability.txt",
+            "size": 135673449,
+            "description": "12 6 6 Analysis of Log4j Vulnerability",
+            "clean_name": "Analysis.of.Log4j.Vulnerability.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.7.Searching.for.Vulnerabilities.in.Third-Party.Libraries.mp4": {
+            "name": "12.6.7.Searching.for.Vulnerabilities.in.Third-Party.Libraries.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.7.Searching.for.Vulnerabilities.in.Third-Party.Libraries.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.7.Searching.for.Vulnerabilities.in.Third-Party.Libraries.txt",
+            "size": 86847182,
+            "description": "12 6 7 Searching for Vulnerabilities in Third-Party Libraries",
+            "clean_name": "Searching.for.Vulnerabilities.in.Third-Party.Libraries.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.8.Module.Summary.mp4": {
+            "name": "12.6.8.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.8.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.6.8.Module.Summary.txt",
+            "size": 34994619,
+            "description": "12 6 8 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.6.YUM.Package.Manager.webm": {
+            "name": "12.6.YUM.Package.Manager.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.6.YUM.Package.Manager.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.6.YUM.Package.Manager.txt",
+            "size": 17769065,
+            "description": "12 6 YUM Package Manager",
+            "clean_name": "12.6.YUM.Package.Manager.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.7.1.Introduction.mp4": {
+            "name": "12.7.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.1.Introduction.txt",
+            "size": 19925437,
+            "description": "12 7 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.7.2.SAST.mp4": {
+            "name": "12.7.2.SAST.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.2.SAST.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.2.SAST.txt",
+            "size": 15108385,
+            "description": "12 7 2 SAST",
+            "clean_name": "SAST.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.7.3.SonarQube.Setup.mp4": {
+            "name": "12.7.3.SonarQube.Setup.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.3.SonarQube.Setup.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.3.SonarQube.Setup.txt",
+            "size": 63547838,
+            "description": "12 7 3 SonarQube Setup",
+            "clean_name": "SonarQube.Setup.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.7.4.Vulnerability.Detection.with.SonarQube.mp4": {
+            "name": "12.7.4.Vulnerability.Detection.with.SonarQube.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.4.Vulnerability.Detection.with.SonarQube.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.4.Vulnerability.Detection.with.SonarQube.txt",
+            "size": 127455173,
+            "description": "12 7 4 Vulnerability Detection with SonarQube",
+            "clean_name": "Vulnerability.Detection.with.SonarQube.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.7.5.Module.Summary.mp4": {
+            "name": "12.7.5.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.5.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.7.5.Module.Summary.txt",
+            "size": 35393720,
+            "description": "12 7 5 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.7.Utilities.for.Information.Security.webm": {
+            "name": "12.7.Utilities.for.Information.Security.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.7.Utilities.for.Information.Security.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.7.Utilities.for.Information.Security.txt",
+            "size": 31029658,
+            "description": "12 7 Utilities for Information Security",
+            "clean_name": "12.7.Utilities.for.Information.Security.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.8.1.Introduction.mp4": {
+            "name": "12.8.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.1.Introduction.txt",
+            "size": 6830399,
+            "description": "12 8 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.8.2.Web.Application.Firewall.mp4": {
+            "name": "12.8.2.Web.Application.Firewall.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.2.Web.Application.Firewall.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.2.Web.Application.Firewall.txt",
+            "size": 4132387,
+            "description": "12 8 2 Web Application Firewall",
+            "clean_name": "Web.Application.Firewall.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.8.3.Vulnerabilities.and.Web.Application.Firewall.mp4": {
+            "name": "12.8.3.Vulnerabilities.and.Web.Application.Firewall.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.3.Vulnerabilities.and.Web.Application.Firewall.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.3.Vulnerabilities.and.Web.Application.Firewall.txt",
+            "size": 4370449,
+            "description": "12 8 3 Vulnerabilities and Web Application Firewall",
+            "clean_name": "Vulnerabilities.and.Web.Application.Firewall.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.8.4.WAF.on.Practice.mp4": {
+            "name": "12.8.4.WAF.on.Practice.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.4.WAF.on.Practice.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.4.WAF.on.Practice.txt",
+            "size": 351060323,
+            "description": "12 8 4 WAF on Practice",
+            "clean_name": "WAF.on.Practice.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.8.5.Configuring.Content.Security.Policy.mp4": {
+            "name": "12.8.5.Configuring.Content.Security.Policy.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.5.Configuring.Content.Security.Policy.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.5.Configuring.Content.Security.Policy.txt",
+            "size": 202663002,
+            "description": "12 8 5 Configuring Content Security Policy",
+            "clean_name": "Configuring.Content.Security.Policy.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.8.6.Module.Summary.mp4": {
+            "name": "12.8.6.Module.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.6.Module.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/12.0.0/12.8.6.Module.Summary.txt",
+            "size": 12451753,
+            "description": "12 8 6 Module Summary",
+            "clean_name": "Module.Summary.mp4",
+            "release_tag": "12.0.0",
+            "section": "Section 12"
+        },
+        "12.8.Hacker.Utilities.webm": {
+            "name": "12.8.Hacker.Utilities.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.8.Hacker.Utilities.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/12.8.Hacker.Utilities.txt",
+            "size": 47414525,
+            "description": "12 8 Hacker Utilities",
+            "clean_name": "12.8.Hacker.Utilities.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 12"
+        },
+        "12.File.webm": {
+            "name": "12.File.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/12.File.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/12.File.txt",
+            "size": 96959529,
+            "description": "12 File",
+            "clean_name": "12.File.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "13.1.1.Intro.to.the.Course.mp4": {
+            "name": "13.1.1.Intro.to.the.Course.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.1.Intro.to.the.Course.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.1.Intro.to.the.Course.txt",
+            "size": 45172845,
+            "description": "13 1 1 Intro to the Course",
+            "clean_name": "Intro.to.the.Course.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.10.Working.with.Git.in.Command.Line.mp4": {
+            "name": "13.1.10.Working.with.Git.in.Command.Line.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.10.Working.with.Git.in.Command.Line.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.10.Working.with.Git.in.Command.Line.txt",
+            "size": 99101684,
+            "description": "13 1 10 Working with Git in Command Line",
+            "clean_name": "Working.with.Git.in.Command.Line.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.11.File.Lifecycle.in.Repository.mp4": {
+            "name": "13.1.11.File.Lifecycle.in.Repository.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.11.File.Lifecycle.in.Repository.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.11.File.Lifecycle.in.Repository.txt",
+            "size": 129133970,
+            "description": "13 1 11 File Lifecycle in Repository",
+            "clean_name": "File.Lifecycle.in.Repository.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.12.Ignoring.Changes.mp4": {
+            "name": "13.1.12.Ignoring.Changes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.12.Ignoring.Changes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.12.Ignoring.Changes.txt",
+            "size": 184468296,
+            "description": "13 1 12 Ignoring Changes",
+            "clean_name": "Ignoring.Changes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.14.Working.with.Git.in.Development.Environments.mp4": {
+            "name": "13.1.14.Working.with.Git.in.Development.Environments.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.14.Working.with.Git.in.Development.Environments.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.14.Working.with.Git.in.Development.Environments.txt",
+            "size": 139176844,
+            "description": "13 1 14 Working with Git in Development Environments",
+            "clean_name": "Working.with.Git.in.Development.Environments.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.15.Summary.mp4": {
+            "name": "13.1.15.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.15.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.15.Summary.txt",
+            "size": 25920208,
+            "description": "13 1 15 Summary",
+            "clean_name": "Summary.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.1.Intro.mp4": {
+            "name": "13.1.2.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.1.Intro.txt",
+            "size": 25180554,
+            "description": "13 1 2 1 Intro",
+            "clean_name": "1.Intro.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.10.Resolving.Conflicts.When.Updating.Repository.mp4": {
+            "name": "13.1.2.10.Resolving.Conflicts.When.Updating.Repository.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.10.Resolving.Conflicts.When.Updating.Repository.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.10.Resolving.Conflicts.When.Updating.Repository.txt",
+            "size": 103060908,
+            "description": "13 1 2 10 Resolving Conflicts When Updating Repository",
+            "clean_name": "10.Resolving.Conflicts.When.Updating.Repository.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.12.Summary.mp4": {
+            "name": "13.1.2.12.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.12.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.12.Summary.txt",
+            "size": 16942183,
+            "description": "13 1 2 12 Summary",
+            "clean_name": "12.Summary.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.2.Remote.and.Local.Repositories.mp4": {
+            "name": "13.1.2.2.Remote.and.Local.Repositories.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.2.Remote.and.Local.Repositories.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.2.Remote.and.Local.Repositories.txt",
+            "size": 82943602,
+            "description": "13 1 2 2 Remote and Local Repositories",
+            "clean_name": "2.Remote.and.Local.Repositories.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.3.GitHub.and.GitLab.Overview.mp4": {
+            "name": "13.1.2.3.GitHub.and.GitLab.Overview.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.3.GitHub.and.GitLab.Overview.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.3.GitHub.and.GitLab.Overview.txt",
+            "size": 169034832,
+            "description": "13 1 2 3 GitHub and GitLab Overview",
+            "clean_name": "3.GitHub.and.GitLab.Overview.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.4.GitHub.Registration.and.Remote.Repository.Creation.mp4": {
+            "name": "13.1.2.4.GitHub.Registration.and.Remote.Repository.Creation.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.4.GitHub.Registration.and.Remote.Repository.Creation.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.4.GitHub.Registration.and.Remote.Repository.Creation.txt",
+            "size": 40684689,
+            "description": "13 1 2 4 GitHub Registration and Remote Repository Creation",
+            "clean_name": "4.GitHub.Registration.and.Remote.Repository.Creation.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.6.Connecting.to.Remote.Repository.mp4": {
+            "name": "13.1.2.6.Connecting.to.Remote.Repository.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.6.Connecting.to.Remote.Repository.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.6.Connecting.to.Remote.Repository.txt",
+            "size": 183093299,
+            "description": "13 1 2 6 Connecting to Remote Repository",
+            "clean_name": "6.Connecting.to.Remote.Repository.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.7.Making.Changes.and.Sending.Them.mp4": {
+            "name": "13.1.2.7.Making.Changes.and.Sending.Them.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.7.Making.Changes.and.Sending.Them.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.7.Making.Changes.and.Sending.Them.txt",
+            "size": 56366046,
+            "description": "13 1 2 7 Making Changes and Sending Them",
+            "clean_name": "7.Making.Changes.and.Sending.Them.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.9.Updating.Local.Repository.mp4": {
+            "name": "13.1.2.9.Updating.Local.Repository.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.9.Updating.Local.Repository.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.9.Updating.Local.Repository.txt",
+            "size": 105016709,
+            "description": "13 1 2 9 Updating Local Repository",
+            "clean_name": "9.Updating.Local.Repository.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.2.Five.Useful.Tips.for.Working.with.the.Course.mp4": {
+            "name": "13.1.2.Five.Useful.Tips.for.Working.with.the.Course.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.Five.Useful.Tips.for.Working.with.the.Course.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.2.Five.Useful.Tips.for.Working.with.the.Course.txt",
+            "size": 119301401,
+            "description": "13 1 2 Five Useful Tips for Working with the Course",
+            "clean_name": "Five.Useful.Tips.for.Working.with.the.Course.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.1.Intro.mp4": {
+            "name": "13.1.3.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.1.Intro.txt",
+            "size": 34848898,
+            "description": "13 1 3 1 Intro",
+            "clean_name": "1.Intro.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.10.Pull.Request.mp4": {
+            "name": "13.1.3.10.Pull.Request.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.10.Pull.Request.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.10.Pull.Request.txt",
+            "size": 161158697,
+            "description": "13 1 3 10 Pull Request",
+            "clean_name": "10.Pull.Request.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.11.Branching.Models.mp4": {
+            "name": "13.1.3.11.Branching.Models.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.11.Branching.Models.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.11.Branching.Models.txt",
+            "size": 116338871,
+            "description": "13 1 3 11 Branching Models",
+            "clean_name": "11.Branching.Models.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.12.Summary.mp4": {
+            "name": "13.1.3.12.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.12.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.12.Summary.txt",
+            "size": 23680770,
+            "description": "13 1 3 12 Summary",
+            "clean_name": "12.Summary.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.2.Branches.Creation.and.Work.mp4": {
+            "name": "13.1.3.2.Branches.Creation.and.Work.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.2.Branches.Creation.and.Work.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.2.Branches.Creation.and.Work.txt",
+            "size": 149351213,
+            "description": "13 1 3 2 Branches Creation and Work",
+            "clean_name": "2.Branches.Creation.and.Work.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.3.Working.with.Remote.Branches.mp4": {
+            "name": "13.1.3.3.Working.with.Remote.Branches.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.3.Working.with.Remote.Branches.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.3.Working.with.Remote.Branches.txt",
+            "size": 151663542,
+            "description": "13 1 3 3 Working with Remote Branches",
+            "clean_name": "3.Working.with.Remote.Branches.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.5.Stashing.Changes.mp4": {
+            "name": "13.1.3.5.Stashing.Changes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.5.Stashing.Changes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.5.Stashing.Changes.txt",
+            "size": 127325625,
+            "description": "13 1 3 5 Stashing Changes",
+            "clean_name": "5.Stashing.Changes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.7.Merging.Branches.mp4": {
+            "name": "13.1.3.7.Merging.Branches.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.7.Merging.Branches.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.7.Merging.Branches.txt",
+            "size": 105209490,
+            "description": "13 1 3 7 Merging Branches",
+            "clean_name": "7.Merging.Branches.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.8.Resolving.Conflicts.mp4": {
+            "name": "13.1.3.8.Resolving.Conflicts.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.8.Resolving.Conflicts.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.8.Resolving.Conflicts.txt",
+            "size": 80876039,
+            "description": "13 1 3 8 Resolving Conflicts",
+            "clean_name": "8.Resolving.Conflicts.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.3.Introduction.mp4": {
+            "name": "13.1.3.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.3.Introduction.txt",
+            "size": 29521711,
+            "description": "13 1 3 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.1.Introduction.mp4": {
+            "name": "13.1.4.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.1.Introduction.txt",
+            "size": 19322239,
+            "description": "13 1 4 1 Introduction",
+            "clean_name": "1.Introduction.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.10.Reverting.Merges.Renaming.Deleting.Branches.mp4": {
+            "name": "13.1.4.10.Reverting.Merges.Renaming.Deleting.Branches.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.10.Reverting.Merges.Renaming.Deleting.Branches.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.10.Reverting.Merges.Renaming.Deleting.Branches.txt",
+            "size": 200335519,
+            "description": "13 1 4 10 Reverting Merges Renaming Deleting Branches",
+            "clean_name": "10.Reverting.Merges.Renaming.Deleting.Branches.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.11.Summary.mp4": {
+            "name": "13.1.4.11.Summary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.11.Summary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.11.Summary.txt",
+            "size": 15121410,
+            "description": "13 1 4 11 Summary",
+            "clean_name": "11.Summary.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.2.Viewing.Changes.mp4": {
+            "name": "13.1.4.2.Viewing.Changes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.2.Viewing.Changes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.2.Viewing.Changes.txt",
+            "size": 346885421,
+            "description": "13 1 4 2 Viewing Changes",
+            "clean_name": "2.Viewing.Changes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.4.Deleting.Uncommitted.Changes.mp4": {
+            "name": "13.1.4.4.Deleting.Uncommitted.Changes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.4.Deleting.Uncommitted.Changes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.4.Deleting.Uncommitted.Changes.txt",
+            "size": 231918485,
+            "description": "13 1 4 4 Deleting Uncommitted Changes",
+            "clean_name": "4.Deleting.Uncommitted.Changes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.6.Reverting.Committed.Changes.mp4": {
+            "name": "13.1.4.6.Reverting.Committed.Changes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.6.Reverting.Committed.Changes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.6.Reverting.Committed.Changes.txt",
+            "size": 231918485,
+            "description": "13 1 4 6 Reverting Committed Changes",
+            "clean_name": "6.Reverting.Committed.Changes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.8.Resetting.Commits.mp4": {
+            "name": "13.1.4.8.Resetting.Commits.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.8.Resetting.Commits.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.8.Resetting.Commits.txt",
+            "size": 169902853,
+            "description": "13 1 4 8 Resetting Commits",
+            "clean_name": "8.Resetting.Commits.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.4.Why.Version.Control.System.Is.Needed.mp4": {
+            "name": "13.1.4.Why.Version.Control.System.Is.Needed.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.Why.Version.Control.System.Is.Needed.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.4.Why.Version.Control.System.Is.Needed.txt",
+            "size": 199964213,
+            "description": "13 1 4 Why Version Control System Is Needed",
+            "clean_name": "Why.Version.Control.System.Is.Needed.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.1.Working.in.Command.Line.mp4": {
+            "name": "13.1.5.1.Working.in.Command.Line.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.1.Working.in.Command.Line.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.1.Working.in.Command.Line.txt",
+            "size": 192956906,
+            "description": "13 1 5 1 Working in Command Line",
+            "clean_name": "1.Working.in.Command.Line.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.3.Working.in.GitHub.mp4": {
+            "name": "13.1.5.3.Working.in.GitHub.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.3.Working.in.GitHub.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.3.Working.in.GitHub.txt",
+            "size": 150613743,
+            "description": "13 1 5 3 Working in GitHub",
+            "clean_name": "3.Working.in.GitHub.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.4.Working.in.GitLab.mp4": {
+            "name": "13.1.5.4.Working.in.GitLab.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.4.Working.in.GitLab.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.4.Working.in.GitLab.txt",
+            "size": 119011806,
+            "description": "13 1 5 4 Working in GitLab",
+            "clean_name": "4.Working.in.GitLab.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.5.Working.in.JetBrains.IDE.mp4": {
+            "name": "13.1.5.5.Working.in.JetBrains.IDE.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.5.Working.in.JetBrains.IDE.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.5.Working.in.JetBrains.IDE.txt",
+            "size": 58740515,
+            "description": "13 1 5 5 Working in JetBrains IDE",
+            "clean_name": "5.Working.in.JetBrains.IDE.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.6.Working.in.VS.Code.mp4": {
+            "name": "13.1.5.6.Working.in.VS.Code.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.6.Working.in.VS.Code.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.6.Working.in.VS.Code.txt",
+            "size": 96023969,
+            "description": "13 1 5 6 Working in VS Code",
+            "clean_name": "6.Working.in.VS.Code.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.7.Other.Clients.and.Tools.mp4": {
+            "name": "13.1.5.7.Other.Clients.and.Tools.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.7.Other.Clients.and.Tools.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.7.Other.Clients.and.Tools.txt",
+            "size": 71307612,
+            "description": "13 1 5 7 Other Clients and Tools",
+            "clean_name": "7.Other.Clients.and.Tools.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.8.Git.Working.Rules.mp4": {
+            "name": "13.1.5.8.Git.Working.Rules.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.8.Git.Working.Rules.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.8.Git.Working.Rules.txt",
+            "size": 147221761,
+            "description": "13 1 5 8 Git Working Rules",
+            "clean_name": "8.Git.Working.Rules.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.9.Common.Problems.and.Solutions.mp4": {
+            "name": "13.1.5.9.Common.Problems.and.Solutions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.9.Common.Problems.and.Solutions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.9.Common.Problems.and.Solutions.txt",
+            "size": 265883534,
+            "description": "13 1 5 9 Common Problems and Solutions",
+            "clean_name": "9.Common.Problems.and.Solutions.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.5.What.Git.Workflow.Looks.Like.mp4": {
+            "name": "13.1.5.What.Git.Workflow.Looks.Like.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.What.Git.Workflow.Looks.Like.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.5.What.Git.Workflow.Looks.Like.txt",
+            "size": 84103611,
+            "description": "13 1 5 What Git Workflow Looks Like",
+            "clean_name": "What.Git.Workflow.Looks.Like.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.6.Installing.Git.on.Windows.mp4": {
+            "name": "13.1.6.Installing.Git.on.Windows.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.6.Installing.Git.on.Windows.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.6.Installing.Git.on.Windows.txt",
+            "size": 70949552,
+            "description": "13 1 6 Installing Git on Windows",
+            "clean_name": "Installing.Git.on.Windows.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.8.Installing.Git.on.MacOS.mp4": {
+            "name": "13.1.8.Installing.Git.on.MacOS.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.8.Installing.Git.on.MacOS.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.8.Installing.Git.on.MacOS.txt",
+            "size": 65456723,
+            "description": "13 1 8 Installing Git on MacOS",
+            "clean_name": "Installing.Git.on.MacOS.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.9.Installing.Git.on.Linux.mp4": {
+            "name": "13.1.9.Installing.Git.on.Linux.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.9.Installing.Git.on.Linux.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.1.9.Installing.Git.on.Linux.txt",
+            "size": 83488675,
+            "description": "13 1 9 Installing Git on Linux",
+            "clean_name": "Installing.Git.on.Linux.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.1.Security.Settings.webm": {
+            "name": "13.1.Security.Settings.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.1.Security.Settings.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.1.Security.Settings.txt",
+            "size": 120325341,
+            "description": "13 1 Security Settings",
+            "clean_name": "13.1.Security.Settings.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 13"
+        },
+        "13.2.1.2.Installing.Python.and.PyCharm.mp4": {
+            "name": "13.2.1.2.Installing.Python.and.PyCharm.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.2.Installing.Python.and.PyCharm.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.2.Installing.Python.and.PyCharm.txt",
+            "size": 305136515,
+            "description": "13 2 1 2 Installing Python and PyCharm",
+            "clean_name": "2.Installing.Python.and.PyCharm.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.1.3.Command.Line.and.Interpreter.mp4": {
+            "name": "13.2.1.3.Command.Line.and.Interpreter.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.3.Command.Line.and.Interpreter.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.3.Command.Line.and.Interpreter.txt",
+            "size": 201826636,
+            "description": "13 2 1 3 Command Line and Interpreter",
+            "clean_name": "3.Command.Line.and.Interpreter.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.1.4.Working.in.PyCharm.Debugging.Programs.mp4": {
+            "name": "13.2.1.4.Working.in.PyCharm.Debugging.Programs.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.4.Working.in.PyCharm.Debugging.Programs.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.4.Working.in.PyCharm.Debugging.Programs.txt",
+            "size": 137647555,
+            "description": "13 2 1 4 Working in PyCharm Debugging Programs",
+            "clean_name": "4.Working.in.PyCharm.Debugging.Programs.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.1.5.Conditional.Breakpoints.and.Interactive.Mode.mp4": {
+            "name": "13.2.1.5.Conditional.Breakpoints.and.Interactive.Mode.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.5.Conditional.Breakpoints.and.Interactive.Mode.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.5.Conditional.Breakpoints.and.Interactive.Mode.txt",
+            "size": 133111536,
+            "description": "13 2 1 5 Conditional Breakpoints and Interactive Mode",
+            "clean_name": "5.Conditional.Breakpoints.and.Interactive.Mode.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.1.6.Working.with.Git.and.GitLab.mp4": {
+            "name": "13.2.1.6.Working.with.Git.and.GitLab.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.6.Working.with.Git.and.GitLab.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.6.Working.with.Git.and.GitLab.txt",
+            "size": 249325072,
+            "description": "13 2 1 6 Working with Git and GitLab",
+            "clean_name": "6.Working.with.Git.and.GitLab.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.1.7.Merge.Proposals.mp4": {
+            "name": "13.2.1.7.Merge.Proposals.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.7.Merge.Proposals.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.1.7.Merge.Proposals.txt",
+            "size": 163943734,
+            "description": "13 2 1 7 Merge Proposals",
+            "clean_name": "7.Merge.Proposals.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.10.1.Homework.Review.mp4": {
+            "name": "13.2.10.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.1.Homework.Review.txt",
+            "size": 289148724,
+            "description": "13 2 10 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.10.2.Exception.Handling.Try.Except.Operators.mp4": {
+            "name": "13.2.10.2.Exception.Handling.Try.Except.Operators.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.2.Exception.Handling.Try.Except.Operators.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.2.Exception.Handling.Try.Except.Operators.txt",
+            "size": 223891530,
+            "description": "13 2 10 2 Exception Handling Try Except Operators",
+            "clean_name": "2.Exception.Handling.Try.Except.Operators.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.10.3.Exception.Handling.Else.Finally.Operators.mp4": {
+            "name": "13.2.10.3.Exception.Handling.Else.Finally.Operators.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.3.Exception.Handling.Else.Finally.Operators.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.3.Exception.Handling.Else.Finally.Operators.txt",
+            "size": 107566337,
+            "description": "13 2 10 3 Exception Handling Else Finally Operators",
+            "clean_name": "3.Exception.Handling.Else.Finally.Operators.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.10.4.Raising.Exceptions.Raise.Operator.mp4": {
+            "name": "13.2.10.4.Raising.Exceptions.Raise.Operator.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.4.Raising.Exceptions.Raise.Operator.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.4.Raising.Exceptions.Raise.Operator.txt",
+            "size": 173020596,
+            "description": "13 2 10 4 Raising Exceptions Raise Operator",
+            "clean_name": "4.Raising.Exceptions.Raise.Operator.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.10.5.Context.Manager.With.Operator.mp4": {
+            "name": "13.2.10.5.Context.Manager.With.Operator.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.5.Context.Manager.With.Operator.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.10.5.Context.Manager.With.Operator.txt",
+            "size": 96562287,
+            "description": "13 2 10 5 Context Manager With Operator",
+            "clean_name": "5.Context.Manager.With.Operator.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.11.1.Homework.Review.mp4": {
+            "name": "13.2.11.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.1.Homework.Review.txt",
+            "size": 96975561,
+            "description": "13 2 11 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.11.2.Classes.mp4": {
+            "name": "13.2.11.2.Classes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.2.Classes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.2.Classes.txt",
+            "size": 72451985,
+            "description": "13 2 11 2 Classes",
+            "clean_name": "2.Classes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.11.3.Class.Methods.Argument.Self.mp4": {
+            "name": "13.2.11.3.Class.Methods.Argument.Self.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.3.Class.Methods.Argument.Self.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.3.Class.Methods.Argument.Self.txt",
+            "size": 151367784,
+            "description": "13 2 11 3 Class Methods Argument Self",
+            "clean_name": "3.Class.Methods.Argument.Self.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.11.4.Constructor.Init.And.Working.With.Multiple.Classes.mp4": {
+            "name": "13.2.11.4.Constructor.Init.And.Working.With.Multiple.Classes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.4.Constructor.Init.And.Working.With.Multiple.Classes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.4.Constructor.Init.And.Working.With.Multiple.Classes.txt",
+            "size": 161234836,
+            "description": "13 2 11 4 Constructor Init And Working With Multiple Classes",
+            "clean_name": "4.Constructor.Init.And.Working.With.Multiple.Classes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.11.5.Defining.Classes.In.Modules.And.Importing.Them.mp4": {
+            "name": "13.2.11.5.Defining.Classes.In.Modules.And.Importing.Them.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.5.Defining.Classes.In.Modules.And.Importing.Them.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.11.5.Defining.Classes.In.Modules.And.Importing.Them.txt",
+            "size": 51705772,
+            "description": "13 2 11 5 Defining Classes In Modules And Importing Them",
+            "clean_name": "5.Defining.Classes.In.Modules.And.Importing.Them.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.12.1.Homework.Review.mp4": {
+            "name": "13.2.12.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.1.Homework.Review.txt",
+            "size": 85398408,
+            "description": "13 2 12 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.12.2.Encapsulation.And.Data.Hiding.Getters.And.Setters.mp4": {
+            "name": "13.2.12.2.Encapsulation.And.Data.Hiding.Getters.And.Setters.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.2.Encapsulation.And.Data.Hiding.Getters.And.Setters.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.2.Encapsulation.And.Data.Hiding.Getters.And.Setters.txt",
+            "size": 80613851,
+            "description": "13 2 12 2 Encapsulation And Data Hiding Getters And Setters",
+            "clean_name": "2.Encapsulation.And.Data.Hiding.Getters.And.Setters.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.12.3.Inheritance.mp4": {
+            "name": "13.2.12.3.Inheritance.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.3.Inheritance.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.3.Inheritance.txt",
+            "size": 94268467,
+            "description": "13 2 12 3 Inheritance",
+            "clean_name": "3.Inheritance.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.12.4.Polymorphism.mp4": {
+            "name": "13.2.12.4.Polymorphism.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.4.Polymorphism.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.4.Polymorphism.txt",
+            "size": 104111507,
+            "description": "13 2 12 4 Polymorphism",
+            "clean_name": "4.Polymorphism.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.12.5.Documentation.Class.And.Method.Description.mp4": {
+            "name": "13.2.12.5.Documentation.Class.And.Method.Description.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.5.Documentation.Class.And.Method.Description.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.12.5.Documentation.Class.And.Method.Description.txt",
+            "size": 109192828,
+            "description": "13 2 12 5 Documentation Class And Method Description",
+            "clean_name": "5.Documentation.Class.And.Method.Description.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.13.1.Homework.Review.mp4": {
+            "name": "13.2.13.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.1.Homework.Review.txt",
+            "size": 94814264,
+            "description": "13 2 13 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.13.2.Iterators.mp4": {
+            "name": "13.2.13.2.Iterators.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.2.Iterators.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.2.Iterators.txt",
+            "size": 47425578,
+            "description": "13 2 13 2 Iterators",
+            "clean_name": "2.Iterators.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.13.3.Iterator.Implementation.mp4": {
+            "name": "13.2.13.3.Iterator.Implementation.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.3.Iterator.Implementation.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.3.Iterator.Implementation.txt",
+            "size": 75529444,
+            "description": "13 2 13 3 Iterator Implementation",
+            "clean_name": "3.Iterator.Implementation.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.13.4.Generators.and.Their.Implementation.mp4": {
+            "name": "13.2.13.4.Generators.and.Their.Implementation.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.4.Generators.and.Their.Implementation.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.4.Generators.and.Their.Implementation.txt",
+            "size": 65837422,
+            "description": "13 2 13 4 Generators and Their Implementation",
+            "clean_name": "4.Generators.and.Their.Implementation.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.13.5.Type.Annotations.mp4": {
+            "name": "13.2.13.5.Type.Annotations.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.5.Type.Annotations.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.13.5.Type.Annotations.txt",
+            "size": 80256044,
+            "description": "13 2 13 5 Type Annotations",
+            "clean_name": "5.Type.Annotations.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.14.1.Homework.Review.mp4": {
+            "name": "13.2.14.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.1.Homework.Review.txt",
+            "size": 112225687,
+            "description": "13 2 14 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.14.2.Function.as.Object.Higher-Order.Functions.mp4": {
+            "name": "13.2.14.2.Function.as.Object.Higher-Order.Functions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.2.Function.as.Object.Higher-Order.Functions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.2.Function.as.Object.Higher-Order.Functions.txt",
+            "size": 94304921,
+            "description": "13 2 14 2 Function as Object Higher-Order Functions",
+            "clean_name": "2.Function.as.Object.Higher-Order.Functions.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.14.3.Decorators.mp4": {
+            "name": "13.2.14.3.Decorators.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.3.Decorators.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.3.Decorators.txt",
+            "size": 76587761,
+            "description": "13 2 14 3 Decorators",
+            "clean_name": "3.Decorators.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.14.4.Some.Features.of.Using.Decorators.mp4": {
+            "name": "13.2.14.4.Some.Features.of.Using.Decorators.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.4.Some.Features.of.Using.Decorators.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.4.Some.Features.of.Using.Decorators.txt",
+            "size": 87090902,
+            "description": "13 2 14 4 Some Features of Using Decorators",
+            "clean_name": "4.Some.Features.of.Using.Decorators.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.14.5.functools.Module.mp4": {
+            "name": "13.2.14.5.functools.Module.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.5.functools.Module.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.14.5.functools.Module.txt",
+            "size": 41844111,
+            "description": "13 2 14 5 functools Module",
+            "clean_name": "5.functools.Module.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.15.1.Homework.Review.mp4": {
+            "name": "13.2.15.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.1.Homework.Review.txt",
+            "size": 48448241,
+            "description": "13 2 15 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.15.2.Multiple.Inheritance.mp4": {
+            "name": "13.2.15.2.Multiple.Inheritance.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.2.Multiple.Inheritance.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.2.Multiple.Inheritance.txt",
+            "size": 79453863,
+            "description": "13 2 15 2 Multiple Inheritance",
+            "clean_name": "2.Multiple.Inheritance.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.15.3.Multiple.Inheritance.Mixins.and.Abstract.Classes.mp4": {
+            "name": "13.2.15.3.Multiple.Inheritance.Mixins.and.Abstract.Classes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.3.Multiple.Inheritance.Mixins.and.Abstract.Classes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.3.Multiple.Inheritance.Mixins.and.Abstract.Classes.txt",
+            "size": 88810224,
+            "description": "13 2 15 3 Multiple Inheritance Mixins and Abstract Classes",
+            "clean_name": "3.Multiple.Inheritance.Mixins.and.Abstract.Classes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.15.4.Class.as.Context.Manager.mp4": {
+            "name": "13.2.15.4.Class.as.Context.Manager.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.4.Class.as.Context.Manager.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.4.Class.as.Context.Manager.txt",
+            "size": 63954137,
+            "description": "13 2 15 4 Class as Context Manager",
+            "clean_name": "4.Class.as.Context.Manager.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.15.5.Class.Methods.Decorators.Setter.and.Property.mp4": {
+            "name": "13.2.15.5.Class.Methods.Decorators.Setter.and.Property.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.5.Class.Methods.Decorators.Setter.and.Property.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.5.Class.Methods.Decorators.Setter.and.Property.txt",
+            "size": 56219533,
+            "description": "13 2 15 5 Class Methods Decorators Setter and Property",
+            "clean_name": "5.Class.Methods.Decorators.Setter.and.Property.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.15.6.Class.Methods.Decorator.Classmethod.mp4": {
+            "name": "13.2.15.6.Class.Methods.Decorator.Classmethod.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.6.Class.Methods.Decorator.Classmethod.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.15.6.Class.Methods.Decorator.Classmethod.txt",
+            "size": 44526349,
+            "description": "13 2 15 6 Class Methods Decorator Classmethod",
+            "clean_name": "6.Class.Methods.Decorator.Classmethod.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.16.1.Homework.Review.mp4": {
+            "name": "13.2.16.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.1.Homework.Review.txt",
+            "size": 78199294,
+            "description": "13 2 16 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.16.2.Decorator.Context.Manager.mp4": {
+            "name": "13.2.16.2.Decorator.Context.Manager.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.2.Decorator.Context.Manager.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.2.Decorator.Context.Manager.txt",
+            "size": 80323214,
+            "description": "13 2 16 2 Decorator Context Manager",
+            "clean_name": "2.Decorator.Context.Manager.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.16.3.Decorators.With.Arguments.mp4": {
+            "name": "13.2.16.3.Decorators.With.Arguments.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.3.Decorators.With.Arguments.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.3.Decorators.With.Arguments.txt",
+            "size": 79042380,
+            "description": "13 2 16 3 Decorators With Arguments",
+            "clean_name": "3.Decorators.With.Arguments.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.16.4.Decorators.For.Classes.mp4": {
+            "name": "13.2.16.4.Decorators.For.Classes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.4.Decorators.For.Classes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.4.Decorators.For.Classes.txt",
+            "size": 107237858,
+            "description": "13 2 16 4 Decorators For Classes",
+            "clean_name": "4.Decorators.For.Classes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.16.5.Decorator.As.Class.mp4": {
+            "name": "13.2.16.5.Decorator.As.Class.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.5.Decorator.As.Class.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.16.5.Decorator.As.Class.txt",
+            "size": 48163965,
+            "description": "13 2 16 5 Decorator As Class",
+            "clean_name": "5.Decorator.As.Class.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.17.1.Homework.Review.mp4": {
+            "name": "13.2.17.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.1.Homework.Review.txt",
+            "size": 116213700,
+            "description": "13 2 17 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.17.2.Namespace.And.Scope.mp4": {
+            "name": "13.2.17.2.Namespace.And.Scope.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.2.Namespace.And.Scope.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.2.Namespace.And.Scope.txt",
+            "size": 84655677,
+            "description": "13 2 17 2 Namespace And Scope",
+            "clean_name": "2.Namespace.And.Scope.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.17.3.Lambda.Functions.mp4": {
+            "name": "13.2.17.3.Lambda.Functions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.3.Lambda.Functions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.3.Lambda.Functions.txt",
+            "size": 51065246,
+            "description": "13 2 17 3 Lambda Functions",
+            "clean_name": "3.Lambda.Functions.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.17.4.Map.And.Filter.Functions.mp4": {
+            "name": "13.2.17.4.Map.And.Filter.Functions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.4.Map.And.Filter.Functions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.4.Map.And.Filter.Functions.txt",
+            "size": 81472657,
+            "description": "13 2 17 4 Map And Filter Functions",
+            "clean_name": "4.Map.And.Filter.Functions.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.17.5.Special.Variable.Name.mp4": {
+            "name": "13.2.17.5.Special.Variable.Name.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.5.Special.Variable.Name.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.17.5.Special.Variable.Name.txt",
+            "size": 56240711,
+            "description": "13 2 17 5 Special Variable Name",
+            "clean_name": "5.Special.Variable.Name.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.18.1.Homework.Review.mp4": {
+            "name": "13.2.18.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.1.Homework.Review.txt",
+            "size": 43041053,
+            "description": "13 2 18 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.18.2.Regular.Expressions.Re.Module.And.Methods.mp4": {
+            "name": "13.2.18.2.Regular.Expressions.Re.Module.And.Methods.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.2.Regular.Expressions.Re.Module.And.Methods.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.2.Regular.Expressions.Re.Module.And.Methods.txt",
+            "size": 71774327,
+            "description": "13 2 18 2 Regular Expressions Re Module And Methods",
+            "clean_name": "2.Regular.Expressions.Re.Module.And.Methods.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.18.3.Regular.Expressions.Patterns.mp4": {
+            "name": "13.2.18.3.Regular.Expressions.Patterns.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.3.Regular.Expressions.Patterns.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.3.Regular.Expressions.Patterns.txt",
+            "size": 98974005,
+            "description": "13 2 18 3 Regular Expressions Patterns",
+            "clean_name": "3.Regular.Expressions.Patterns.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.18.4.Parsing.Basics.Requests.Module.And.JSON.Format.mp4": {
+            "name": "13.2.18.4.Parsing.Basics.Requests.Module.And.JSON.Format.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.4.Parsing.Basics.Requests.Module.And.JSON.Format.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.4.Parsing.Basics.Requests.Module.And.JSON.Format.txt",
+            "size": 95239983,
+            "description": "13 2 18 4 Parsing Basics Requests Module And JSON Format",
+            "clean_name": "4.Parsing.Basics.Requests.Module.And.JSON.Format.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.18.5.Itertools.Module.mp4": {
+            "name": "13.2.18.5.Itertools.Module.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.5.Itertools.Module.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.18.5.Itertools.Module.txt",
+            "size": 64012153,
+            "description": "13 2 18 5 Itertools Module",
+            "clean_name": "5.Itertools.Module.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.2.1.Lists.and.Their.Initialization.mp4": {
+            "name": "13.2.2.1.Lists.and.Their.Initialization.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.1.Lists.and.Their.Initialization.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.1.Lists.and.Their.Initialization.txt",
+            "size": 169864810,
+            "description": "13 2 2 1 Lists and Their Initialization",
+            "clean_name": "1.Lists.and.Their.Initialization.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.2.2.Indexes.Working.with.List.Elements.mp4": {
+            "name": "13.2.2.2.Indexes.Working.with.List.Elements.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.2.Indexes.Working.with.List.Elements.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.2.Indexes.Working.with.List.Elements.txt",
+            "size": 149021955,
+            "description": "13 2 2 2 Indexes Working with List Elements",
+            "clean_name": "2.Indexes.Working.with.List.Elements.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.2.3.Lists.Working.with.Strings.mp4": {
+            "name": "13.2.2.3.Lists.Working.with.Strings.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.3.Lists.Working.with.Strings.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.3.Lists.Working.with.Strings.txt",
+            "size": 131010762,
+            "description": "13 2 2 3 Lists Working with Strings",
+            "clean_name": "3.Lists.Working.with.Strings.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.2.4.Basic.Capabilities.when.Working.with.Lists.mp4": {
+            "name": "13.2.2.4.Basic.Capabilities.when.Working.with.Lists.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.4.Basic.Capabilities.when.Working.with.Lists.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.2.4.Basic.Capabilities.when.Working.with.Lists.txt",
+            "size": 142748123,
+            "description": "13 2 2 4 Basic Capabilities when Working with Lists",
+            "clean_name": "4.Basic.Capabilities.when.Working.with.Lists.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.3.1.Homework.Review.mp4": {
+            "name": "13.2.3.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.1.Homework.Review.txt",
+            "size": 132114294,
+            "description": "13 2 3 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.3.2.Working.with.Lists.Insert.Remove.Index.Methods.mp4": {
+            "name": "13.2.3.2.Working.with.Lists.Insert.Remove.Index.Methods.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.2.Working.with.Lists.Insert.Remove.Index.Methods.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.2.Working.with.Lists.Insert.Remove.Index.Methods.txt",
+            "size": 229808008,
+            "description": "13 2 3 2 Working with Lists Insert Remove Index Methods",
+            "clean_name": "2.Working.with.Lists.Insert.Remove.Index.Methods.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.3.3.Working.with.Multiple.Lists.Extend.and.Count.Methods.mp4": {
+            "name": "13.2.3.3.Working.with.Multiple.Lists.Extend.and.Count.Methods.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.3.Working.with.Multiple.Lists.Extend.and.Count.Methods.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.3.Working.with.Multiple.Lists.Extend.and.Count.Methods.txt",
+            "size": 115267805,
+            "description": "13 2 3 3 Working with Multiple Lists Extend and Count Methods",
+            "clean_name": "3.Working.with.Multiple.Lists.Extend.and.Count.Methods.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.3.4.Nested.Lists.mp4": {
+            "name": "13.2.3.4.Nested.Lists.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.4.Nested.Lists.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.3.4.Nested.Lists.txt",
+            "size": 173419369,
+            "description": "13 2 3 4 Nested Lists",
+            "clean_name": "4.Nested.Lists.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.4.1.Homework.Review.mp4": {
+            "name": "13.2.4.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.1.Homework.Review.txt",
+            "size": 86887113,
+            "description": "13 2 4 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.4.2.List.Comprehensions.mp4": {
+            "name": "13.2.4.2.List.Comprehensions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.2.List.Comprehensions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.2.List.Comprehensions.txt",
+            "size": 59662850,
+            "description": "13 2 4 2 List Comprehensions",
+            "clean_name": "2.List.Comprehensions.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.4.3.List.Comprehensions.with.Conditions.mp4": {
+            "name": "13.2.4.3.List.Comprehensions.with.Conditions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.3.List.Comprehensions.with.Conditions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.3.List.Comprehensions.with.Conditions.txt",
+            "size": 78947342,
+            "description": "13 2 4 3 List Comprehensions with Conditions",
+            "clean_name": "3.List.Comprehensions.with.Conditions.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.4.4.List.Slices.mp4": {
+            "name": "13.2.4.4.List.Slices.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.4.List.Slices.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.4.List.Slices.txt",
+            "size": 93218138,
+            "description": "13 2 4 4 List Slices",
+            "clean_name": "4.List.Slices.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.4.5.Strings.Indices.and.Slices.mp4": {
+            "name": "13.2.4.5.Strings.Indices.and.Slices.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.5.Strings.Indices.and.Slices.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.5.Strings.Indices.and.Slices.txt",
+            "size": 86501141,
+            "description": "13 2 4 5 Strings Indices and Slices",
+            "clean_name": "5.Strings.Indices.and.Slices.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.4.6.Outro.mp4": {
+            "name": "13.2.4.6.Outro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.6.Outro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.4.6.Outro.txt",
+            "size": 8398909,
+            "description": "13 2 4 6 Outro",
+            "clean_name": "6.Outro.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.5.1.Homework.Review.mp4": {
+            "name": "13.2.5.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.1.Homework.Review.txt",
+            "size": 119126931,
+            "description": "13 2 5 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.5.2.String.Formatting.mp4": {
+            "name": "13.2.5.2.String.Formatting.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.2.String.Formatting.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.2.String.Formatting.txt",
+            "size": 132945585,
+            "description": "13 2 5 2 String Formatting",
+            "clean_name": "2.String.Formatting.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.5.3.String.Methods.Split.Join.mp4": {
+            "name": "13.2.5.3.String.Methods.Split.Join.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.3.String.Methods.Split.Join.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.3.String.Methods.Split.Join.txt",
+            "size": 157791496,
+            "description": "13 2 5 3 String Methods Split Join",
+            "clean_name": "3.String.Methods.Split.Join.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.5.4.String.Methods.Startswith.Endswith.mp4": {
+            "name": "13.2.5.4.String.Methods.Startswith.Endswith.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.4.String.Methods.Startswith.Endswith.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.4.String.Methods.Startswith.Endswith.txt",
+            "size": 140660626,
+            "description": "13 2 5 4 String Methods Startswith Endswith",
+            "clean_name": "4.String.Methods.Startswith.Endswith.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.5.5.String.Formatting.Substitutions.mp4": {
+            "name": "13.2.5.5.String.Formatting.Substitutions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.5.String.Formatting.Substitutions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.5.5.String.Formatting.Substitutions.txt",
+            "size": 84210795,
+            "description": "13 2 5 5 String Formatting Substitutions",
+            "clean_name": "5.String.Formatting.Substitutions.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.6.1.Dictionary.Basics.mp4": {
+            "name": "13.2.6.1.Dictionary.Basics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.1.Dictionary.Basics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.1.Dictionary.Basics.txt",
+            "size": 122988534,
+            "description": "13 2 6 1 Dictionary Basics",
+            "clean_name": "1.Dictionary.Basics.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.6.2.Dictionary.Methods.mp4": {
+            "name": "13.2.6.2.Dictionary.Methods.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.2.Dictionary.Methods.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.2.Dictionary.Methods.txt",
+            "size": 112800462,
+            "description": "13 2 6 2 Dictionary Methods",
+            "clean_name": "2.Dictionary.Methods.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.6.3.Nested.Dictionaries.Default.Get.mp4": {
+            "name": "13.2.6.3.Nested.Dictionaries.Default.Get.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.3.Nested.Dictionaries.Default.Get.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.3.Nested.Dictionaries.Default.Get.txt",
+            "size": 96689996,
+            "description": "13 2 6 3 Nested Dictionaries Default Get",
+            "clean_name": "3.Nested.Dictionaries.Default.Get.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.6.4.Sets.Function.Set.mp4": {
+            "name": "13.2.6.4.Sets.Function.Set.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.4.Sets.Function.Set.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.4.Sets.Function.Set.txt",
+            "size": 66505637,
+            "description": "13 2 6 4 Sets Function Set",
+            "clean_name": "4.Sets.Function.Set.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.6.5.Dictionary.Generation.mp4": {
+            "name": "13.2.6.5.Dictionary.Generation.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.5.Dictionary.Generation.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.6.5.Dictionary.Generation.txt",
+            "size": 138927344,
+            "description": "13 2 6 5 Dictionary Generation",
+            "clean_name": "5.Dictionary.Generation.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.7.1.Homework.Review.mp4": {
+            "name": "13.2.7.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.1.Homework.Review.txt",
+            "size": 52970511,
+            "description": "13 2 7 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.7.2.Tuples.mp4": {
+            "name": "13.2.7.2.Tuples.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.2.Tuples.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.2.Tuples.txt",
+            "size": 112469424,
+            "description": "13 2 7 2 Tuples",
+            "clean_name": "2.Tuples.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.7.3.Enumerate.Function.Iterating.Multiple.Values.mp4": {
+            "name": "13.2.7.3.Enumerate.Function.Iterating.Multiple.Values.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.3.Enumerate.Function.Iterating.Multiple.Values.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.3.Enumerate.Function.Iterating.Multiple.Values.txt",
+            "size": 83114226,
+            "description": "13 2 7 3 Enumerate Function Iterating Multiple Values",
+            "clean_name": "3.Enumerate.Function.Iterating.Multiple.Values.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.7.4.Iterating.Keys.Values.In.Dictionary.mp4": {
+            "name": "13.2.7.4.Iterating.Keys.Values.In.Dictionary.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.4.Iterating.Keys.Values.In.Dictionary.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.4.Iterating.Keys.Values.In.Dictionary.txt",
+            "size": 73048470,
+            "description": "13 2 7 4 Iterating Keys Values In Dictionary",
+            "clean_name": "4.Iterating.Keys.Values.In.Dictionary.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.7.5.Composite.Keys.mp4": {
+            "name": "13.2.7.5.Composite.Keys.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.5.Composite.Keys.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.5.Composite.Keys.txt",
+            "size": 60813094,
+            "description": "13 2 7 5 Composite Keys",
+            "clean_name": "5.Composite.Keys.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.7.6.Zip.Function.mp4": {
+            "name": "13.2.7.6.Zip.Function.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.6.Zip.Function.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.6.Zip.Function.txt",
+            "size": 109250796,
+            "description": "13 2 7 6 Zip Function",
+            "clean_name": "6.Zip.Function.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.7.7.Outro.mp4": {
+            "name": "13.2.7.7.Outro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.7.Outro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.7.7.Outro.txt",
+            "size": 7668014,
+            "description": "13 2 7 7 Outro",
+            "clean_name": "7.Outro.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.8.1.Homework.Review.mp4": {
+            "name": "13.2.8.1.Homework.Review.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.1.Homework.Review.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.1.Homework.Review.txt",
+            "size": 57326526,
+            "description": "13 2 8 1 Homework Review",
+            "clean_name": "1.Homework.Review.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.8.2.Recursion.mp4": {
+            "name": "13.2.8.2.Recursion.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.2.Recursion.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.2.Recursion.txt",
+            "size": 107418197,
+            "description": "13 2 8 2 Recursion",
+            "clean_name": "2.Recursion.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.8.4.Passing.Mutable.Immutable.Data.to.Function.mp4": {
+            "name": "13.2.8.4.Passing.Mutable.Immutable.Data.to.Function.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.4.Passing.Mutable.Immutable.Data.to.Function.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.4.Passing.Mutable.Immutable.Data.to.Function.txt",
+            "size": 55597936,
+            "description": "13 2 8 4 Passing Mutable Immutable Data to Function",
+            "clean_name": "4.Passing.Mutable.Immutable.Data.to.Function.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.8.6.Named.Arguments.and.Default.Values.mp4": {
+            "name": "13.2.8.6.Named.Arguments.and.Default.Values.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.6.Named.Arguments.and.Default.Values.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.6.Named.Arguments.and.Default.Values.txt",
+            "size": 104627344,
+            "description": "13 2 8 6 Named Arguments and Default Values",
+            "clean_name": "6.Named.Arguments.and.Default.Values.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.8.7.Args.and.Kwargs.mp4": {
+            "name": "13.2.8.7.Args.and.Kwargs.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.7.Args.and.Kwargs.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.8.7.Args.and.Kwargs.txt",
+            "size": 117666607,
+            "description": "13 2 8 7 Args and Kwargs",
+            "clean_name": "7.Args.and.Kwargs.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.9.1.Os.Module.Path.Generation.and.Listdir.Method.mp4": {
+            "name": "13.2.9.1.Os.Module.Path.Generation.and.Listdir.Method.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.1.Os.Module.Path.Generation.and.Listdir.Method.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.1.Os.Module.Path.Generation.and.Listdir.Method.txt",
+            "size": 127166622,
+            "description": "13 2 9 1 Os Module Path Generation and Listdir Method",
+            "clean_name": "1.Os.Module.Path.Generation.and.Listdir.Method.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.9.2.Os.Module.Checks.mp4": {
+            "name": "13.2.9.2.Os.Module.Checks.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.2.Os.Module.Checks.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.2.Os.Module.Checks.txt",
+            "size": 91779498,
+            "description": "13 2 9 2 Os Module Checks",
+            "clean_name": "2.Os.Module.Checks.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.9.3.Basic.File.Operations.Open.Close.Read.mp4": {
+            "name": "13.2.9.3.Basic.File.Operations.Open.Close.Read.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.3.Basic.File.Operations.Open.Close.Read.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.3.Basic.File.Operations.Open.Close.Read.txt",
+            "size": 96251691,
+            "description": "13 2 9 3 Basic File Operations Open Close Read",
+            "clean_name": "3.Basic.File.Operations.Open.Close.Read.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.9.4.Write.Method.Write.Modes.mp4": {
+            "name": "13.2.9.4.Write.Method.Write.Modes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.4.Write.Method.Write.Modes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.4.Write.Method.Write.Modes.txt",
+            "size": 90025100,
+            "description": "13 2 9 4 Write Method Write Modes",
+            "clean_name": "4.Write.Method.Write.Modes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.9.5.Moving.Cursor.in.File.Seek.Method.mp4": {
+            "name": "13.2.9.5.Moving.Cursor.in.File.Seek.Method.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.5.Moving.Cursor.in.File.Seek.Method.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.2.9.5.Moving.Cursor.in.File.Seek.Method.txt",
+            "size": 52423136,
+            "description": "13 2 9 5 Moving Cursor in File Seek Method",
+            "clean_name": "5.Moving.Cursor.in.File.Seek.Method.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.2.Chroot.Utility.webm": {
+            "name": "13.2.Chroot.Utility.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.2.Chroot.Utility.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.2.Chroot.Utility.txt",
+            "size": 5430215,
+            "description": "13 2 Chroot Utility",
+            "clean_name": "13.2.Chroot.Utility.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 13"
+        },
+        "13.3.1.1.Intro.mp4": {
+            "name": "13.3.1.1.Intro.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.1.Intro.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.1.Intro.txt",
+            "size": 19834617,
+            "description": "13 3 1 1 Intro",
+            "clean_name": "1.Intro.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.1.2.OSI.Model.mp4": {
+            "name": "13.3.1.2.OSI.Model.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.2.OSI.Model.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.2.OSI.Model.txt",
+            "size": 52856023,
+            "description": "13 3 1 2 OSI Model",
+            "clean_name": "2.OSI.Model.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.1.3.OSI.Levels.Analysis.mp4": {
+            "name": "13.3.1.3.OSI.Levels.Analysis.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.3.OSI.Levels.Analysis.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.3.OSI.Levels.Analysis.txt",
+            "size": 73690547,
+            "description": "13 3 1 3 OSI Levels Analysis",
+            "clean_name": "3.OSI.Levels.Analysis.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.1.4.TCP.IP.Protocol.and.Stack.mp4": {
+            "name": "13.3.1.4.TCP.IP.Protocol.and.Stack.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.4.TCP.IP.Protocol.and.Stack.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.4.TCP.IP.Protocol.and.Stack.txt",
+            "size": 112205995,
+            "description": "13 3 1 4 TCP IP Protocol and Stack",
+            "clean_name": "4.TCP.IP.Protocol.and.Stack.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.1.5.UDP.Protocol.mp4": {
+            "name": "13.3.1.5.UDP.Protocol.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.5.UDP.Protocol.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.5.UDP.Protocol.txt",
+            "size": 33854623,
+            "description": "13 3 1 5 UDP Protocol",
+            "clean_name": "5.UDP.Protocol.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.1.6.Protocols.Comparison.mp4": {
+            "name": "13.3.1.6.Protocols.Comparison.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.6.Protocols.Comparison.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.1.6.Protocols.Comparison.txt",
+            "size": 43575875,
+            "description": "13 3 1 6 Protocols Comparison",
+            "clean_name": "6.Protocols.Comparison.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.10.1.FireWall.mp4": {
+            "name": "13.3.10.1.FireWall.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.10.1.FireWall.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.10.1.FireWall.txt",
+            "size": 78463347,
+            "description": "13 3 10 1 FireWall",
+            "clean_name": "1.FireWall.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.10.2.FirewallArchitecture.mp4": {
+            "name": "13.3.10.2.FirewallArchitecture.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.10.2.FirewallArchitecture.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.10.2.FirewallArchitecture.txt",
+            "size": 121882912,
+            "description": "13 3 10 2 FirewallArchitecture",
+            "clean_name": "2.FirewallArchitecture.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.10.3.FirewallSetup.mp4": {
+            "name": "13.3.10.3.FirewallSetup.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.10.3.FirewallSetup.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.10.3.FirewallSetup.txt",
+            "size": 302977576,
+            "description": "13 3 10 3 FirewallSetup",
+            "clean_name": "3.FirewallSetup.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.2.1.DNS.mp4": {
+            "name": "13.3.2.1.DNS.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.1.DNS.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.1.DNS.txt",
+            "size": 38216775,
+            "description": "13 3 2 1 DNS",
+            "clean_name": "1.DNS.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.2.2.DHCP.mp4": {
+            "name": "13.3.2.2.DHCP.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.2.DHCP.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.2.DHCP.txt",
+            "size": 302258139,
+            "description": "13 3 2 2 DHCP",
+            "clean_name": "2.DHCP.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.2.3.NAT.mp4": {
+            "name": "13.3.2.3.NAT.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.3.NAT.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.3.NAT.txt",
+            "size": 341263744,
+            "description": "13 3 2 3 NAT",
+            "clean_name": "3.NAT.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.2.4.NTP.mp4": {
+            "name": "13.3.2.4.NTP.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.4.NTP.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.2.4.NTP.txt",
+            "size": 132767966,
+            "description": "13 3 2 4 NTP",
+            "clean_name": "4.NTP.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.3.1.NetworkDesignBasics.mp4": {
+            "name": "13.3.3.1.NetworkDesignBasics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.3.1.NetworkDesignBasics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.3.1.NetworkDesignBasics.txt",
+            "size": 77481908,
+            "description": "13 3 3 1 NetworkDesignBasics",
+            "clean_name": "1.NetworkDesignBasics.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.3.2.RoleDistribution.mp4": {
+            "name": "13.3.3.2.RoleDistribution.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.3.2.RoleDistribution.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.3.2.RoleDistribution.txt",
+            "size": 185264280,
+            "description": "13 3 3 2 RoleDistribution",
+            "clean_name": "2.RoleDistribution.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.3.3.NetworkBuildingConcept.mp4": {
+            "name": "13.3.3.3.NetworkBuildingConcept.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.3.3.NetworkBuildingConcept.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.3.3.NetworkBuildingConcept.txt",
+            "size": 239652640,
+            "description": "13 3 3 3 NetworkBuildingConcept",
+            "clean_name": "3.NetworkBuildingConcept.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.4.1.NetworkScalingVLAN.mp4": {
+            "name": "13.3.4.1.NetworkScalingVLAN.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.1.NetworkScalingVLAN.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.1.NetworkScalingVLAN.txt",
+            "size": 240671875,
+            "description": "13 3 4 1 NetworkScalingVLAN",
+            "clean_name": "1.NetworkScalingVLAN.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.4.2.Layer3Switching.mp4": {
+            "name": "13.3.4.2.Layer3Switching.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.2.Layer3Switching.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.2.Layer3Switching.txt",
+            "size": 90070637,
+            "description": "13 3 4 2 Layer3Switching",
+            "clean_name": "2.Layer3Switching.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.4.3.LinkAggregation.mp4": {
+            "name": "13.3.4.3.LinkAggregation.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.3.LinkAggregation.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.3.LinkAggregation.txt",
+            "size": 104729685,
+            "description": "13 3 4 3 LinkAggregation",
+            "clean_name": "3.LinkAggregation.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.4.4.FirstHopRedundancyProtocols.mp4": {
+            "name": "13.3.4.4.FirstHopRedundancyProtocols.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.4.FirstHopRedundancyProtocols.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.4.FirstHopRedundancyProtocols.txt",
+            "size": 131758267,
+            "description": "13 3 4 4 FirstHopRedundancyProtocols",
+            "clean_name": "4.FirstHopRedundancyProtocols.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.4.5.ChannelAggregationProtocolsConfiguration.mp4": {
+            "name": "13.3.4.5.ChannelAggregationProtocolsConfiguration.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.5.ChannelAggregationProtocolsConfiguration.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.4.5.ChannelAggregationProtocolsConfiguration.txt",
+            "size": 716132238,
+            "description": "13 3 4 5 ChannelAggregationProtocolsConfiguration",
+            "clean_name": "5.ChannelAggregationProtocolsConfiguration.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.5.1.DynamicRoutingProtocols.mp4": {
+            "name": "13.3.5.1.DynamicRoutingProtocols.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.1.DynamicRoutingProtocols.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.1.DynamicRoutingProtocols.txt",
+            "size": 192335636,
+            "description": "13 3 5 1 DynamicRoutingProtocols",
+            "clean_name": "1.DynamicRoutingProtocols.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.5.2.OSPFCharacteristics.mp4": {
+            "name": "13.3.5.2.OSPFCharacteristics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.2.OSPFCharacteristics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.2.OSPFCharacteristics.txt",
+            "size": 166968631,
+            "description": "13 3 5 2 OSPFCharacteristics",
+            "clean_name": "2.OSPFCharacteristics.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.5.3.OSPFPacketTypes.mp4": {
+            "name": "13.3.5.3.OSPFPacketTypes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.3.OSPFPacketTypes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.3.OSPFPacketTypes.txt",
+            "size": 159262567,
+            "description": "13 3 5 3 OSPFPacketTypes",
+            "clean_name": "3.OSPFPacketTypes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.5.4.OSPFv2SingleAreaConfiguration.mp4": {
+            "name": "13.3.5.4.OSPFv2SingleAreaConfiguration.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.4.OSPFv2SingleAreaConfiguration.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.5.4.OSPFv2SingleAreaConfiguration.txt",
+            "size": 415724769,
+            "description": "13 3 5 4 OSPFv2SingleAreaConfiguration",
+            "clean_name": "4.OSPFv2SingleAreaConfiguration.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.6.1.BGPBasic.mp4": {
+            "name": "13.3.6.1.BGPBasic.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.1.BGPBasic.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.1.BGPBasic.txt",
+            "size": 103843898,
+            "description": "13 3 6 1 BGPBasic",
+            "clean_name": "1.BGPBasic.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.6.2.BGPBasicAdvanced.mp4": {
+            "name": "13.3.6.2.BGPBasicAdvanced.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.2.BGPBasicAdvanced.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.2.BGPBasicAdvanced.txt",
+            "size": 368782274,
+            "description": "13 3 6 2 BGPBasicAdvanced",
+            "clean_name": "2.BGPBasicAdvanced.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.6.3.BGPAttributes.mp4": {
+            "name": "13.3.6.3.BGPAttributes.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.3.BGPAttributes.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.3.BGPAttributes.txt",
+            "size": 213677801,
+            "description": "13 3 6 3 BGPAttributes",
+            "clean_name": "3.BGPAttributes.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.6.4.BGPProtocolConfiguration.mp4": {
+            "name": "13.3.6.4.BGPProtocolConfiguration.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.4.BGPProtocolConfiguration.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.6.4.BGPProtocolConfiguration.txt",
+            "size": 382896005,
+            "description": "13 3 6 4 BGPProtocolConfiguration",
+            "clean_name": "4.BGPProtocolConfiguration.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.7.1.IPv4Protocol.mp4": {
+            "name": "13.3.7.1.IPv4Protocol.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.1.IPv4Protocol.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.1.IPv4Protocol.txt",
+            "size": 977584700,
+            "description": "13 3 7 1 IPv4Protocol",
+            "clean_name": "1.IPv4Protocol.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.7.2.IPv6Protocol.mp4": {
+            "name": "13.3.7.2.IPv6Protocol.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.2.IPv6Protocol.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.2.IPv6Protocol.txt",
+            "size": 496782004,
+            "description": "13 3 7 2 IPv6Protocol",
+            "clean_name": "2.IPv6Protocol.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.7.3.IPv6NetworkPrefixAcquisition.mp4": {
+            "name": "13.3.7.3.IPv6NetworkPrefixAcquisition.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.3.IPv6NetworkPrefixAcquisition.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.3.IPv6NetworkPrefixAcquisition.txt",
+            "size": 367213143,
+            "description": "13 3 7 3 IPv6NetworkPrefixAcquisition",
+            "clean_name": "3.IPv6NetworkPrefixAcquisition.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.7.4.IPv6PracticeConfiguration.mp4": {
+            "name": "13.3.7.4.IPv6PracticeConfiguration.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.4.IPv6PracticeConfiguration.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.7.4.IPv6PracticeConfiguration.txt",
+            "size": 252664331,
+            "description": "13 3 7 4 IPv6PracticeConfiguration",
+            "clean_name": "4.IPv6PracticeConfiguration.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.8.1.Introduction.mp4": {
+            "name": "13.3.8.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.1.Introduction.txt",
+            "size": 36636401,
+            "description": "13 3 8 1 Introduction",
+            "clean_name": "1.Introduction.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.8.2.GRE.mp4": {
+            "name": "13.3.8.2.GRE.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.2.GRE.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.2.GRE.txt",
+            "size": 605866544,
+            "description": "13 3 8 2 GRE",
+            "clean_name": "2.GRE.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.8.3.IPSecBasic.mp4": {
+            "name": "13.3.8.3.IPSecBasic.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.3.IPSecBasic.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.3.IPSecBasic.txt",
+            "size": 349570040,
+            "description": "13 3 8 3 IPSecBasic",
+            "clean_name": "3.IPSecBasic.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.8.4.IPSecAdvancedESPAH.mp4": {
+            "name": "13.3.8.4.IPSecAdvancedESPAH.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.4.IPSecAdvancedESPAH.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.4.IPSecAdvancedESPAH.txt",
+            "size": 278793951,
+            "description": "13 3 8 4 IPSecAdvancedESPAH",
+            "clean_name": "4.IPSecAdvancedESPAH.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.8.5.IPSecAdvancedIKE.mp4": {
+            "name": "13.3.8.5.IPSecAdvancedIKE.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.5.IPSecAdvancedIKE.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.5.IPSecAdvancedIKE.txt",
+            "size": 336054694,
+            "description": "13 3 8 5 IPSecAdvancedIKE",
+            "clean_name": "5.IPSecAdvancedIKE.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.8.6.VPN.mp4": {
+            "name": "13.3.8.6.VPN.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.6.VPN.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.8.6.VPN.txt",
+            "size": 114603495,
+            "description": "13 3 8 6 VPN",
+            "clean_name": "6.VPN.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.9.1.ACL.mp4": {
+            "name": "13.3.9.1.ACL.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.9.1.ACL.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.9.1.ACL.txt",
+            "size": 73598987,
+            "description": "13 3 9 1 ACL",
+            "clean_name": "1.ACL.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.9.2.AAA.mp4": {
+            "name": "13.3.9.2.AAA.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.9.2.AAA.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.9.2.AAA.txt",
+            "size": 69563490,
+            "description": "13 3 9 2 AAA",
+            "clean_name": "2.AAA.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.9.3.L2Security.mp4": {
+            "name": "13.3.9.3.L2Security.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.9.3.L2Security.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/13.0.0/13.3.9.3.L2Security.txt",
+            "size": 139129406,
+            "description": "13 3 9 3 L2Security",
+            "clean_name": "3.L2Security.mp4",
+            "release_tag": "13.0.0",
+            "section": "Section 13"
+        },
+        "13.3.PAM.AppArmor.PolicyKit.webm": {
+            "name": "13.3.PAM.AppArmor.PolicyKit.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.3.PAM.AppArmor.PolicyKit.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.3.PAM.AppArmor.PolicyKit.txt",
+            "size": 192179263,
+            "description": "13 3 PAM AppArmor PolicyKit",
+            "clean_name": "13.3.PAM.AppArmor.PolicyKit.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 13"
+        },
+        "13.4.Protection.and.Assessment.of.IS.Security.Level.webm": {
+            "name": "13.4.Protection.and.Assessment.of.IS.Security.Level.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.4.Protection.and.Assessment.of.IS.Security.Level.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/13.4.Protection.and.Assessment.of.IS.Security.Level.txt",
+            "size": 83689972,
+            "description": "13 4 Protection and Assessment of IS Security Level",
+            "clean_name": "13.4.Protection.and.Assessment.of.IS.Security.Level.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 13"
+        },
+        "13.File.system.webm": {
+            "name": "13.File.system.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/13.File.system.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/13.File.system.txt",
+            "size": 149388450,
+            "description": "13 File system",
+            "clean_name": "13.File.system.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "14.1.Backup.webm": {
+            "name": "14.1.Backup.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.1.Backup.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.1.Backup.txt",
+            "size": 70367797,
+            "description": "14 1 Backup",
+            "clean_name": "14.1.Backup.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 14"
+        },
+        "14.2.Automating.Backup.Task.webm": {
+            "name": "14.2.Automating.Backup.Task.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.2.Automating.Backup.Task.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.2.Automating.Backup.Task.txt",
+            "size": 53999420,
+            "description": "14 2 Automating Backup Task",
+            "clean_name": "14.2.Automating.Backup.Task.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 14"
+        },
+        "14.3.Data.Recovery.webm": {
+            "name": "14.3.Data.Recovery.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.3.Data.Recovery.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.3.Data.Recovery.txt",
+            "size": 26102604,
+            "description": "14 3 Data Recovery",
+            "clean_name": "14.3.Data.Recovery.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 14"
+        },
+        "14.4.Data.Recovery.with.tar.webm": {
+            "name": "14.4.Data.Recovery.with.tar.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.4.Data.Recovery.with.tar.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.4.Data.Recovery.with.tar.txt",
+            "size": 6430534,
+            "description": "14 4 Data Recovery with tar",
+            "clean_name": "14.4.Data.Recovery.with.tar.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 14"
+        },
+        "14.5.Information.Security.Assurance.webm": {
+            "name": "14.5.Information.Security.Assurance.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.5.Information.Security.Assurance.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.5.Information.Security.Assurance.txt",
+            "size": 47377271,
+            "description": "14 5 Information Security Assurance",
+            "clean_name": "14.5.Information.Security.Assurance.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 14"
+        },
+        "14.6.Organizational.Protection.of.Information.webm": {
+            "name": "14.6.Organizational.Protection.of.Information.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.6.Organizational.Protection.of.Information.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/14.6.Organizational.Protection.of.Information.txt",
+            "size": 17603852,
+            "description": "14 6 Organizational Protection of Information",
+            "clean_name": "14.6.Organizational.Protection.of.Information.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 14"
+        },
+        "14.Packet.manager.webm": {
+            "name": "14.Packet.manager.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/14.Packet.manager.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/14.Packet.manager.txt",
+            "size": 101724737,
+            "description": "14 Packet manager",
+            "clean_name": "14.Packet.manager.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "15.Kernel.webm": {
+            "name": "15.Kernel.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/15.Kernel.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/15.Kernel.txt",
+            "size": 227804356,
+            "description": "15 Kernel",
+            "clean_name": "15.Kernel.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "16.Memory.swapping.webm": {
+            "name": "16.Memory.swapping.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/16.Memory.swapping.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/16.Memory.swapping.txt",
+            "size": 76399203,
+            "description": "16 Memory swapping",
+            "clean_name": "16.Memory.swapping.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "17.Process.webm": {
+            "name": "17.Process.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/17.Process.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/17.Process.txt",
+            "size": 147783469,
+            "description": "17 Process",
+            "clean_name": "17.Process.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "18.Socket.webm": {
+            "name": "18.Socket.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/18.Socket.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/18.Socket.txt",
+            "size": 42342699,
+            "description": "18 Socket",
+            "clean_name": "18.Socket.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "2.1.1.Introduction.to.Information.Security.webm": {
+            "name": "2.1.1.Introduction.to.Information.Security.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.1.Introduction.to.Information.Security.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.1.Introduction.to.Information.Security.txt",
+            "size": 89534524,
+            "description": "2 1 1 Introduction to Information Security",
+            "clean_name": "Introduction.to.Information.Security.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.1.2.Information.Protection.webm": {
+            "name": "2.1.2.Information.Protection.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.2.Information.Protection.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.2.Information.Protection.txt",
+            "size": 231449362,
+            "description": "2 1 2 Information Protection",
+            "clean_name": "Information.Protection.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.1.3.Career.in.Information.Security.webm": {
+            "name": "2.1.3.Career.in.Information.Security.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.3.Career.in.Information.Security.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.3.Career.in.Information.Security.txt",
+            "size": 265315698,
+            "description": "2 1 3 Career in Information Security",
+            "clean_name": "Career.in.Information.Security.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.1.4.Course.Overview.webm": {
+            "name": "2.1.4.Course.Overview.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.4.Course.Overview.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.1.4.Course.Overview.txt",
+            "size": 44125051,
+            "description": "2 1 4 Course Overview",
+            "clean_name": "Course.Overview.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.1.Protocols.mp4": {
+            "name": "2.1.Protocols.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.1.Protocols.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.1.Protocols.txt",
+            "size": 53073362,
+            "description": "2 1 Protocols",
+            "clean_name": "2.1.Protocols.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 2"
+        },
+        "2.2.1.Introduction.to.OS.Security.webm": {
+            "name": "2.2.1.Introduction.to.OS.Security.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.1.Introduction.to.OS.Security.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.1.Introduction.to.OS.Security.txt",
+            "size": 107165546,
+            "description": "2 2 1 Introduction to OS Security",
+            "clean_name": "Introduction.to.OS.Security.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.2.2.Linux.as.Target.System.webm": {
+            "name": "2.2.2.Linux.as.Target.System.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.2.Linux.as.Target.System.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.2.Linux.as.Target.System.txt",
+            "size": 339255138,
+            "description": "2 2 2 Linux as Target System",
+            "clean_name": "Linux.as.Target.System.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.2.3.Linux.as.Home.OS.for.Security.Specialist.webm": {
+            "name": "2.2.3.Linux.as.Home.OS.for.Security.Specialist.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.3.Linux.as.Home.OS.for.Security.Specialist.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.3.Linux.as.Home.OS.for.Security.Specialist.txt",
+            "size": 174827042,
+            "description": "2 2 3 Linux as Home OS for Security Specialist",
+            "clean_name": "Linux.as.Home.OS.for.Security.Specialist.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.2.4.Linux.File.System.webm": {
+            "name": "2.2.4.Linux.File.System.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.4.Linux.File.System.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.2.4.Linux.File.System.txt",
+            "size": 85369341,
+            "description": "2 2 4 Linux File System",
+            "clean_name": "Linux.File.System.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.2.ICMP.Protocol.Work.and.Other.Network.Level.Protocols.mp4": {
+            "name": "2.2.ICMP.Protocol.Work.and.Other.Network.Level.Protocols.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.2.ICMP.Protocol.Work.and.Other.Network.Level.Protocols.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.2.ICMP.Protocol.Work.and.Other.Network.Level.Protocols.txt",
+            "size": 151926320,
+            "description": "2 2 ICMP Protocol Work and Other Network Level Protocols",
+            "clean_name": "2.2.ICMP.Protocol.Work.and.Other.Network.Level.Protocols.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 2"
+        },
+        "2.3.1.Creating.User.Account.webm": {
+            "name": "2.3.1.Creating.User.Account.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.1.Creating.User.Account.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.1.Creating.User.Account.txt",
+            "size": 137823230,
+            "description": "2 3 1 Creating User Account",
+            "clean_name": "Creating.User.Account.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.3.2.Delegation.of.Rights.webm": {
+            "name": "2.3.2.Delegation.of.Rights.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.2.Delegation.of.Rights.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.2.Delegation.of.Rights.txt",
+            "size": 88193917,
+            "description": "2 3 2 Delegation of Rights",
+            "clean_name": "Delegation.of.Rights.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.3.3.Inheritance.of.Rights.webm": {
+            "name": "2.3.3.Inheritance.of.Rights.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.3.Inheritance.of.Rights.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.3.Inheritance.of.Rights.txt",
+            "size": 162765638,
+            "description": "2 3 3 Inheritance of Rights",
+            "clean_name": "Inheritance.of.Rights.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.3.4.Superuser.Rights.webm": {
+            "name": "2.3.4.Superuser.Rights.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.4.Superuser.Rights.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.4.Superuser.Rights.txt",
+            "size": 84635139,
+            "description": "2 3 4 Superuser Rights",
+            "clean_name": "Superuser.Rights.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.3.5.Malware.Characteristics.webm": {
+            "name": "2.3.5.Malware.Characteristics.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.5.Malware.Characteristics.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.5.Malware.Characteristics.txt",
+            "size": 91863540,
+            "description": "2 3 5 Malware Characteristics",
+            "clean_name": "Malware.Characteristics.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.3.6.Types.of.Malware.webm": {
+            "name": "2.3.6.Types.of.Malware.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.6.Types.of.Malware.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.3.6.Types.of.Malware.txt",
+            "size": 213605599,
+            "description": "2 3 6 Types of Malware",
+            "clean_name": "Types.of.Malware.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.3.IPsec.Protocol.Set.Work.mp4": {
+            "name": "2.3.IPsec.Protocol.Set.Work.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.3.IPsec.Protocol.Set.Work.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.3.IPsec.Protocol.Set.Work.txt",
+            "size": 23063811,
+            "description": "2 3 IPsec Protocol Set Work",
+            "clean_name": "2.3.IPsec.Protocol.Set.Work.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 2"
+        },
+        "2.4.1.Users.and.Groups.webm": {
+            "name": "2.4.1.Users.and.Groups.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.1.Users.and.Groups.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.1.Users.and.Groups.txt",
+            "size": 224121028,
+            "description": "2 4 1 Users and Groups",
+            "clean_name": "Users.and.Groups.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.4.2.Access.Rights.webm": {
+            "name": "2.4.2.Access.Rights.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.2.Access.Rights.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.2.Access.Rights.txt",
+            "size": 218213288,
+            "description": "2 4 2 Access Rights",
+            "clean_name": "Access.Rights.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.4.3.Sudo.and.Su.Commands.webm": {
+            "name": "2.4.3.Sudo.and.Su.Commands.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.3.Sudo.and.Su.Commands.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.3.Sudo.and.Su.Commands.txt",
+            "size": 224019517,
+            "description": "2 4 3 Sudo and Su Commands",
+            "clean_name": "Sudo.and.Su.Commands.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.4.4.MAC.and.DAC.Access.Control.Model.webm": {
+            "name": "2.4.4.MAC.and.DAC.Access.Control.Model.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.4.MAC.and.DAC.Access.Control.Model.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.4.MAC.and.DAC.Access.Control.Model.txt",
+            "size": 145163574,
+            "description": "2 4 4 MAC and DAC Access Control Model",
+            "clean_name": "MAC.and.DAC.Access.Control.Model.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.4.5.Privileges.in.Linux.webm": {
+            "name": "2.4.5.Privileges.in.Linux.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.5.Privileges.in.Linux.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.5.Privileges.in.Linux.txt",
+            "size": 46629605,
+            "description": "2 4 5 Privileges in Linux",
+            "clean_name": "Privileges.in.Linux.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.4.6.Privilege.Escalation.in.Linux.webm": {
+            "name": "2.4.6.Privilege.Escalation.in.Linux.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.6.Privilege.Escalation.in.Linux.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.4.6.Privilege.Escalation.in.Linux.txt",
+            "size": 117780549,
+            "description": "2 4 6 Privilege Escalation in Linux",
+            "clean_name": "Privilege.Escalation.in.Linux.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.4.Transport.Level.Protocols.Work.TCP.IP.Protocol.Stack.mp4": {
+            "name": "2.4.Transport.Level.Protocols.Work.TCP.IP.Protocol.Stack.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.4.Transport.Level.Protocols.Work.TCP.IP.Protocol.Stack.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.4.Transport.Level.Protocols.Work.TCP.IP.Protocol.Stack.txt",
+            "size": 90820852,
+            "description": "2 4 Transport Level Protocols Work TCP IP Protocol Stack",
+            "clean_name": "2.4.Transport.Level.Protocols.Work.TCP.IP.Protocol.Stack.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 2"
+        },
+        "2.5.FTP.Protocol.Work.and.Other.Application.Level.Protocols.mp4": {
+            "name": "2.5.FTP.Protocol.Work.and.Other.Application.Level.Protocols.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.5.FTP.Protocol.Work.and.Other.Application.Level.Protocols.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/2.5.FTP.Protocol.Work.and.Other.Application.Level.Protocols.txt",
+            "size": 51699881,
+            "description": "2 5 FTP Protocol Work and Other Application Level Protocols",
+            "clean_name": "2.5.FTP.Protocol.Work.and.Other.Application.Level.Protocols.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 2"
+        },
+        "2.6.1.IO.in.Linux.webm": {
+            "name": "2.6.1.IO.in.Linux.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.1.IO.in.Linux.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.1.IO.in.Linux.txt",
+            "size": 71633406,
+            "description": "2 6 1 IO in Linux",
+            "clean_name": "IO.in.Linux.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.6.2.File.Writing.webm": {
+            "name": "2.6.2.File.Writing.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.2.File.Writing.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.2.File.Writing.txt",
+            "size": 86830060,
+            "description": "2 6 2 File Writing",
+            "clean_name": "File.Writing.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.6.3.Reading.from.File.webm": {
+            "name": "2.6.3.Reading.from.File.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.3.Reading.from.File.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.3.Reading.from.File.txt",
+            "size": 208137110,
+            "description": "2 6 3 Reading from File",
+            "clean_name": "Reading.from.File.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.6.4.Search.and.Filtering.webm": {
+            "name": "2.6.4.Search.and.Filtering.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.4.Search.and.Filtering.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.4.Search.and.Filtering.txt",
+            "size": 123143054,
+            "description": "2 6 4 Search and Filtering",
+            "clean_name": "Search.and.Filtering.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.6.5.Pipeline.Processing.webm": {
+            "name": "2.6.5.Pipeline.Processing.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.5.Pipeline.Processing.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.5.Pipeline.Processing.txt",
+            "size": 42673574,
+            "description": "2 6 5 Pipeline Processing",
+            "clean_name": "Pipeline.Processing.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.6.6.Information.Search.and.Exfiltration.webm": {
+            "name": "2.6.6.Information.Search.and.Exfiltration.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.6.Information.Search.and.Exfiltration.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.6.Information.Search.and.Exfiltration.txt",
+            "size": 82618773,
+            "description": "2 6 6 Information Search and Exfiltration",
+            "clean_name": "Information.Search.and.Exfiltration.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.6.7.Analysis.of.Exfiltration.Attacks.webm": {
+            "name": "2.6.7.Analysis.of.Exfiltration.Attacks.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.7.Analysis.of.Exfiltration.Attacks.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.7.Analysis.of.Exfiltration.Attacks.txt",
+            "size": 97684576,
+            "description": "2 6 7 Analysis of Exfiltration Attacks",
+            "clean_name": "Analysis.of.Exfiltration.Attacks.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.6.8.Lateral.Movement.webm": {
+            "name": "2.6.8.Lateral.Movement.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.8.Lateral.Movement.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.6.8.Lateral.Movement.txt",
+            "size": 53078095,
+            "description": "2 6 8 Lateral Movement",
+            "clean_name": "Lateral.Movement.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.1.Linux.Kernel.webm": {
+            "name": "2.7.1.Linux.Kernel.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.1.Linux.Kernel.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.1.Linux.Kernel.txt",
+            "size": 91360161,
+            "description": "2 7 1 Linux Kernel",
+            "clean_name": "Linux.Kernel.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.2.Linux.Kernel.Initialization.webm": {
+            "name": "2.7.2.Linux.Kernel.Initialization.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.2.Linux.Kernel.Initialization.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.2.Linux.Kernel.Initialization.txt",
+            "size": 95719867,
+            "description": "2 7 2 Linux Kernel Initialization",
+            "clean_name": "Linux.Kernel.Initialization.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.3.Linux.Kernel.Parameters.webm": {
+            "name": "2.7.3.Linux.Kernel.Parameters.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.3.Linux.Kernel.Parameters.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.3.Linux.Kernel.Parameters.txt",
+            "size": 112825006,
+            "description": "2 7 3 Linux Kernel Parameters",
+            "clean_name": "Linux.Kernel.Parameters.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.4.Bootloader.webm": {
+            "name": "2.7.4.Bootloader.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.4.Bootloader.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.4.Bootloader.txt",
+            "size": 82068012,
+            "description": "2 7 4 Bootloader",
+            "clean_name": "Bootloader.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.5.GRUB.webm": {
+            "name": "2.7.5.GRUB.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.5.GRUB.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.5.GRUB.txt",
+            "size": 113981159,
+            "description": "2 7 5 GRUB",
+            "clean_name": "GRUB.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.6.MBR.webm": {
+            "name": "2.7.6.MBR.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.6.MBR.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.6.MBR.txt",
+            "size": 68100203,
+            "description": "2 7 6 MBR",
+            "clean_name": "MBR.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.7.UEFI.webm": {
+            "name": "2.7.7.UEFI.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.7.UEFI.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.7.UEFI.txt",
+            "size": 18262735,
+            "description": "2 7 7 UEFI",
+            "clean_name": "UEFI.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.8.Kernel.and.Modules.Security.webm": {
+            "name": "2.7.8.Kernel.and.Modules.Security.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.8.Kernel.and.Modules.Security.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.8.Kernel.and.Modules.Security.txt",
+            "size": 98549127,
+            "description": "2 7 8 Kernel and Modules Security",
+            "clean_name": "Kernel.and.Modules.Security.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.7.9.Shellcodes.webm": {
+            "name": "2.7.9.Shellcodes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.9.Shellcodes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/2.0.0/2.7.9.Shellcodes.txt",
+            "size": 49036582,
+            "description": "2 7 9 Shellcodes",
+            "clean_name": "Shellcodes.webm",
+            "release_tag": "2.0.0",
+            "section": "Section 2"
+        },
+        "2.Intro.to.setup.webm": {
+            "name": "2.Intro.to.setup.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/2.Intro.to.setup.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/2.Intro.to.setup.txt",
+            "size": 38927283,
+            "description": "2 Intro to setup",
+            "clean_name": "2.Intro.to.setup.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "3.1.Network.Routes.and.Routing.Table.mp4": {
+            "name": "3.1.Network.Routes.and.Routing.Table.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.1.Network.Routes.and.Routing.Table.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.1.Network.Routes.and.Routing.Table.txt",
+            "size": 103351202,
+            "description": "3 1 Network Routes and Routing Table",
+            "clean_name": "3.1.Network.Routes.and.Routing.Table.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 3"
+        },
+        "3.2.Static.Routing.mp4": {
+            "name": "3.2.Static.Routing.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.2.Static.Routing.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.2.Static.Routing.txt",
+            "size": 58316118,
+            "description": "3 2 Static Routing",
+            "clean_name": "3.2.Static.Routing.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 3"
+        },
+        "3.3.Dynamic.Routing.mp4": {
+            "name": "3.3.Dynamic.Routing.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.3.Dynamic.Routing.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.3.Dynamic.Routing.txt",
+            "size": 73323250,
+            "description": "3 3 Dynamic Routing",
+            "clean_name": "3.3.Dynamic.Routing.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 3"
+        },
+        "3.4.inetd.xinetd.mp4": {
+            "name": "3.4.inetd.xinetd.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.4.inetd.xinetd.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.4.inetd.xinetd.txt",
+            "size": 41264987,
+            "description": "3 4 inetd xinetd",
+            "clean_name": "3.4.inetd.xinetd.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 3"
+        },
+        "3.5.Remote.Access.Configuration.mp4": {
+            "name": "3.5.Remote.Access.Configuration.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.5.Remote.Access.Configuration.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.5.Remote.Access.Configuration.txt",
+            "size": 216298332,
+            "description": "3 5 Remote Access Configuration",
+            "clean_name": "3.5.Remote.Access.Configuration.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 3"
+        },
+        "3.6.Work.with.Mail.Service.mp4": {
+            "name": "3.6.Work.with.Mail.Service.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.6.Work.with.Mail.Service.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/3.6.Work.with.Mail.Service.txt",
+            "size": 116195438,
+            "description": "3 6 Work with Mail Service",
+            "clean_name": "3.6.Work.with.Mail.Service.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 3"
+        },
+        "3.Types.of.setup.webm": {
+            "name": "3.Types.of.setup.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/3.Types.of.setup.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/3.Types.of.setup.txt",
+            "size": 122777455,
+            "description": "3 Types of setup",
+            "clean_name": "3.Types.of.setup.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "4.1.1.Introduction.webm": {
+            "name": "4.1.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.1.Introduction.txt",
+            "size": 26973509,
+            "description": "4 1 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.1.2.Local.Administration.Policies.webm": {
+            "name": "4.1.2.Local.Administration.Policies.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.2.Local.Administration.Policies.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.2.Local.Administration.Policies.txt",
+            "size": 310595591,
+            "description": "4 1 2 Local Administration Policies",
+            "clean_name": "Local.Administration.Policies.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.1.3.Local.Administration.Tools.webm": {
+            "name": "4.1.3.Local.Administration.Tools.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.3.Local.Administration.Tools.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.3.Local.Administration.Tools.txt",
+            "size": 305365913,
+            "description": "4 1 3 Local Administration Tools",
+            "clean_name": "Local.Administration.Tools.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.1.4.Storing.Credentials.webm": {
+            "name": "4.1.4.Storing.Credentials.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.4.Storing.Credentials.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.4.Storing.Credentials.txt",
+            "size": 222691610,
+            "description": "4 1 4 Storing Credentials",
+            "clean_name": "Storing.Credentials.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.1.5.Attacks.Aimed.at.Stealing.Credentials.webm": {
+            "name": "4.1.5.Attacks.Aimed.at.Stealing.Credentials.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.5.Attacks.Aimed.at.Stealing.Credentials.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.5.Attacks.Aimed.at.Stealing.Credentials.txt",
+            "size": 395184318,
+            "description": "4 1 5 Attacks Aimed at Stealing Credentials",
+            "clean_name": "Attacks.Aimed.at.Stealing.Credentials.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.1.6.Protecting.Credentials.webm": {
+            "name": "4.1.6.Protecting.Credentials.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.6.Protecting.Credentials.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.1.6.Protecting.Credentials.txt",
+            "size": 227705859,
+            "description": "4 1 6 Protecting Credentials",
+            "clean_name": "Protecting.Credentials.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.1.NFS.Basics.mp4": {
+            "name": "4.1.NFS.Basics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.1.NFS.Basics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.1.NFS.Basics.txt",
+            "size": 19313263,
+            "description": "4 1 NFS Basics",
+            "clean_name": "4.1.NFS.Basics.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 4"
+        },
+        "4.1.What.is.Terminal.Console.and.Command.Shell.webm": {
+            "name": "4.1.What.is.Terminal.Console.and.Command.Shell.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.1.What.is.Terminal.Console.and.Command.Shell.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.1.What.is.Terminal.Console.and.Command.Shell.txt",
+            "size": 59412547,
+            "description": "4 1 What is Terminal Console and Command Shell",
+            "clean_name": "4.1.What.is.Terminal.Console.and.Command.Shell.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 4"
+        },
+        "4.2.1.Group.Policy.Access.Management.webm": {
+            "name": "4.2.1.Group.Policy.Access.Management.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.1.Group.Policy.Access.Management.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.1.Group.Policy.Access.Management.txt",
+            "size": 15546823,
+            "description": "4 2 1 Group Policy Access Management",
+            "clean_name": "Group.Policy.Access.Management.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.2.2.Preparing.Work.Environment.webm": {
+            "name": "4.2.2.Preparing.Work.Environment.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.2.Preparing.Work.Environment.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.2.Preparing.Work.Environment.txt",
+            "size": 255545095,
+            "description": "4 2 2 Preparing Work Environment",
+            "clean_name": "Preparing.Work.Environment.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.2.3.Configuring.Group.Policy.Parameters.webm": {
+            "name": "4.2.3.Configuring.Group.Policy.Parameters.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.3.Configuring.Group.Policy.Parameters.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.3.Configuring.Group.Policy.Parameters.txt",
+            "size": 150843956,
+            "description": "4 2 3 Configuring Group Policy Parameters",
+            "clean_name": "Configuring.Group.Policy.Parameters.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.2.4.Using.Group.Policy.for.Remote.Software.Installation.webm": {
+            "name": "4.2.4.Using.Group.Policy.for.Remote.Software.Installation.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.4.Using.Group.Policy.for.Remote.Software.Installation.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.4.Using.Group.Policy.for.Remote.Software.Installation.txt",
+            "size": 157345305,
+            "description": "4 2 4 Using Group Policy for Remote Software Installation",
+            "clean_name": "Using.Group.Policy.for.Remote.Software.Installation.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.2.5.Configuring.Group.Policy.Parameters.for.Automatic.Updates.webm": {
+            "name": "4.2.5.Configuring.Group.Policy.Parameters.for.Automatic.Updates.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.5.Configuring.Group.Policy.Parameters.for.Automatic.Updates.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.5.Configuring.Group.Policy.Parameters.for.Automatic.Updates.txt",
+            "size": 451992004,
+            "description": "4 2 5 Configuring Group Policy Parameters for Automatic Updates",
+            "clean_name": "Configuring.Group.Policy.Parameters.for.Automatic.Updates.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.2.6.Advanced.Group.Policy.Management.webm": {
+            "name": "4.2.6.Advanced.Group.Policy.Management.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.6.Advanced.Group.Policy.Management.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.6.Advanced.Group.Policy.Management.txt",
+            "size": 353855164,
+            "description": "4 2 6 Advanced Group Policy Management",
+            "clean_name": "Advanced.Group.Policy.Management.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.2.7.Summary.webm": {
+            "name": "4.2.7.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.7.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.2.7.Summary.txt",
+            "size": 6722936,
+            "description": "4 2 7 Summary",
+            "clean_name": "Summary.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.2.NFS.Analysis.mp4": {
+            "name": "4.2.NFS.Analysis.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.2.NFS.Analysis.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.2.NFS.Analysis.txt",
+            "size": 195355169,
+            "description": "4 2 NFS Analysis",
+            "clean_name": "4.2.NFS.Analysis.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 4"
+        },
+        "4.2.Overview.of.Command.Shells.webm": {
+            "name": "4.2.Overview.of.Command.Shells.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.2.Overview.of.Command.Shells.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.2.Overview.of.Command.Shells.txt",
+            "size": 129996776,
+            "description": "4 2 Overview of Command Shells",
+            "clean_name": "4.2.Overview.of.Command.Shells.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 4"
+        },
+        "4.3.1.Security.Audit.webm": {
+            "name": "4.3.1.Security.Audit.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.1.Security.Audit.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.1.Security.Audit.txt",
+            "size": 167231825,
+            "description": "4 3 1 Security Audit",
+            "clean_name": "Security.Audit.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.3.2.Basic.Security.Audit.Policies.webm": {
+            "name": "4.3.2.Basic.Security.Audit.Policies.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.2.Basic.Security.Audit.Policies.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.2.Basic.Security.Audit.Policies.txt",
+            "size": 185956597,
+            "description": "4 3 2 Basic Security Audit Policies",
+            "clean_name": "Basic.Security.Audit.Policies.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.3.3.Advanced.Security.Audit.Policies.Part1.webm": {
+            "name": "4.3.3.Advanced.Security.Audit.Policies.Part1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.3.Advanced.Security.Audit.Policies.Part1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.3.Advanced.Security.Audit.Policies.Part1.txt",
+            "size": 379832182,
+            "description": "4 3 3 Advanced Security Audit Policies Part1",
+            "clean_name": "Advanced.Security.Audit.Policies.Part1.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.3.4.Advanced.Security.Audit.Policies.Part2.webm": {
+            "name": "4.3.4.Advanced.Security.Audit.Policies.Part2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.4.Advanced.Security.Audit.Policies.Part2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.4.Advanced.Security.Audit.Policies.Part2.txt",
+            "size": 332443032,
+            "description": "4 3 4 Advanced Security Audit Policies Part2",
+            "clean_name": "Advanced.Security.Audit.Policies.Part2.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.3.5.Planning.and.Deploying.Advanced.Security.Audit.Policies.webm": {
+            "name": "4.3.5.Planning.and.Deploying.Advanced.Security.Audit.Policies.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.5.Planning.and.Deploying.Advanced.Security.Audit.Policies.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.5.Planning.and.Deploying.Advanced.Security.Audit.Policies.txt",
+            "size": 158973934,
+            "description": "4 3 5 Planning and Deploying Advanced Security Audit Policies",
+            "clean_name": "Planning.and.Deploying.Advanced.Security.Audit.Policies.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.3.6.Using.Advanced.Security.Audit.Capabilities.webm": {
+            "name": "4.3.6.Using.Advanced.Security.Audit.Capabilities.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.6.Using.Advanced.Security.Audit.Capabilities.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.3.6.Using.Advanced.Security.Audit.Capabilities.txt",
+            "size": 119037341,
+            "description": "4 3 6 Using Advanced Security Audit Capabilities",
+            "clean_name": "Using.Advanced.Security.Audit.Capabilities.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.3.Basic.Navigation.in.File.System.webm": {
+            "name": "4.3.Basic.Navigation.in.File.System.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.3.Basic.Navigation.in.File.System.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.3.Basic.Navigation.in.File.System.txt",
+            "size": 237230489,
+            "description": "4 3 Basic Navigation in File System",
+            "clean_name": "4.3.Basic.Navigation.in.File.System.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 4"
+        },
+        "4.3.DNS.Basics.mp4": {
+            "name": "4.3.DNS.Basics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.3.DNS.Basics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.3.DNS.Basics.txt",
+            "size": 25118805,
+            "description": "4 3 DNS Basics",
+            "clean_name": "4.3.DNS.Basics.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 4"
+        },
+        "4.4.1.Local.Accounts.webm": {
+            "name": "4.4.1.Local.Accounts.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.1.Local.Accounts.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.1.Local.Accounts.txt",
+            "size": 246937847,
+            "description": "4 4 1 Local Accounts",
+            "clean_name": "Local.Accounts.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.4.2.Service.Accounts.webm": {
+            "name": "4.4.2.Service.Accounts.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.2.Service.Accounts.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.2.Service.Accounts.txt",
+            "size": 138702453,
+            "description": "4 4 2 Service Accounts",
+            "clean_name": "Service.Accounts.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.4.3.Microsoft.Accounts.webm": {
+            "name": "4.4.3.Microsoft.Accounts.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.3.Microsoft.Accounts.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.3.Microsoft.Accounts.txt",
+            "size": 348174359,
+            "description": "4 4 3 Microsoft Accounts",
+            "clean_name": "Microsoft.Accounts.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.4.4.User.Account.Control.webm": {
+            "name": "4.4.4.User.Account.Control.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.4.User.Account.Control.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.4.User.Account.Control.txt",
+            "size": 180460496,
+            "description": "4 4 4 User Account Control",
+            "clean_name": "User.Account.Control.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.4.5.Windows.Firewall.webm": {
+            "name": "4.4.5.Windows.Firewall.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.5.Windows.Firewall.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.4.5.Windows.Firewall.txt",
+            "size": 257172877,
+            "description": "4 4 5 Windows Firewall",
+            "clean_name": "Windows.Firewall.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.4.DNS.Work.Organization.mp4": {
+            "name": "4.4.DNS.Work.Organization.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.4.DNS.Work.Organization.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.4.DNS.Work.Organization.txt",
+            "size": 142597514,
+            "description": "4 4 DNS Work Organization",
+            "clean_name": "4.4.DNS.Work.Organization.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 4"
+        },
+        "4.4.Input.Output.Redirection.Error.Format.webm": {
+            "name": "4.4.Input.Output.Redirection.Error.Format.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.4.Input.Output.Redirection.Error.Format.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.4.Input.Output.Redirection.Error.Format.txt",
+            "size": 88938371,
+            "description": "4 4 Input Output Redirection Error Format",
+            "clean_name": "4.4.Input.Output.Redirection.Error.Format.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 4"
+        },
+        "4.5.1.Introduction.webm": {
+            "name": "4.5.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.1.Introduction.txt",
+            "size": 10114929,
+            "description": "4 5 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.5.2.Digital.Signatures.webm": {
+            "name": "4.5.2.Digital.Signatures.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.2.Digital.Signatures.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.2.Digital.Signatures.txt",
+            "size": 244061909,
+            "description": "4 5 2 Digital Signatures",
+            "clean_name": "Digital.Signatures.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.5.3.Using.Digital.Signatures.for.Authenticity.Verification.webm": {
+            "name": "4.5.3.Using.Digital.Signatures.for.Authenticity.Verification.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.3.Using.Digital.Signatures.for.Authenticity.Verification.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.3.Using.Digital.Signatures.for.Authenticity.Verification.txt",
+            "size": 182967551,
+            "description": "4 5 3 Using Digital Signatures for Authenticity Verification",
+            "clean_name": "Using.Digital.Signatures.for.Authenticity.Verification.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.5.4.Creating.a.Digital.Signature.webm": {
+            "name": "4.5.4.Creating.a.Digital.Signature.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.4.Creating.a.Digital.Signature.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.4.Creating.a.Digital.Signature.txt",
+            "size": 343326231,
+            "description": "4 5 4 Creating a Digital Signature",
+            "clean_name": "Creating.a.Digital.Signature.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.5.5.Using.Digital.Signatures.for.Signing.Files.webm": {
+            "name": "4.5.5.Using.Digital.Signatures.for.Signing.Files.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.5.Using.Digital.Signatures.for.Signing.Files.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.5.Using.Digital.Signatures.for.Signing.Files.txt",
+            "size": 241007127,
+            "description": "4 5 5 Using Digital Signatures for Signing Files",
+            "clean_name": "Using.Digital.Signatures.for.Signing.Files.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.5.6.Verifying.Digital.Signatures.webm": {
+            "name": "4.5.6.Verifying.Digital.Signatures.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.6.Verifying.Digital.Signatures.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.5.6.Verifying.Digital.Signatures.txt",
+            "size": 89200973,
+            "description": "4 5 6 Verifying Digital Signatures",
+            "clean_name": "Verifying.Digital.Signatures.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.5.Basic.File.Operations.Commands.webm": {
+            "name": "4.5.Basic.File.Operations.Commands.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.5.Basic.File.Operations.Commands.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.5.Basic.File.Operations.Commands.txt",
+            "size": 138062480,
+            "description": "4 5 Basic File Operations Commands",
+            "clean_name": "4.5.Basic.File.Operations.Commands.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 4"
+        },
+        "4.5.Wireless.Connections.mp4": {
+            "name": "4.5.Wireless.Connections.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.5.Wireless.Connections.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/4.5.Wireless.Connections.txt",
+            "size": 66227523,
+            "description": "4 5 Wireless Connections",
+            "clean_name": "4.5.Wireless.Connections.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 4"
+        },
+        "4.6.1.Registry.Description.webm": {
+            "name": "4.6.1.Registry.Description.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.1.Registry.Description.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.1.Registry.Description.txt",
+            "size": 120665165,
+            "description": "4 6 1 Registry Description",
+            "clean_name": "Registry.Description.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.6.2.Information.in.the.Registry.Monitoring.Changes.webm": {
+            "name": "4.6.2.Information.in.the.Registry.Monitoring.Changes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.2.Information.in.the.Registry.Monitoring.Changes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.2.Information.in.the.Registry.Monitoring.Changes.txt",
+            "size": 491529468,
+            "description": "4 6 2 Information in the Registry Monitoring Changes",
+            "clean_name": "Information.in.the.Registry.Monitoring.Changes.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.6.3.Registry.Backup.webm": {
+            "name": "4.6.3.Registry.Backup.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.3.Registry.Backup.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.3.Registry.Backup.txt",
+            "size": 286508801,
+            "description": "4 6 3 Registry Backup",
+            "clean_name": "Registry.Backup.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.6.4.Registry.Recovery.webm": {
+            "name": "4.6.4.Registry.Recovery.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.4.Registry.Recovery.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.6.4.Registry.Recovery.txt",
+            "size": 409779610,
+            "description": "4 6 4 Registry Recovery",
+            "clean_name": "Registry.Recovery.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.6.Search.and.Filtering.Pipelines.webm": {
+            "name": "4.6.Search.and.Filtering.Pipelines.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.6.Search.and.Filtering.Pipelines.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.6.Search.and.Filtering.Pipelines.txt",
+            "size": 161474222,
+            "description": "4 6 Search and Filtering Pipelines",
+            "clean_name": "4.6.Search.and.Filtering.Pipelines.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 4"
+        },
+        "4.7.1.Working.with.Objects.webm": {
+            "name": "4.7.1.Working.with.Objects.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.1.Working.with.Objects.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.1.Working.with.Objects.txt",
+            "size": 474445503,
+            "description": "4 7 1 Working with Objects",
+            "clean_name": "Working.with.Objects.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.7.2.Managing.Computers.webm": {
+            "name": "4.7.2.Managing.Computers.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.2.Managing.Computers.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.2.Managing.Computers.txt",
+            "size": 322987890,
+            "description": "4 7 2 Managing Computers",
+            "clean_name": "Managing.Computers.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.7.3.Managing.Processes.and.Services.webm": {
+            "name": "4.7.3.Managing.Processes.and.Services.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.3.Managing.Processes.and.Services.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.3.Managing.Processes.and.Services.txt",
+            "size": 323185336,
+            "description": "4 7 3 Managing Processes and Services",
+            "clean_name": "Managing.Processes.and.Services.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.7.4.Managing.Disks.and.Files.webm": {
+            "name": "4.7.4.Managing.Disks.and.Files.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.4.Managing.Disks.and.Files.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.4.Managing.Disks.and.Files.txt",
+            "size": 891041212,
+            "description": "4 7 4 Managing Disks and Files",
+            "clean_name": "Managing.Disks.and.Files.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.7.5.Working.with.Network.and.Data.webm": {
+            "name": "4.7.5.Working.with.Network.and.Data.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.5.Working.with.Network.and.Data.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.7.5.Working.with.Network.and.Data.txt",
+            "size": 921073593,
+            "description": "4 7 5 Working with Network and Data",
+            "clean_name": "Working.with.Network.and.Data.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.8.1.Starting.Work.with.Active.Directory.Domain.Services.webm": {
+            "name": "4.8.1.Starting.Work.with.Active.Directory.Domain.Services.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.1.Starting.Work.with.Active.Directory.Domain.Services.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.1.Starting.Work.with.Active.Directory.Domain.Services.txt",
+            "size": 395191745,
+            "description": "4 8 1 Starting Work with Active Directory Domain Services",
+            "clean_name": "Starting.Work.with.Active.Directory.Domain.Services.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.8.2.Planning.and.Designing.Domain.Services.webm": {
+            "name": "4.8.2.Planning.and.Designing.Domain.Services.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.2.Planning.and.Designing.Domain.Services.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.2.Planning.and.Designing.Domain.Services.txt",
+            "size": 287566584,
+            "description": "4 8 2 Planning and Designing Domain Services",
+            "clean_name": "Planning.and.Designing.Domain.Services.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.8.3.Installation.and.Demotion.of.Domain.Services.webm": {
+            "name": "4.8.3.Installation.and.Demotion.of.Domain.Services.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.3.Installation.and.Demotion.of.Domain.Services.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.3.Installation.and.Demotion.of.Domain.Services.txt",
+            "size": 493673250,
+            "description": "4 8 3 Installation and Demotion of Domain Services",
+            "clean_name": "Installation.and.Demotion.of.Domain.Services.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.8.4.Accounts.webm": {
+            "name": "4.8.4.Accounts.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.4.Accounts.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/4.0.0/4.8.4.Accounts.txt",
+            "size": 431523855,
+            "description": "4 8 4 Accounts",
+            "clean_name": "Accounts.webm",
+            "release_tag": "4.0.0",
+            "section": "Section 4"
+        },
+        "4.File.system.and.directories.webm": {
+            "name": "4.File.system.and.directories.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.File.system.and.directories.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/4.File.system.and.directories.txt",
+            "size": 62666303,
+            "description": "4 File system and directories",
+            "clean_name": "4.File.system.and.directories.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "5.1.1.Introduction.webm": {
+            "name": "5.1.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.1.Introduction.txt",
+            "size": 38282309,
+            "description": "5 1 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.1.2.Database.Overview.webm": {
+            "name": "5.1.2.Database.Overview.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.2.Database.Overview.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.2.Database.Overview.txt",
+            "size": 732381926,
+            "description": "5 1 2 Database Overview",
+            "clean_name": "Database.Overview.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.1.3.On.Premise.Databases.webm": {
+            "name": "5.1.3.On.Premise.Databases.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.3.On.Premise.Databases.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.3.On.Premise.Databases.txt",
+            "size": 187290811,
+            "description": "5 1 3 On Premise Databases",
+            "clean_name": "On.Premise.Databases.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.1.4.Cloud.Databases.webm": {
+            "name": "5.1.4.Cloud.Databases.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.4.Cloud.Databases.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.4.Cloud.Databases.txt",
+            "size": 312860546,
+            "description": "5 1 4 Cloud Databases",
+            "clean_name": "Cloud.Databases.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.1.5.Mobile.Databases.webm": {
+            "name": "5.1.5.Mobile.Databases.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.5.Mobile.Databases.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.5.Mobile.Databases.txt",
+            "size": 312325069,
+            "description": "5 1 5 Mobile Databases",
+            "clean_name": "Mobile.Databases.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.1.6.Database.Usage.Options.Comparison.webm": {
+            "name": "5.1.6.Database.Usage.Options.Comparison.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.6.Database.Usage.Options.Comparison.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.1.6.Database.Usage.Options.Comparison.txt",
+            "size": 129468269,
+            "description": "5 1 6 Database Usage Options Comparison",
+            "clean_name": "Database.Usage.Options.Comparison.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.1.Apache.Web.Server.mp4": {
+            "name": "5.1.Apache.Web.Server.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/5.1.Apache.Web.Server.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/5.1.Apache.Web.Server.txt",
+            "size": 52056716,
+            "description": "5 1 Apache Web Server",
+            "clean_name": "5.1.Apache.Web.Server.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 5"
+        },
+        "5.1.Device.Names.webm": {
+            "name": "5.1.Device.Names.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/5.1.Device.Names.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/5.1.Device.Names.txt",
+            "size": 135091893,
+            "description": "5 1 Device Names",
+            "clean_name": "5.1.Device.Names.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 5"
+        },
+        "5.2.1.Relational.Databases.Basics.webm": {
+            "name": "5.2.1.Relational.Databases.Basics.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.1.Relational.Databases.Basics.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.1.Relational.Databases.Basics.txt",
+            "size": 44370461,
+            "description": "5 2 1 Relational Databases Basics",
+            "clean_name": "Relational.Databases.Basics.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.3.MySQL.Setup.and.Usage.webm": {
+            "name": "5.2.3.MySQL.Setup.and.Usage.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.3.MySQL.Setup.and.Usage.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.3.MySQL.Setup.and.Usage.txt",
+            "size": 114606477,
+            "description": "5 2 3 MySQL Setup and Usage",
+            "clean_name": "MySQL.Setup.and.Usage.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.4.SQL.Query.Language.webm": {
+            "name": "5.2.4.SQL.Query.Language.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.4.SQL.Query.Language.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.4.SQL.Query.Language.txt",
+            "size": 173022048,
+            "description": "5 2 4 SQL Query Language",
+            "clean_name": "SQL.Query.Language.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.5.SELECT.Queries.and.Data.Filtering.1.webm": {
+            "name": "5.2.5.SELECT.Queries.and.Data.Filtering.1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.1.txt",
+            "size": 50755853,
+            "description": "5 2 5 SELECT Queries and Data Filtering 1",
+            "clean_name": "SELECT.Queries.and.Data.Filtering.1.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.5.SELECT.Queries.and.Data.Filtering.2.webm": {
+            "name": "5.2.5.SELECT.Queries.and.Data.Filtering.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.2.txt",
+            "size": 22239062,
+            "description": "5 2 5 SELECT Queries and Data Filtering 2",
+            "clean_name": "SELECT.Queries.and.Data.Filtering.2.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.5.SELECT.Queries.and.Data.Filtering.3.webm": {
+            "name": "5.2.5.SELECT.Queries.and.Data.Filtering.3.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.3.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.3.txt",
+            "size": 20832688,
+            "description": "5 2 5 SELECT Queries and Data Filtering 3",
+            "clean_name": "SELECT.Queries.and.Data.Filtering.3.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.5.SELECT.Queries.and.Data.Filtering.4.webm": {
+            "name": "5.2.5.SELECT.Queries.and.Data.Filtering.4.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.4.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.5.SELECT.Queries.and.Data.Filtering.4.txt",
+            "size": 21269743,
+            "description": "5 2 5 SELECT Queries and Data Filtering 4",
+            "clean_name": "SELECT.Queries.and.Data.Filtering.4.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.6.Sorting.and.Grouping.Results.1.webm": {
+            "name": "5.2.6.Sorting.and.Grouping.Results.1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.1.txt",
+            "size": 19493793,
+            "description": "5 2 6 Sorting and Grouping Results 1",
+            "clean_name": "Sorting.and.Grouping.Results.1.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.6.Sorting.and.Grouping.Results.2.webm": {
+            "name": "5.2.6.Sorting.and.Grouping.Results.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.2.txt",
+            "size": 39906956,
+            "description": "5 2 6 Sorting and Grouping Results 2",
+            "clean_name": "Sorting.and.Grouping.Results.2.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.6.Sorting.and.Grouping.Results.3.webm": {
+            "name": "5.2.6.Sorting.and.Grouping.Results.3.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.3.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.3.txt",
+            "size": 29363581,
+            "description": "5 2 6 Sorting and Grouping Results 3",
+            "clean_name": "Sorting.and.Grouping.Results.3.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.6.Sorting.and.Grouping.Results.4.webm": {
+            "name": "5.2.6.Sorting.and.Grouping.Results.4.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.4.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.4.txt",
+            "size": 28934765,
+            "description": "5 2 6 Sorting and Grouping Results 4",
+            "clean_name": "Sorting.and.Grouping.Results.4.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.6.Sorting.and.Grouping.Results.5.webm": {
+            "name": "5.2.6.Sorting.and.Grouping.Results.5.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.5.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.5.txt",
+            "size": 17304029,
+            "description": "5 2 6 Sorting and Grouping Results 5",
+            "clean_name": "Sorting.and.Grouping.Results.5.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.6.Sorting.and.Grouping.Results.6.webm": {
+            "name": "5.2.6.Sorting.and.Grouping.Results.6.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.6.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.6.Sorting.and.Grouping.Results.6.txt",
+            "size": 24724369,
+            "description": "5 2 6 Sorting and Grouping Results 6",
+            "clean_name": "Sorting.and.Grouping.Results.6.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.1.webm": {
+            "name": "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.1.txt",
+            "size": 30199993,
+            "description": "5 2 7 Joining Tables and Results JOIN and UNION Operators 1",
+            "clean_name": "Joining.Tables.and.Results.JOIN.and.UNION.Operators.1.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.2.webm": {
+            "name": "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.2.txt",
+            "size": 79037730,
+            "description": "5 2 7 Joining Tables and Results JOIN and UNION Operators 2",
+            "clean_name": "Joining.Tables.and.Results.JOIN.and.UNION.Operators.2.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.3.webm": {
+            "name": "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.3.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.3.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.3.txt",
+            "size": 80969743,
+            "description": "5 2 7 Joining Tables and Results JOIN and UNION Operators 3",
+            "clean_name": "Joining.Tables.and.Results.JOIN.and.UNION.Operators.3.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.4.webm": {
+            "name": "5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.4.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.4.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.7.Joining.Tables.and.Results.JOIN.and.UNION.Operators.4.txt",
+            "size": 57406185,
+            "description": "5 2 7 Joining Tables and Results JOIN and UNION Operators 4",
+            "clean_name": "Joining.Tables.and.Results.JOIN.and.UNION.Operators.4.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.1.webm": {
+            "name": "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.1.txt",
+            "size": 26004115,
+            "description": "5 2 8 Data Modification Queries UPDATE INSERT and DELETE 1",
+            "clean_name": "Data.Modification.Queries.UPDATE.INSERT.and.DELETE.1.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.2.webm": {
+            "name": "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.2.txt",
+            "size": 12059880,
+            "description": "5 2 8 Data Modification Queries UPDATE INSERT and DELETE 2",
+            "clean_name": "Data.Modification.Queries.UPDATE.INSERT.and.DELETE.2.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.3.webm": {
+            "name": "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.3.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.3.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.3.txt",
+            "size": 31684514,
+            "description": "5 2 8 Data Modification Queries UPDATE INSERT and DELETE 3",
+            "clean_name": "Data.Modification.Queries.UPDATE.INSERT.and.DELETE.3.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.4.webm": {
+            "name": "5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.4.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.4.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.8.Data.Modification.Queries.UPDATE.INSERT.and.DELETE.4.txt",
+            "size": 15148334,
+            "description": "5 2 8 Data Modification Queries UPDATE INSERT and DELETE 4",
+            "clean_name": "Data.Modification.Queries.UPDATE.INSERT.and.DELETE.4.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.9.Structural.Queries.webm": {
+            "name": "5.2.9.Structural.Queries.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.9.Structural.Queries.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.2.9.Structural.Queries.txt",
+            "size": 95490737,
+            "description": "5 2 9 Structural Queries",
+            "clean_name": "Structural.Queries.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.2.Apache.Web.Server.Configuration.mp4": {
+            "name": "5.2.Apache.Web.Server.Configuration.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/5.2.Apache.Web.Server.Configuration.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/5.2.Apache.Web.Server.Configuration.txt",
+            "size": 221518872,
+            "description": "5 2 Apache Web Server Configuration",
+            "clean_name": "5.2.Apache.Web.Server.Configuration.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 5"
+        },
+        "5.2.Device.Files.webm": {
+            "name": "5.2.Device.Files.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/5.2.Device.Files.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/5.2.Device.Files.txt",
+            "size": 29463979,
+            "description": "5 2 Device Files",
+            "clean_name": "5.2.Device.Files.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 5"
+        },
+        "5.3.1.Database.Architecture.on.the.Example.of.PostgreSQL.and.MongoDB.webm": {
+            "name": "5.3.1.Database.Architecture.on.the.Example.of.PostgreSQL.and.MongoDB.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.1.Database.Architecture.on.the.Example.of.PostgreSQL.and.MongoDB.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.1.Database.Architecture.on.the.Example.of.PostgreSQL.and.MongoDB.txt",
+            "size": 579319583,
+            "description": "5 3 1 Database Architecture on the Example of PostgreSQL and MongoDB",
+            "clean_name": "Database.Architecture.on.the.Example.of.PostgreSQL.and.MongoDB.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.3.2.Authentication.in.Databases.webm": {
+            "name": "5.3.2.Authentication.in.Databases.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.2.Authentication.in.Databases.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.2.Authentication.in.Databases.txt",
+            "size": 338848056,
+            "description": "5 3 2 Authentication in Databases",
+            "clean_name": "Authentication.in.Databases.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.3.3.Database.Utilities.webm": {
+            "name": "5.3.3.Database.Utilities.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.3.Database.Utilities.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.3.Database.Utilities.txt",
+            "size": 227601705,
+            "description": "5 3 3 Database Utilities",
+            "clean_name": "Database.Utilities.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.3.4.Users.and.Roles.webm": {
+            "name": "5.3.4.Users.and.Roles.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.4.Users.and.Roles.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.4.Users.and.Roles.txt",
+            "size": 223447333,
+            "description": "5 3 4 Users and Roles",
+            "clean_name": "Users.and.Roles.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.3.5.Server.Procedures.in.Databases.webm": {
+            "name": "5.3.5.Server.Procedures.in.Databases.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.5.Server.Procedures.in.Databases.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.3.5.Server.Procedures.in.Databases.txt",
+            "size": 170563562,
+            "description": "5 3 5 Server Procedures in Databases",
+            "clean_name": "Server.Procedures.in.Databases.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.3.SSL.Technology.mp4": {
+            "name": "5.3.SSL.Technology.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/5.3.SSL.Technology.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/5.3.SSL.Technology.txt",
+            "size": 153249319,
+            "description": "5 3 SSL Technology",
+            "clean_name": "5.3.SSL.Technology.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 5"
+        },
+        "5.4.1.Levels.of.System.Criticality.and.Data.Value.webm": {
+            "name": "5.4.1.Levels.of.System.Criticality.and.Data.Value.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.1.Levels.of.System.Criticality.and.Data.Value.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.1.Levels.of.System.Criticality.and.Data.Value.txt",
+            "size": 155958068,
+            "description": "5 4 1 Levels of System Criticality and Data Value",
+            "clean_name": "Levels.of.System.Criticality.and.Data.Value.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.4.2.DB.Recovery.and.Backup.webm": {
+            "name": "5.4.2.DB.Recovery.and.Backup.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.2.DB.Recovery.and.Backup.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.2.DB.Recovery.and.Backup.txt",
+            "size": 209867598,
+            "description": "5 4 2 DB Recovery and Backup",
+            "clean_name": "DB.Recovery.and.Backup.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.4.3.Export.and.Import.of.Data.in.PostgreSQL.webm": {
+            "name": "5.4.3.Export.and.Import.of.Data.in.PostgreSQL.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.3.Export.and.Import.of.Data.in.PostgreSQL.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.3.Export.and.Import.of.Data.in.PostgreSQL.txt",
+            "size": 166315894,
+            "description": "5 4 3 Export and Import of Data in PostgreSQL",
+            "clean_name": "Export.and.Import.of.Data.in.PostgreSQL.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.4.4.Hot.DB.Backup.on.PostgreSQL.Example.webm": {
+            "name": "5.4.4.Hot.DB.Backup.on.PostgreSQL.Example.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.4.Hot.DB.Backup.on.PostgreSQL.Example.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.4.Hot.DB.Backup.on.PostgreSQL.Example.txt",
+            "size": 378680002,
+            "description": "5 4 4 Hot DB Backup on PostgreSQL Example",
+            "clean_name": "Hot.DB.Backup.on.PostgreSQL.Example.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.4.5.Data.Flows.Vulnerability.Elimination.and.Software.Updates.DB.webm": {
+            "name": "5.4.5.Data.Flows.Vulnerability.Elimination.and.Software.Updates.DB.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.5.Data.Flows.Vulnerability.Elimination.and.Software.Updates.DB.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.4.5.Data.Flows.Vulnerability.Elimination.and.Software.Updates.DB.txt",
+            "size": 211285077,
+            "description": "5 4 5 Data Flows Vulnerability Elimination and Software Updates DB",
+            "clean_name": "Data.Flows.Vulnerability.Elimination.and.Software.Updates.DB.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.5.1.Introduction.to.the.Module.webm": {
+            "name": "5.5.1.Introduction.to.the.Module.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.1.Introduction.to.the.Module.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.1.Introduction.to.the.Module.txt",
+            "size": 43439424,
+            "description": "5 5 1 Introduction to the Module",
+            "clean_name": "Introduction.to.the.Module.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.5.2.Row.Level.Security.RLS.webm": {
+            "name": "5.5.2.Row.Level.Security.RLS.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.2.Row.Level.Security.RLS.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.2.Row.Level.Security.RLS.txt",
+            "size": 257163411,
+            "description": "5 5 2 Row Level Security RLS",
+            "clean_name": "Row.Level.Security.RLS.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.5.3.Transparent.Data.Encryption.Technologies.webm": {
+            "name": "5.5.3.Transparent.Data.Encryption.Technologies.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.3.Transparent.Data.Encryption.Technologies.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.3.Transparent.Data.Encryption.Technologies.txt",
+            "size": 195453249,
+            "description": "5 5 3 Transparent Data Encryption Technologies",
+            "clean_name": "Transparent.Data.Encryption.Technologies.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.5.4.Encryption.Using.DB.Means.pgcrypto.webm": {
+            "name": "5.5.4.Encryption.Using.DB.Means.pgcrypto.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.4.Encryption.Using.DB.Means.pgcrypto.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.4.Encryption.Using.DB.Means.pgcrypto.txt",
+            "size": 91228749,
+            "description": "5 5 4 Encryption Using DB Means pgcrypto",
+            "clean_name": "Encryption.Using.DB.Means.pgcrypto.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.5.5.Data.Masking.and.Anonymization.webm": {
+            "name": "5.5.5.Data.Masking.and.Anonymization.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.5.Data.Masking.and.Anonymization.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.5.Data.Masking.and.Anonymization.txt",
+            "size": 210298405,
+            "description": "5 5 5 Data Masking and Anonymization",
+            "clean_name": "Data.Masking.and.Anonymization.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.5.6.Obfuscation.of.Procedures.and.Functions.webm": {
+            "name": "5.5.6.Obfuscation.of.Procedures.and.Functions.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.6.Obfuscation.of.Procedures.and.Functions.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/5.0.0/5.5.6.Obfuscation.of.Procedures.and.Functions.txt",
+            "size": 136194517,
+            "description": "5 5 6 Obfuscation of Procedures and Functions",
+            "clean_name": "Obfuscation.of.Procedures.and.Functions.webm",
+            "release_tag": "5.0.0",
+            "section": "Section 5"
+        },
+        "5.Disk.encryption.webm": {
+            "name": "5.Disk.encryption.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/5.Disk.encryption.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/5.Disk.encryption.txt",
+            "size": 49281546,
+            "description": "5 Disk encryption",
+            "clean_name": "5.Disk.encryption.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "6.1.2.Introduction.to.Programming.and.Python.Language.webm": {
+            "name": "6.1.2.Introduction.to.Programming.and.Python.Language.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.2.Introduction.to.Programming.and.Python.Language.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.2.Introduction.to.Programming.and.Python.Language.txt",
+            "size": 99645831,
+            "description": "6 1 2 Introduction to Programming and Python Language",
+            "clean_name": "Introduction.to.Programming.and.Python.Language.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.1.3.First.Program.webm": {
+            "name": "6.1.3.First.Program.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.3.First.Program.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.3.First.Program.txt",
+            "size": 56788246,
+            "description": "6 1 3 First Program",
+            "clean_name": "First.Program.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.1.4.First.Errors.webm": {
+            "name": "6.1.4.First.Errors.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.4.First.Errors.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.4.First.Errors.txt",
+            "size": 32019723,
+            "description": "6 1 4 First Errors",
+            "clean_name": "First.Errors.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.1.5.Features.of.Working.with.Print.webm": {
+            "name": "6.1.5.Features.of.Working.with.Print.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.5.Features.of.Working.with.Print.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.1.5.Features.of.Working.with.Print.txt",
+            "size": 38062372,
+            "description": "6 1 5 Features of Working with Print",
+            "clean_name": "Features.of.Working.with.Print.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.1.Disks.and.Partitions.webm": {
+            "name": "6.1.Disks.and.Partitions.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.1.Disks.and.Partitions.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.1.Disks.and.Partitions.txt",
+            "size": 140929512,
+            "description": "6 1 Disks and Partitions",
+            "clean_name": "6.1.Disks.and.Partitions.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 6"
+        },
+        "6.1.Packet.Filters.Basics.mp4": {
+            "name": "6.1.Packet.Filters.Basics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/6.1.Packet.Filters.Basics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/6.1.Packet.Filters.Basics.txt",
+            "size": 26014673,
+            "description": "6 1 Packet Filters Basics",
+            "clean_name": "6.1.Packet.Filters.Basics.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 6"
+        },
+        "6.10.1.Working.with.Nested.Loops.webm": {
+            "name": "6.10.1.Working.with.Nested.Loops.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.1.Working.with.Nested.Loops.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.1.Working.with.Nested.Loops.txt",
+            "size": 93318321,
+            "description": "6 10 1 Working with Nested Loops",
+            "clean_name": "Working.with.Nested.Loops.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.10.2.Using.if.in.Nested.Loops.webm": {
+            "name": "6.10.2.Using.if.in.Nested.Loops.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.2.Using.if.in.Nested.Loops.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.2.Using.if.in.Nested.Loops.txt",
+            "size": 59836343,
+            "description": "6 10 2 Using if in Nested Loops",
+            "clean_name": "Using.if.in.Nested.Loops.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.10.3.Working.with.Two.Counters.in.Conditional.Operator.webm": {
+            "name": "6.10.3.Working.with.Two.Counters.in.Conditional.Operator.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.3.Working.with.Two.Counters.in.Conditional.Operator.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.3.Working.with.Two.Counters.in.Conditional.Operator.txt",
+            "size": 72233362,
+            "description": "6 10 3 Working with Two Counters in Conditional Operator",
+            "clean_name": "Working.with.Two.Counters.in.Conditional.Operator.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.10.4.Solving.Problems.with.Nested.Loops.webm": {
+            "name": "6.10.4.Solving.Problems.with.Nested.Loops.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.4.Solving.Problems.with.Nested.Loops.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.4.Solving.Problems.with.Nested.Loops.txt",
+            "size": 83314295,
+            "description": "6 10 4 Solving Problems with Nested Loops",
+            "clean_name": "Solving.Problems.with.Nested.Loops.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.10.5.Else.Block.for.Loop.Infinite.Outer.Loop.webm": {
+            "name": "6.10.5.Else.Block.for.Loop.Infinite.Outer.Loop.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.5.Else.Block.for.Loop.Infinite.Outer.Loop.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.10.5.Else.Block.for.Loop.Infinite.Outer.Loop.txt",
+            "size": 84274874,
+            "description": "6 10 5 Else Block for Loop Infinite Outer Loop",
+            "clean_name": "Else.Block.for.Loop.Infinite.Outer.Loop.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.11.1.Homework.Review.Floating.Point.Numbers.int.float.webm": {
+            "name": "6.11.1.Homework.Review.Floating.Point.Numbers.int.float.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.1.Homework.Review.Floating.Point.Numbers.int.float.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.1.Homework.Review.Floating.Point.Numbers.int.float.txt",
+            "size": 127929282,
+            "description": "6 11 1 Homework Review Floating Point Numbers int float",
+            "clean_name": "Homework.Review.Floating.Point.Numbers.int.float.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.11.2.Input.of.Real.Number.Functions.float.and.round.webm": {
+            "name": "6.11.2.Input.of.Real.Number.Functions.float.and.round.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.2.Input.of.Real.Number.Functions.float.and.round.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.2.Input.of.Real.Number.Functions.float.and.round.txt",
+            "size": 107799267,
+            "description": "6 11 2 Input of Real Number Functions float and round",
+            "clean_name": "Input.of.Real.Number.Functions.float.and.round.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.11.3.Type.Casting.Between.int.and.float.webm": {
+            "name": "6.11.3.Type.Casting.Between.int.and.float.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.3.Type.Casting.Between.int.and.float.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.3.Type.Casting.Between.int.and.float.txt",
+            "size": 72067200,
+            "description": "6 11 3 Type Casting Between int and float",
+            "clean_name": "Type.Casting.Between.int.and.float.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.11.4.Mathematical.Functions.Working.with.the.math.Module.webm": {
+            "name": "6.11.4.Mathematical.Functions.Working.with.the.math.Module.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.4.Mathematical.Functions.Working.with.the.math.Module.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.4.Mathematical.Functions.Working.with.the.math.Module.txt",
+            "size": 98804510,
+            "description": "6 11 4 Mathematical Functions Working with the math Module",
+            "clean_name": "Mathematical.Functions.Working.with.the.math.Module.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.11.5.About.the.Next.Module.webm": {
+            "name": "6.11.5.About.the.Next.Module.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.5.About.the.Next.Module.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.11.5.About.the.Next.Module.txt",
+            "size": 35372244,
+            "description": "6 11 5 About the Next Module",
+            "clean_name": "About.the.Next.Module.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.12.1.Homework.Review.Functions.webm": {
+            "name": "6.12.1.Homework.Review.Functions.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.1.Homework.Review.Functions.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.1.Homework.Review.Functions.txt",
+            "size": 39357735,
+            "description": "6 12 1 Homework Review Functions",
+            "clean_name": "Homework.Review.Functions.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.12.2.Functions.and.Their.Calls.webm": {
+            "name": "6.12.2.Functions.and.Their.Calls.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.2.Functions.and.Their.Calls.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.2.Functions.and.Their.Calls.txt",
+            "size": 131132617,
+            "description": "6 12 2 Functions and Their Calls",
+            "clean_name": "Functions.and.Their.Calls.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.12.3.Functions.with.One.Parameter.webm": {
+            "name": "6.12.3.Functions.with.One.Parameter.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.3.Functions.with.One.Parameter.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.3.Functions.with.One.Parameter.txt",
+            "size": 89615990,
+            "description": "6 12 3 Functions with One Parameter",
+            "clean_name": "Functions.with.One.Parameter.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.12.4.Functions.with.Multiple.Parameters.webm": {
+            "name": "6.12.4.Functions.with.Multiple.Parameters.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.4.Functions.with.Multiple.Parameters.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.4.Functions.with.Multiple.Parameters.txt",
+            "size": 104672705,
+            "description": "6 12 4 Functions with Multiple Parameters",
+            "clean_name": "Functions.with.Multiple.Parameters.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.12.5.Nested.Function.Call.webm": {
+            "name": "6.12.5.Nested.Function.Call.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.5.Nested.Function.Call.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.12.5.Nested.Function.Call.txt",
+            "size": 90084500,
+            "description": "6 12 5 Nested Function Call",
+            "clean_name": "Nested.Function.Call.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.13.1.Review.of.Practical.Work.Float.2.webm": {
+            "name": "6.13.1.Review.of.Practical.Work.Float.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.1.Review.of.Practical.Work.Float.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.1.Review.of.Practical.Work.Float.2.txt",
+            "size": 44081162,
+            "description": "6 13 1 Review of Practical Work Float 2",
+            "clean_name": "Review.of.Practical.Work.Float.2.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.13.2.Return.Values.from.Functions.Operator.return.webm": {
+            "name": "6.13.2.Return.Values.from.Functions.Operator.return.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.2.Return.Values.from.Functions.Operator.return.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.2.Return.Values.from.Functions.Operator.return.txt",
+            "size": 83768451,
+            "description": "6 13 2 Return Values from Functions Operator return",
+            "clean_name": "Return.Values.from.Functions.Operator.return.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.13.3.Representation.of.Real.Numbers.in.the.Program.webm": {
+            "name": "6.13.3.Representation.of.Real.Numbers.in.the.Program.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.3.Representation.of.Real.Numbers.in.the.Program.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.3.Representation.of.Real.Numbers.in.the.Program.txt",
+            "size": 70992417,
+            "description": "6 13 3 Representation of Real Numbers in the Program",
+            "clean_name": "Representation.of.Real.Numbers.in.the.Program.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.13.4.Features.of.Working.with.Real.Numbers.webm": {
+            "name": "6.13.4.Features.of.Working.with.Real.Numbers.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.4.Features.of.Working.with.Real.Numbers.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.4.Features.of.Working.with.Real.Numbers.txt",
+            "size": 44001341,
+            "description": "6 13 4 Features of Working with Real Numbers",
+            "clean_name": "Features.of.Working.with.Real.Numbers.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.13.5.Algorithms.with.Given.Accuracy.webm": {
+            "name": "6.13.5.Algorithms.with.Given.Accuracy.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.5.Algorithms.with.Given.Accuracy.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.13.5.Algorithms.with.Given.Accuracy.txt",
+            "size": 57630623,
+            "description": "6 13 5 Algorithms with Given Accuracy",
+            "clean_name": "Algorithms.with.Given.Accuracy.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.2.1.Variables.webm": {
+            "name": "6.2.1.Variables.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.1.Variables.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.1.Variables.txt",
+            "size": 56788246,
+            "description": "6 2 1 Variables",
+            "clean_name": "Variables.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.2.2.Input.Operator.webm": {
+            "name": "6.2.2.Input.Operator.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.2.Input.Operator.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.2.Input.Operator.txt",
+            "size": 81935492,
+            "description": "6 2 2 Input Operator",
+            "clean_name": "Input.Operator.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.2.3.Strings.and.Concatenation.webm": {
+            "name": "6.2.3.Strings.and.Concatenation.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.3.Strings.and.Concatenation.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.3.Strings.and.Concatenation.txt",
+            "size": 73641815,
+            "description": "6 2 3 Strings and Concatenation",
+            "clean_name": "Strings.and.Concatenation.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.2.4.Features.of.Working.with.Variables.webm": {
+            "name": "6.2.4.Features.of.Working.with.Variables.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.4.Features.of.Working.with.Variables.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.2.4.Features.of.Working.with.Variables.txt",
+            "size": 92398187,
+            "description": "6 2 4 Features of Working with Variables",
+            "clean_name": "Features.of.Working.with.Variables.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.2.Work.with.iptables.mp4": {
+            "name": "6.2.Work.with.iptables.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/6.2.Work.with.iptables.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/6.2.Work.with.iptables.txt",
+            "size": 53086473,
+            "description": "6 2 Work with iptables",
+            "clean_name": "6.2.Work.with.iptables.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 6"
+        },
+        "6.2.Working.with.Partition.Table.webm": {
+            "name": "6.2.Working.with.Partition.Table.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.2.Working.with.Partition.Table.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.2.Working.with.Partition.Table.txt",
+            "size": 101257720,
+            "description": "6 2 Working with Partition Table",
+            "clean_name": "6.2.Working.with.Partition.Table.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 6"
+        },
+        "6.3.1.Homework.Review.webm": {
+            "name": "6.3.1.Homework.Review.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.1.Homework.Review.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.1.Homework.Review.txt",
+            "size": 60908194,
+            "description": "6 3 1 Homework Review",
+            "clean_name": "Homework.Review.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.3.2.Numbers.and.Arithmetic.Operations.with.Them.webm": {
+            "name": "6.3.2.Numbers.and.Arithmetic.Operations.with.Them.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.2.Numbers.and.Arithmetic.Operations.with.Them.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.2.Numbers.and.Arithmetic.Operations.with.Them.txt",
+            "size": 53298486,
+            "description": "6 3 2 Numbers and Arithmetic Operations with Them",
+            "clean_name": "Numbers.and.Arithmetic.Operations.with.Them.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.3.3.Priority.of.Arithmetic.Operations.webm": {
+            "name": "6.3.3.Priority.of.Arithmetic.Operations.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.3.Priority.of.Arithmetic.Operations.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.3.Priority.of.Arithmetic.Operations.txt",
+            "size": 35711780,
+            "description": "6 3 3 Priority of Arithmetic Operations",
+            "clean_name": "Priority.of.Arithmetic.Operations.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.3.4.Inputting.a.Number.from.Keyboard.webm": {
+            "name": "6.3.4.Inputting.a.Number.from.Keyboard.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.4.Inputting.a.Number.from.Keyboard.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.4.Inputting.a.Number.from.Keyboard.txt",
+            "size": 74221505,
+            "description": "6 3 4 Inputting a Number from Keyboard",
+            "clean_name": "Inputting.a.Number.from.Keyboard.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.3.5.Integer.Division.and.Division.with.Remainder.webm": {
+            "name": "6.3.5.Integer.Division.and.Division.with.Remainder.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.5.Integer.Division.and.Division.with.Remainder.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.5.Integer.Division.and.Division.with.Remainder.txt",
+            "size": 72135996,
+            "description": "6 3 5 Integer Division and Division with Remainder",
+            "clean_name": "Integer.Division.and.Division.with.Remainder.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.3.6.Shorthand.Operators.webm": {
+            "name": "6.3.6.Shorthand.Operators.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.6.Shorthand.Operators.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.6.Shorthand.Operators.txt",
+            "size": 59819453,
+            "description": "6 3 6 Shorthand Operators",
+            "clean_name": "Shorthand.Operators.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.3.7.Practical.Work.webm": {
+            "name": "6.3.7.Practical.Work.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.7.Practical.Work.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.3.7.Practical.Work.txt",
+            "size": 54005978,
+            "description": "6 3 7 Practical Work",
+            "clean_name": "Practical.Work.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.3.Traffic.Management.with.iptables.mp4": {
+            "name": "6.3.Traffic.Management.with.iptables.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/6.3.Traffic.Management.with.iptables.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/6.3.Traffic.Management.with.iptables.txt",
+            "size": 597726651,
+            "description": "6 3 Traffic Management with iptables",
+            "clean_name": "6.3.Traffic.Management.with.iptables.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 6"
+        },
+        "6.3.Working.with.Disk.Creating.Partition.and.Formatting.webm": {
+            "name": "6.3.Working.with.Disk.Creating.Partition.and.Formatting.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.3.Working.with.Disk.Creating.Partition.and.Formatting.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.3.Working.with.Disk.Creating.Partition.and.Formatting.txt",
+            "size": 245726468,
+            "description": "6 3 Working with Disk Creating Partition and Formatting",
+            "clean_name": "6.3.Working.with.Disk.Creating.Partition.and.Formatting.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 6"
+        },
+        "6.4.1.Homework.Review.webm": {
+            "name": "6.4.1.Homework.Review.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.1.Homework.Review.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.1.Homework.Review.txt",
+            "size": 72276404,
+            "description": "6 4 1 Homework Review",
+            "clean_name": "Homework.Review.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.4.2.Conditional.Operator.webm": {
+            "name": "6.4.2.Conditional.Operator.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.2.Conditional.Operator.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.2.Conditional.Operator.txt",
+            "size": 165607722,
+            "description": "6 4 2 Conditional Operator",
+            "clean_name": "Conditional.Operator.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.4.3.Full.Form.of.Conditional.Operator.if.webm": {
+            "name": "6.4.3.Full.Form.of.Conditional.Operator.if.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.3.Full.Form.of.Conditional.Operator.if.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.3.Full.Form.of.Conditional.Operator.if.txt",
+            "size": 100698803,
+            "description": "6 4 3 Full Form of Conditional Operator if",
+            "clean_name": "Full.Form.of.Conditional.Operator.if.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.4.4.Comments.webm": {
+            "name": "6.4.4.Comments.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.4.Comments.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.4.4.Comments.txt",
+            "size": 102220223,
+            "description": "6 4 4 Comments",
+            "clean_name": "Comments.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.4.Disk.Checking.webm": {
+            "name": "6.4.Disk.Checking.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.4.Disk.Checking.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.4.Disk.Checking.txt",
+            "size": 153395557,
+            "description": "6 4 Disk Checking",
+            "clean_name": "6.4.Disk.Checking.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 6"
+        },
+        "6.5.1.Homework.Review.webm": {
+            "name": "6.5.1.Homework.Review.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.1.Homework.Review.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.1.Homework.Review.txt",
+            "size": 45207502,
+            "description": "6 5 1 Homework Review",
+            "clean_name": "Homework.Review.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.5.2.Nested.Conditions.webm": {
+            "name": "6.5.2.Nested.Conditions.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.2.Nested.Conditions.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.2.Nested.Conditions.txt",
+            "size": 99744254,
+            "description": "6 5 2 Nested Conditions",
+            "clean_name": "Nested.Conditions.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.5.3.Chains.of.Conditions.if-elif-else.webm": {
+            "name": "6.5.3.Chains.of.Conditions.if-elif-else.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.3.Chains.of.Conditions.if-elif-else.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.3.Chains.of.Conditions.if-elif-else.txt",
+            "size": 76946344,
+            "description": "6 5 3 Chains of Conditions if-elif-else",
+            "clean_name": "Chains.of.Conditions.if-elif-else.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.5.4.Logical.Operators.and.and.or.webm": {
+            "name": "6.5.4.Logical.Operators.and.and.or.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.4.Logical.Operators.and.and.or.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.4.Logical.Operators.and.and.or.txt",
+            "size": 125582621,
+            "description": "6 5 4 Logical Operators and and or",
+            "clean_name": "Logical.Operators.and.and.or.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.5.5.Using.Multiple.Logical.Operators.webm": {
+            "name": "6.5.5.Using.Multiple.Logical.Operators.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.5.Using.Multiple.Logical.Operators.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.5.5.Using.Multiple.Logical.Operators.txt",
+            "size": 136706522,
+            "description": "6 5 5 Using Multiple Logical Operators",
+            "clean_name": "Using.Multiple.Logical.Operators.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.6.1.Analysis.of.Practical.Work.webm": {
+            "name": "6.6.1.Analysis.of.Practical.Work.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.1.Analysis.of.Practical.Work.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.1.Analysis.of.Practical.Work.txt",
+            "size": 86178463,
+            "description": "6 6 1 Analysis of Practical Work",
+            "clean_name": "Analysis.of.Practical.Work.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.6.2.While.Operator.webm": {
+            "name": "6.6.2.While.Operator.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.2.While.Operator.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.2.While.Operator.txt",
+            "size": 119003660,
+            "description": "6 6 2 While Operator",
+            "clean_name": "While.Operator.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.6.3.Breaking.the.Loop.Break.Operator.webm": {
+            "name": "6.6.3.Breaking.the.Loop.Break.Operator.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.3.Breaking.the.Loop.Break.Operator.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.3.Breaking.the.Loop.Break.Operator.txt",
+            "size": 89260033,
+            "description": "6 6 3 Breaking the Loop Break Operator",
+            "clean_name": "Breaking.the.Loop.Break.Operator.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.6.4.Infinite.Loop.Boolean.Data.Type.webm": {
+            "name": "6.6.4.Infinite.Loop.Boolean.Data.Type.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.4.Infinite.Loop.Boolean.Data.Type.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.4.Infinite.Loop.Boolean.Data.Type.txt",
+            "size": 102933468,
+            "description": "6 6 4 Infinite Loop Boolean Data Type",
+            "clean_name": "Infinite.Loop.Boolean.Data.Type.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.6.5.While.Loop.with.Counter.webm": {
+            "name": "6.6.5.While.Loop.with.Counter.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.5.While.Loop.with.Counter.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.5.While.Loop.with.Counter.txt",
+            "size": 78139919,
+            "description": "6 6 5 While Loop with Counter",
+            "clean_name": "While.Loop.with.Counter.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.6.6.Continue.Operator.in.While.Loop.webm": {
+            "name": "6.6.6.Continue.Operator.in.While.Loop.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.6.Continue.Operator.in.While.Loop.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.6.6.Continue.Operator.in.While.Loop.txt",
+            "size": 75008730,
+            "description": "6 6 6 Continue Operator in While Loop",
+            "clean_name": "Continue.Operator.in.While.Loop.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.7.1.Homework.Review.webm": {
+            "name": "6.7.1.Homework.Review.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.1.Homework.Review.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.1.Homework.Review.txt",
+            "size": 93752696,
+            "description": "6 7 1 Homework Review",
+            "clean_name": "Homework.Review.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.7.2.For.Loop.Working.with.List.of.Numbers.webm": {
+            "name": "6.7.2.For.Loop.Working.with.List.of.Numbers.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.2.For.Loop.Working.with.List.of.Numbers.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.2.For.Loop.Working.with.List.of.Numbers.txt",
+            "size": 83781689,
+            "description": "6 7 2 For Loop Working with List of Numbers",
+            "clean_name": "For.Loop.Working.with.List.of.Numbers.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.7.3.Function.range.webm": {
+            "name": "6.7.3.Function.range.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.3.Function.range.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.3.Function.range.txt",
+            "size": 114267197,
+            "description": "6 7 3 Function range",
+            "clean_name": "Function.range.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.7.4.Function.range.with.Start.webm": {
+            "name": "6.7.4.Function.range.with.Start.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.4.Function.range.with.Start.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.4.Function.range.with.Start.txt",
+            "size": 142743461,
+            "description": "6 7 4 Function range with Start",
+            "clean_name": "Function.range.with.Start.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.7.5.Typical.Algorithms.with.Counting.Loops.webm": {
+            "name": "6.7.5.Typical.Algorithms.with.Counting.Loops.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.5.Typical.Algorithms.with.Counting.Loops.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.7.5.Typical.Algorithms.with.Counting.Loops.txt",
+            "size": 97083063,
+            "description": "6 7 5 Typical Algorithms with Counting Loops",
+            "clean_name": "Typical.Algorithms.with.Counting.Loops.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.8.1.Homework.Review.For.Loops.Part.2.webm": {
+            "name": "6.8.1.Homework.Review.For.Loops.Part.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.1.Homework.Review.For.Loops.Part.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.1.Homework.Review.For.Loops.Part.2.txt",
+            "size": 80825314,
+            "description": "6 8 1 Homework Review For Loops Part 2",
+            "clean_name": "Homework.Review.For.Loops.Part.2.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.8.2.Algorithmic.Tasks.with.Counting.Loops.webm": {
+            "name": "6.8.2.Algorithmic.Tasks.with.Counting.Loops.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.2.Algorithmic.Tasks.with.Counting.Loops.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.2.Algorithmic.Tasks.with.Counting.Loops.txt",
+            "size": 122243156,
+            "description": "6 8 2 Algorithmic Tasks with Counting Loops",
+            "clean_name": "Algorithmic.Tasks.with.Counting.Loops.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.8.3.Function.range.start.stop.step.webm": {
+            "name": "6.8.3.Function.range.start.stop.step.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.3.Function.range.start.stop.step.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.3.Function.range.start.stop.step.txt",
+            "size": 142208847,
+            "description": "6 8 3 Function range start stop step",
+            "clean_name": "Function.range.start.stop.step.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.8.4.Negative.Step.in.Function.range.webm": {
+            "name": "6.8.4.Negative.Step.in.Function.range.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.4.Negative.Step.in.Function.range.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.4.Negative.Step.in.Function.range.txt",
+            "size": 118322378,
+            "description": "6 8 4 Negative Step in Function range",
+            "clean_name": "Negative.Step.in.Function.range.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.8.5.User.Input.and.Function.range.webm": {
+            "name": "6.8.5.User.Input.and.Function.range.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.5.User.Input.and.Function.range.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.8.5.User.Input.and.Function.range.txt",
+            "size": 135584400,
+            "description": "6 8 5 User Input and Function range",
+            "clean_name": "User.Input.and.Function.range.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.9.1.Homework.Review.For.Loop.Working.with.Strings.webm": {
+            "name": "6.9.1.Homework.Review.For.Loop.Working.with.Strings.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.1.Homework.Review.For.Loop.Working.with.Strings.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.1.Homework.Review.For.Loop.Working.with.Strings.txt",
+            "size": 55505976,
+            "description": "6 9 1 Homework Review For Loop Working with Strings",
+            "clean_name": "Homework.Review.For.Loop.Working.with.Strings.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.9.2.String.Comparison.webm": {
+            "name": "6.9.2.String.Comparison.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.2.String.Comparison.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.2.String.Comparison.txt",
+            "size": 66120732,
+            "description": "6 9 2 String Comparison",
+            "clean_name": "String.Comparison.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.9.3.For.Loop.Iterating.Over.a.String.webm": {
+            "name": "6.9.3.For.Loop.Iterating.Over.a.String.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.3.For.Loop.Iterating.Over.a.String.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.3.For.Loop.Iterating.Over.a.String.txt",
+            "size": 90728108,
+            "description": "6 9 3 For Loop Iterating Over a String",
+            "clean_name": "For.Loop.Iterating.Over.a.String.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.9.4.Additional.Possibilities.of.the.print.Function.webm": {
+            "name": "6.9.4.Additional.Possibilities.of.the.print.Function.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.4.Additional.Possibilities.of.the.print.Function.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.4.Additional.Possibilities.of.the.print.Function.txt",
+            "size": 67686476,
+            "description": "6 9 4 Additional Possibilities of the print Function",
+            "clean_name": "Additional.Possibilities.of.the.print.Function.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.9.5.Typical.Algorithms.for.Working.with.Strings.webm": {
+            "name": "6.9.5.Typical.Algorithms.for.Working.with.Strings.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.5.Typical.Algorithms.for.Working.with.Strings.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/6.0.0/6.9.5.Typical.Algorithms.for.Working.with.Strings.txt",
+            "size": 93781278,
+            "description": "6 9 5 Typical Algorithms for Working with Strings",
+            "clean_name": "Typical.Algorithms.for.Working.with.Strings.webm",
+            "release_tag": "6.0.0",
+            "section": "Section 6"
+        },
+        "6.Boot.loader.webm": {
+            "name": "6.Boot.loader.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.Boot.loader.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/6.Boot.loader.txt",
+            "size": 32199343,
+            "description": "6 Boot loader",
+            "clean_name": "6.Boot.loader.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "7.1.1.Intro.webm": {
+            "name": "7.1.1.Intro.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.1.Intro.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.1.Intro.txt",
+            "size": 41303916,
+            "description": "7 1 1 Intro",
+            "clean_name": "Intro.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.1.2.Types.of.Processes.and.Their.Differences.Part.1.webm": {
+            "name": "7.1.2.Types.of.Processes.and.Their.Differences.Part.1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.2.Types.of.Processes.and.Their.Differences.Part.1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.2.Types.of.Processes.and.Their.Differences.Part.1.txt",
+            "size": 227401827,
+            "description": "7 1 2 Types of Processes and Their Differences Part 1",
+            "clean_name": "Types.of.Processes.and.Their.Differences.Part.1.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.1.2.Types.of.Processes.and.Their.Differences.Part.2.webm": {
+            "name": "7.1.2.Types.of.Processes.and.Their.Differences.Part.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.2.Types.of.Processes.and.Their.Differences.Part.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.2.Types.of.Processes.and.Their.Differences.Part.2.txt",
+            "size": 325094496,
+            "description": "7 1 2 Types of Processes and Their Differences Part 2",
+            "clean_name": "Types.of.Processes.and.Their.Differences.Part.2.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.1.3.The.Golden.Standard.webm": {
+            "name": "7.1.3.The.Golden.Standard.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.3.The.Golden.Standard.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.3.The.Golden.Standard.txt",
+            "size": 210553090,
+            "description": "7 1 3 The Golden Standard",
+            "clean_name": "The.Golden.Standard.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.1.4.Prioritization.of.Processes.webm": {
+            "name": "7.1.4.Prioritization.of.Processes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.4.Prioritization.of.Processes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.1.4.Prioritization.of.Processes.txt",
+            "size": 563976374,
+            "description": "7 1 4 Prioritization of Processes",
+            "clean_name": "Prioritization.of.Processes.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.1.Introduction.to.File.Systems.webm": {
+            "name": "7.1.Introduction.to.File.Systems.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.1.Introduction.to.File.Systems.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.1.Introduction.to.File.Systems.txt",
+            "size": 194260383,
+            "description": "7 1 Introduction to File Systems",
+            "clean_name": "7.1.Introduction.to.File.Systems.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 7"
+        },
+        "7.1.Network.Operability.Support.Basics.mp4": {
+            "name": "7.1.Network.Operability.Support.Basics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.1.Network.Operability.Support.Basics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.1.Network.Operability.Support.Basics.txt",
+            "size": 267945728,
+            "description": "7 1 Network Operability Support Basics",
+            "clean_name": "7.1.Network.Operability.Support.Basics.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 7"
+        },
+        "7.2.1.Groups.of.IS.Processes.webm": {
+            "name": "7.2.1.Groups.of.IS.Processes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.1.Groups.of.IS.Processes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.1.Groups.of.IS.Processes.txt",
+            "size": 490728859,
+            "description": "7 2 1 Groups of IS Processes",
+            "clean_name": "Groups.of.IS.Processes.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.2.2.Operational.Processes.webm": {
+            "name": "7.2.2.Operational.Processes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.2.Operational.Processes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.2.Operational.Processes.txt",
+            "size": 249713098,
+            "description": "7 2 2 Operational Processes",
+            "clean_name": "Operational.Processes.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.2.3.Antivirus.Protection.Process.Part.1.webm": {
+            "name": "7.2.3.Antivirus.Protection.Process.Part.1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.3.Antivirus.Protection.Process.Part.1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.3.Antivirus.Protection.Process.Part.1.txt",
+            "size": 165290630,
+            "description": "7 2 3 Antivirus Protection Process Part 1",
+            "clean_name": "Antivirus.Protection.Process.Part.1.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.2.3.Antivirus.Protection.Process.Part.2.webm": {
+            "name": "7.2.3.Antivirus.Protection.Process.Part.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.3.Antivirus.Protection.Process.Part.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.2.3.Antivirus.Protection.Process.Part.2.txt",
+            "size": 397599830,
+            "description": "7 2 3 Antivirus Protection Process Part 2",
+            "clean_name": "Antivirus.Protection.Process.Part.2.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.2.Inodes.webm": {
+            "name": "7.2.Inodes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.2.Inodes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.2.Inodes.txt",
+            "size": 169472273,
+            "description": "7 2 Inodes",
+            "clean_name": "7.2.Inodes.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 7"
+        },
+        "7.2.Work.with.Network.Operability.Support.Utilities.mp4": {
+            "name": "7.2.Work.with.Network.Operability.Support.Utilities.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.2.Work.with.Network.Operability.Support.Utilities.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.2.Work.with.Network.Operability.Support.Utilities.txt",
+            "size": 417449023,
+            "description": "7 2 Work with Network Operability Support Utilities",
+            "clean_name": "7.2.Work.with.Network.Operability.Support.Utilities.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 7"
+        },
+        "7.3.1.Tactical.Processes.webm": {
+            "name": "7.3.1.Tactical.Processes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.1.Tactical.Processes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.1.Tactical.Processes.txt",
+            "size": 178058513,
+            "description": "7 3 1 Tactical Processes",
+            "clean_name": "Tactical.Processes.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.3.2.Incident.Management.Process.webm": {
+            "name": "7.3.2.Incident.Management.Process.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.2.Incident.Management.Process.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.2.Incident.Management.Process.txt",
+            "size": 621285223,
+            "description": "7 3 2 Incident Management Process",
+            "clean_name": "Incident.Management.Process.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.3.3.Strategic.Processes.webm": {
+            "name": "7.3.3.Strategic.Processes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.3.Strategic.Processes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.3.Strategic.Processes.txt",
+            "size": 169179210,
+            "description": "7 3 3 Strategic Processes",
+            "clean_name": "Strategic.Processes.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.3.4.Compliance.Management.Process.webm": {
+            "name": "7.3.4.Compliance.Management.Process.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.4.Compliance.Management.Process.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.4.Compliance.Management.Process.txt",
+            "size": 244422301,
+            "description": "7 3 4 Compliance Management Process",
+            "clean_name": "Compliance.Management.Process.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.3.5.Differences.and.Features.of.Different.Types.of.Processes.webm": {
+            "name": "7.3.5.Differences.and.Features.of.Different.Types.of.Processes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.5.Differences.and.Features.of.Different.Types.of.Processes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.3.5.Differences.and.Features.of.Different.Types.of.Processes.txt",
+            "size": 229704794,
+            "description": "7 3 5 Differences and Features of Different Types of Processes",
+            "clean_name": "Differences.and.Features.of.Different.Types.of.Processes.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.3.File.System.and.File.webm": {
+            "name": "7.3.File.System.and.File.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.3.File.System.and.File.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.3.File.System.and.File.txt",
+            "size": 144229955,
+            "description": "7 3 File System and File",
+            "clean_name": "7.3.File.System.and.File.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 7"
+        },
+        "7.3.Network.Operability.Checks.Conducting.mp4": {
+            "name": "7.3.Network.Operability.Checks.Conducting.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.3.Network.Operability.Checks.Conducting.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.3.Network.Operability.Checks.Conducting.txt",
+            "size": 1274386378,
+            "description": "7 3 Network Operability Checks Conducting",
+            "clean_name": "7.3.Network.Operability.Checks.Conducting.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 7"
+        },
+        "7.4.1.Set.of.Roles.in.Operational.Processes.webm": {
+            "name": "7.4.1.Set.of.Roles.in.Operational.Processes.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.1.Set.of.Roles.in.Operational.Processes.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.1.Set.of.Roles.in.Operational.Processes.txt",
+            "size": 366973512,
+            "description": "7 4 1 Set of Roles in Operational Processes",
+            "clean_name": "Set.of.Roles.in.Operational.Processes.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.4.2.Set.of.Roles.in.Project.Implementation.webm": {
+            "name": "7.4.2.Set.of.Roles.in.Project.Implementation.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.2.Set.of.Roles.in.Project.Implementation.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.2.Set.of.Roles.in.Project.Implementation.txt",
+            "size": 302524710,
+            "description": "7 4 2 Set of Roles in Project Implementation",
+            "clean_name": "Set.of.Roles.in.Project.Implementation.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.4.3.Manager.webm": {
+            "name": "7.4.3.Manager.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.3.Manager.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.3.Manager.txt",
+            "size": 360295591,
+            "description": "7 4 3 Manager",
+            "clean_name": "Manager.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.4.4.Chief.Engineer.webm": {
+            "name": "7.4.4.Chief.Engineer.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.4.Chief.Engineer.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.4.Chief.Engineer.txt",
+            "size": 447569209,
+            "description": "7 4 4 Chief Engineer",
+            "clean_name": "Chief.Engineer.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.4.5.Participant.webm": {
+            "name": "7.4.5.Participant.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.5.Participant.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.4.5.Participant.txt",
+            "size": 319832305,
+            "description": "7 4 5 Participant",
+            "clean_name": "Participant.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.4.Logs.Work.Basics.mp4": {
+            "name": "7.4.Logs.Work.Basics.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.4.Logs.Work.Basics.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/7.4.Logs.Work.Basics.txt",
+            "size": 623581069,
+            "description": "7 4 Logs Work Basics",
+            "clean_name": "7.4.Logs.Work.Basics.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 7"
+        },
+        "7.4.Recovering.Deleted.Files.webm": {
+            "name": "7.4.Recovering.Deleted.Files.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.4.Recovering.Deleted.Files.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.4.Recovering.Deleted.Files.txt",
+            "size": 212138548,
+            "description": "7 4 Recovering Deleted Files",
+            "clean_name": "7.4.Recovering.Deleted.Files.webm",
+            "release_tag": "1.0.0",
+            "section": "Section 7"
+        },
+        "7.5.1.Company.Types.and.Influencing.Factors.webm": {
+            "name": "7.5.1.Company.Types.and.Influencing.Factors.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.1.Company.Types.and.Influencing.Factors.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.1.Company.Types.and.Influencing.Factors.txt",
+            "size": 393635080,
+            "description": "7 5 1 Company Types and Influencing Factors",
+            "clean_name": "Company.Types.and.Influencing.Factors.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.5.2.Basic.Specializations.in.Information.Security.webm": {
+            "name": "7.5.2.Basic.Specializations.in.Information.Security.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.2.Basic.Specializations.in.Information.Security.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.2.Basic.Specializations.in.Information.Security.txt",
+            "size": 758760583,
+            "description": "7 5 2 Basic Specializations in Information Security",
+            "clean_name": "Basic.Specializations.in.Information.Security.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.5.3.Development.of.Specializations.in.Companies.webm": {
+            "name": "7.5.3.Development.of.Specializations.in.Companies.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.3.Development.of.Specializations.in.Companies.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.3.Development.of.Specializations.in.Companies.txt",
+            "size": 306315869,
+            "description": "7 5 3 Development of Specializations in Companies",
+            "clean_name": "Development.of.Specializations.in.Companies.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.5.4.Career.Graph.webm": {
+            "name": "7.5.4.Career.Graph.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.4.Career.Graph.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/7.0.0/7.5.4.Career.Graph.txt",
+            "size": 633818846,
+            "description": "7 5 4 Career Graph",
+            "clean_name": "Career.Graph.webm",
+            "release_tag": "7.0.0",
+            "section": "Section 7"
+        },
+        "7.Emergency.boot.webm": {
+            "name": "7.Emergency.boot.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.Emergency.boot.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/7.Emergency.boot.txt",
+            "size": 39600040,
+            "description": "7 Emergency boot",
+            "clean_name": "7.Emergency.boot.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "8.1.1.Access.and.Connection.to.Test.Environment.for.Practical.Work.webm": {
+            "name": "8.1.1.Access.and.Connection.to.Test.Environment.for.Practical.Work.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.1.1.Access.and.Connection.to.Test.Environment.for.Practical.Work.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.1.1.Access.and.Connection.to.Test.Environment.for.Practical.Work.txt",
+            "size": 38825709,
+            "description": "8 1 1 Access and Connection to Test Environment for Practical Work",
+            "clean_name": "Access.and.Connection.to.Test.Environment.for.Practical.Work.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.1.Basic.Incidents.in.Local.Network.mp4": {
+            "name": "8.1.Basic.Incidents.in.Local.Network.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.1.Basic.Incidents.in.Local.Network.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.1.Basic.Incidents.in.Local.Network.txt",
+            "size": 177916856,
+            "description": "8 1 Basic Incidents in Local Network",
+            "clean_name": "8.1.Basic.Incidents.in.Local.Network.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 8"
+        },
+        "8.10.1.Module.Introduction.webm": {
+            "name": "8.10.1.Module.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.1.Module.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.1.Module.Introduction.txt",
+            "size": 52727893,
+            "description": "8 10 1 Module Introduction",
+            "clean_name": "Module.Introduction.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.10.2.What.is.Active.Directory.webm": {
+            "name": "8.10.2.What.is.Active.Directory.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.2.What.is.Active.Directory.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.2.What.is.Active.Directory.txt",
+            "size": 70895742,
+            "description": "8 10 2 What is Active Directory",
+            "clean_name": "What.is.Active.Directory.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.10.3.Active.Directory.Users.and.Groups.webm": {
+            "name": "8.10.3.Active.Directory.Users.and.Groups.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.3.Active.Directory.Users.and.Groups.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.3.Active.Directory.Users.and.Groups.txt",
+            "size": 78888631,
+            "description": "8 10 3 Active Directory Users and Groups",
+            "clean_name": "Active.Directory.Users.and.Groups.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.10.4.BloodHound.AD.Analysis.webm": {
+            "name": "8.10.4.BloodHound.AD.Analysis.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.4.BloodHound.AD.Analysis.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.4.BloodHound.AD.Analysis.txt",
+            "size": 62400716,
+            "description": "8 10 4 BloodHound AD Analysis",
+            "clean_name": "BloodHound.AD.Analysis.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.10.5.Windows.Authentication.webm": {
+            "name": "8.10.5.Windows.Authentication.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.5.Windows.Authentication.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.5.Windows.Authentication.txt",
+            "size": 40514384,
+            "description": "8 10 5 Windows Authentication",
+            "clean_name": "Windows.Authentication.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.10.6.NTLM.Authentication.webm": {
+            "name": "8.10.6.NTLM.Authentication.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.6.NTLM.Authentication.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.6.NTLM.Authentication.txt",
+            "size": 89660442,
+            "description": "8 10 6 NTLM Authentication",
+            "clean_name": "NTLM.Authentication.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.10.7.Kerberos.Authentication.webm": {
+            "name": "8.10.7.Kerberos.Authentication.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.7.Kerberos.Authentication.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.7.Kerberos.Authentication.txt",
+            "size": 62115936,
+            "description": "8 10 7 Kerberos Authentication",
+            "clean_name": "Kerberos.Authentication.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.10.8.Module.Summary.webm": {
+            "name": "8.10.8.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.8.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.10.8.Module.Summary.txt",
+            "size": 22123416,
+            "description": "8 10 8 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.11.1.Introduction.webm": {
+            "name": "8.11.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.1.Introduction.txt",
+            "size": 39605420,
+            "description": "8 11 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.11.2.Pass.the.Hash.webm": {
+            "name": "8.11.2.Pass.the.Hash.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.2.Pass.the.Hash.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.2.Pass.the.Hash.txt",
+            "size": 56410388,
+            "description": "8 11 2 Pass the Hash",
+            "clean_name": "Pass.the.Hash.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.11.3.NTLM.Relay.webm": {
+            "name": "8.11.3.NTLM.Relay.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.3.NTLM.Relay.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.3.NTLM.Relay.txt",
+            "size": 61282754,
+            "description": "8 11 3 NTLM Relay",
+            "clean_name": "NTLM.Relay.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.11.4.NTLM.Hash.Cracking.webm": {
+            "name": "8.11.4.NTLM.Hash.Cracking.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.4.NTLM.Hash.Cracking.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.4.NTLM.Hash.Cracking.txt",
+            "size": 57452892,
+            "description": "8 11 4 NTLM Hash Cracking",
+            "clean_name": "NTLM.Hash.Cracking.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.11.5.Kerberoasting.webm": {
+            "name": "8.11.5.Kerberoasting.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.5.Kerberoasting.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.5.Kerberoasting.txt",
+            "size": 84316905,
+            "description": "8 11 5 Kerberoasting",
+            "clean_name": "Kerberoasting.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.11.6.Pass.the.Ticket.webm": {
+            "name": "8.11.6.Pass.the.Ticket.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.6.Pass.the.Ticket.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.6.Pass.the.Ticket.txt",
+            "size": 61869370,
+            "description": "8 11 6 Pass the Ticket",
+            "clean_name": "Pass.the.Ticket.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.11.7.Module.Summary.webm": {
+            "name": "8.11.7.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.7.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.11.7.Module.Summary.txt",
+            "size": 39239077,
+            "description": "8 11 7 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.1.Vulnerability.Management.webm": {
+            "name": "8.12.1.Vulnerability.Management.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.1.Vulnerability.Management.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.1.Vulnerability.Management.txt",
+            "size": 12226809,
+            "description": "8 12 1 Vulnerability Management",
+            "clean_name": "Vulnerability.Management.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.2.Vulnerability.Metrics.webm": {
+            "name": "8.12.2.Vulnerability.Metrics.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.2.Vulnerability.Metrics.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.2.Vulnerability.Metrics.txt",
+            "size": 56166542,
+            "description": "8 12 2 Vulnerability Metrics",
+            "clean_name": "Vulnerability.Metrics.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.3.Vulnerability.Search.webm": {
+            "name": "8.12.3.Vulnerability.Search.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.3.Vulnerability.Search.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.3.Vulnerability.Search.txt",
+            "size": 122858151,
+            "description": "8 12 3 Vulnerability Search",
+            "clean_name": "Vulnerability.Search.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.4.Scanner.Setup.webm": {
+            "name": "8.12.4.Scanner.Setup.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.4.Scanner.Setup.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.4.Scanner.Setup.txt",
+            "size": 99999344,
+            "description": "8 12 4 Scanner Setup",
+            "clean_name": "Scanner.Setup.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.5.Scanner.Usage.webm": {
+            "name": "8.12.5.Scanner.Usage.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.5.Scanner.Usage.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.5.Scanner.Usage.txt",
+            "size": 135900222,
+            "description": "8 12 5 Scanner Usage",
+            "clean_name": "Scanner.Usage.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.6.Exploit.Search-2.webm": {
+            "name": "8.12.6.Exploit.Search-2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.6.Exploit.Search-2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.6.Exploit.Search-2.txt",
+            "size": 34418290,
+            "description": "8 12 6 Exploit Search-2",
+            "clean_name": "Exploit.Search-2.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.6.Exploit.Search.webm": {
+            "name": "8.12.6.Exploit.Search.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.6.Exploit.Search.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.6.Exploit.Search.txt",
+            "size": 48672856,
+            "description": "8 12 6 Exploit Search",
+            "clean_name": "Exploit.Search.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.12.7.Module.Summary.webm": {
+            "name": "8.12.7.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.7.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.12.7.Module.Summary.txt",
+            "size": 10357817,
+            "description": "8 12 7 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.13.1.Introduction.webm": {
+            "name": "8.13.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.1.Introduction.txt",
+            "size": 6358178,
+            "description": "8 13 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.13.2.Metasploit.webm": {
+            "name": "8.13.2.Metasploit.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.2.Metasploit.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.2.Metasploit.txt",
+            "size": 58385756,
+            "description": "8 13 2 Metasploit",
+            "clean_name": "Metasploit.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.13.3.Post-Exploitation.webm": {
+            "name": "8.13.3.Post-Exploitation.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.3.Post-Exploitation.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.3.Post-Exploitation.txt",
+            "size": 159369114,
+            "description": "8 13 3 Post-Exploitation",
+            "clean_name": "Post-Exploitation.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.13.4.System-Persistence.webm": {
+            "name": "8.13.4.System-Persistence.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.4.System-Persistence.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.4.System-Persistence.txt",
+            "size": 179607455,
+            "description": "8 13 4 System-Persistence",
+            "clean_name": "System-Persistence.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.13.5.Bug-Bounty-Programs.webm": {
+            "name": "8.13.5.Bug-Bounty-Programs.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.5.Bug-Bounty-Programs.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.5.Bug-Bounty-Programs.txt",
+            "size": 22159355,
+            "description": "8 13 5 Bug-Bounty-Programs",
+            "clean_name": "Bug-Bounty-Programs.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.13.6.Module-Summary.webm": {
+            "name": "8.13.6.Module-Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.6.Module-Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.13.6.Module-Summary.txt",
+            "size": 11812651,
+            "description": "8 13 6 Module-Summary",
+            "clean_name": "Module-Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.1.Intro.webm": {
+            "name": "8.2.1.Intro.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.1.Intro.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.1.Intro.txt",
+            "size": 22294571,
+            "description": "8 2 1 Intro",
+            "clean_name": "Intro.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.2.What.is.Ethical.Hacking.webm": {
+            "name": "8.2.2.What.is.Ethical.Hacking.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.2.What.is.Ethical.Hacking.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.2.What.is.Ethical.Hacking.txt",
+            "size": 39341474,
+            "description": "8 2 2 What is Ethical Hacking",
+            "clean_name": "What.is.Ethical.Hacking.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.3.Legal.Aspects.of.Activity.webm": {
+            "name": "8.2.3.Legal.Aspects.of.Activity.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.3.Legal.Aspects.of.Activity.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.3.Legal.Aspects.of.Activity.txt",
+            "size": 19425172,
+            "description": "8 2 3 Legal Aspects of Activity",
+            "clean_name": "Legal.Aspects.of.Activity.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.4.Main.Directions.of.Activity.webm": {
+            "name": "8.2.4.Main.Directions.of.Activity.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.4.Main.Directions.of.Activity.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.4.Main.Directions.of.Activity.txt",
+            "size": 30594088,
+            "description": "8 2 4 Main Directions of Activity",
+            "clean_name": "Main.Directions.of.Activity.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.5.Kill.Chain.Model.webm": {
+            "name": "8.2.5.Kill.Chain.Model.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.5.Kill.Chain.Model.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.5.Kill.Chain.Model.txt",
+            "size": 19753568,
+            "description": "8 2 5 Kill Chain Model",
+            "clean_name": "Kill.Chain.Model.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.6.Overview.of.Public.Distributives.for.Pentest.Part2.webm": {
+            "name": "8.2.6.Overview.of.Public.Distributives.for.Pentest.Part2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.6.Overview.of.Public.Distributives.for.Pentest.Part2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.6.Overview.of.Public.Distributives.for.Pentest.Part2.txt",
+            "size": 35577555,
+            "description": "8 2 6 Overview of Public Distributives for Pentest Part2",
+            "clean_name": "Overview.of.Public.Distributives.for.Pentest.Part2.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.6.Overview.of.Public.Distributives.for.Pentest.webm": {
+            "name": "8.2.6.Overview.of.Public.Distributives.for.Pentest.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.6.Overview.of.Public.Distributives.for.Pentest.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.6.Overview.of.Public.Distributives.for.Pentest.txt",
+            "size": 18080317,
+            "description": "8 2 6 Overview of Public Distributives for Pentest",
+            "clean_name": "Overview.of.Public.Distributives.for.Pentest.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.7.Module.Summary.webm": {
+            "name": "8.2.7.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.7.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.2.7.Module.Summary.txt",
+            "size": 32575074,
+            "description": "8 2 7 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.2.Incident.Detection.Inside.Network.mp4": {
+            "name": "8.2.Incident.Detection.Inside.Network.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.2.Incident.Detection.Inside.Network.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.2.Incident.Detection.Inside.Network.txt",
+            "size": 375016,
+            "description": "8 2 Incident Detection Inside Network",
+            "clean_name": "8.2.Incident.Detection.Inside.Network.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 8"
+        },
+        "8.3.1.Introduction.to.OSINT.Part.1.webm": {
+            "name": "8.3.1.Introduction.to.OSINT.Part.1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.1.Introduction.to.OSINT.Part.1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.1.Introduction.to.OSINT.Part.1.txt",
+            "size": 128492331,
+            "description": "8 3 1 Introduction to OSINT Part 1",
+            "clean_name": "Introduction.to.OSINT.Part.1.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.10.Module.Summary.webm": {
+            "name": "8.3.10.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.10.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.10.Module.Summary.txt",
+            "size": 34492941,
+            "description": "8 3 10 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.2.What.is.OSINT.webm": {
+            "name": "8.3.2.What.is.OSINT.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.2.What.is.OSINT.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.2.What.is.OSINT.txt",
+            "size": 135367121,
+            "description": "8 3 2 What is OSINT",
+            "clean_name": "What.is.OSINT.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.3.Internet.Levels.webm": {
+            "name": "8.3.3.Internet.Levels.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.3.Internet.Levels.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.3.Internet.Levels.txt",
+            "size": 27399425,
+            "description": "8 3 3 Internet Levels",
+            "clean_name": "Internet.Levels.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.4.Websites.and.Social.Networks.webm": {
+            "name": "8.3.4.Websites.and.Social.Networks.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.4.Websites.and.Social.Networks.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.4.Websites.and.Social.Networks.txt",
+            "size": 209272589,
+            "description": "8 3 4 Websites and Social Networks",
+            "clean_name": "Websites.and.Social.Networks.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.5.Metadata.webm": {
+            "name": "8.3.5.Metadata.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.5.Metadata.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.5.Metadata.txt",
+            "size": 53678182,
+            "description": "8 3 5 Metadata",
+            "clean_name": "Metadata.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.6.Honeytokens.and.Countering.OSINT.webm": {
+            "name": "8.3.6.Honeytokens.and.Countering.OSINT.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.6.Honeytokens.and.Countering.OSINT.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.6.Honeytokens.and.Countering.OSINT.txt",
+            "size": 51356438,
+            "description": "8 3 6 Honeytokens and Countering OSINT",
+            "clean_name": "Honeytokens.and.Countering.OSINT.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.7.Search.Engines.webm": {
+            "name": "8.3.7.Search.Engines.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.7.Search.Engines.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.7.Search.Engines.txt",
+            "size": 105768468,
+            "description": "8 3 7 Search Engines",
+            "clean_name": "Search.Engines.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.8.Email.Search.webm": {
+            "name": "8.3.8.Email.Search.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.8.Email.Search.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.8.Email.Search.txt",
+            "size": 26398908,
+            "description": "8 3 8 Email Search",
+            "clean_name": "Email.Search.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.9.Repositories.and.Search.webm": {
+            "name": "8.3.9.Repositories.and.Search.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.9.Repositories.and.Search.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.3.9.Repositories.and.Search.txt",
+            "size": 29449469,
+            "description": "8 3 9 Repositories and Search",
+            "clean_name": "Repositories.and.Search.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.3.Incident.Detection.Beyond.Network.Perimeter.mp4": {
+            "name": "8.3.Incident.Detection.Beyond.Network.Perimeter.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.3.Incident.Detection.Beyond.Network.Perimeter.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.3.Incident.Detection.Beyond.Network.Perimeter.txt",
+            "size": 405307102,
+            "description": "8 3 Incident Detection Beyond Network Perimeter",
+            "clean_name": "8.3.Incident.Detection.Beyond.Network.Perimeter.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 8"
+        },
+        "8.4.1.What.Awaits.You.webm": {
+            "name": "8.4.1.What.Awaits.You.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.1.What.Awaits.You.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.1.What.Awaits.You.txt",
+            "size": 9709837,
+            "description": "8 4 1 What Awaits You",
+            "clean_name": "What.Awaits.You.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.4.2.DNS.Record.Investigation.webm": {
+            "name": "8.4.2.DNS.Record.Investigation.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.2.DNS.Record.Investigation.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.2.DNS.Record.Investigation.txt",
+            "size": 168556026,
+            "description": "8 4 2 DNS Record Investigation",
+            "clean_name": "DNS.Record.Investigation.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.4.3.Search.Engines.2.webm": {
+            "name": "8.4.3.Search.Engines.2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.3.Search.Engines.2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.3.Search.Engines.2.txt",
+            "size": 328762943,
+            "description": "8 4 3 Search Engines 2",
+            "clean_name": "Search.Engines.2.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.4.4.OSINT.Tools.webm": {
+            "name": "8.4.4.OSINT.Tools.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.4.OSINT.Tools.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.4.OSINT.Tools.txt",
+            "size": 249478763,
+            "description": "8 4 4 OSINT Tools",
+            "clean_name": "OSINT.Tools.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.4.5.Maltego.Setup.webm": {
+            "name": "8.4.5.Maltego.Setup.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.5.Maltego.Setup.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.5.Maltego.Setup.txt",
+            "size": 141355303,
+            "description": "8 4 5 Maltego Setup",
+            "clean_name": "Maltego.Setup.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.4.6.Module.Summary.webm": {
+            "name": "8.4.6.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.6.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.4.6.Module.Summary.txt",
+            "size": 8226069,
+            "description": "8 4 6 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.4.Auxiliary.Utilities.for.Network.Work.mp4": {
+            "name": "8.4.Auxiliary.Utilities.for.Network.Work.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.4.Auxiliary.Utilities.for.Network.Work.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/8.4.Auxiliary.Utilities.for.Network.Work.txt",
+            "size": 152243053,
+            "description": "8 4 Auxiliary Utilities for Network Work",
+            "clean_name": "8.4.Auxiliary.Utilities.for.Network.Work.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 8"
+        },
+        "8.5.1.Intro.webm": {
+            "name": "8.5.1.Intro.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.5.1.Intro.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.5.1.Intro.txt",
+            "size": 4239328,
+            "description": "8 5 1 Intro",
+            "clean_name": "Intro.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.5.2.Introduction.to.Social.Engineering.webm": {
+            "name": "8.5.2.Introduction.to.Social.Engineering.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.5.2.Introduction.to.Social.Engineering.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.5.2.Introduction.to.Social.Engineering.txt",
+            "size": 6291586,
+            "description": "8 5 2 Introduction to Social Engineering",
+            "clean_name": "Introduction.to.Social.Engineering.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.6.1.Intro.webm": {
+            "name": "8.6.1.Intro.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.1.Intro.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.1.Intro.txt",
+            "size": 6269008,
+            "description": "8 6 1 Intro",
+            "clean_name": "Intro.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.6.2.Introduction.to.Networks.webm": {
+            "name": "8.6.2.Introduction.to.Networks.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.2.Introduction.to.Networks.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.2.Introduction.to.Networks.txt",
+            "size": 1812136,
+            "description": "8 6 2 Introduction to Networks",
+            "clean_name": "Introduction.to.Networks.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.6.3.Basic.Protocols.webm": {
+            "name": "8.6.3.Basic.Protocols.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.3.Basic.Protocols.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.3.Basic.Protocols.txt",
+            "size": 1279592,
+            "description": "8 6 3 Basic Protocols",
+            "clean_name": "Basic.Protocols.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.6.4.Traffic.Interception.webm": {
+            "name": "8.6.4.Traffic.Interception.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.4.Traffic.Interception.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.4.Traffic.Interception.txt",
+            "size": 163050752,
+            "description": "8 6 4 Traffic Interception",
+            "clean_name": "Traffic.Interception.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.6.5.Network.Attacks.webm": {
+            "name": "8.6.5.Network.Attacks.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.5.Network.Attacks.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.5.Network.Attacks.txt",
+            "size": 701851,
+            "description": "8 6 5 Network Attacks",
+            "clean_name": "Network.Attacks.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.6.6.ARP.Spoofing.webm": {
+            "name": "8.6.6.ARP.Spoofing.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.6.ARP.Spoofing.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.6.ARP.Spoofing.txt",
+            "size": 68808132,
+            "description": "8 6 6 ARP Spoofing",
+            "clean_name": "ARP.Spoofing.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.6.7.Module.Summary.webm": {
+            "name": "8.6.7.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.7.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.6.7.Module.Summary.txt",
+            "size": 1512815,
+            "description": "8 6 7 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.7.1.Introduction.webm": {
+            "name": "8.7.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.1.Introduction.txt",
+            "size": 4001684,
+            "description": "8 7 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.7.2.Network.Scanning.Basics.webm": {
+            "name": "8.7.2.Network.Scanning.Basics.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.2.Network.Scanning.Basics.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.2.Network.Scanning.Basics.txt",
+            "size": 81249861,
+            "description": "8 7 2 Network Scanning Basics",
+            "clean_name": "Network.Scanning.Basics.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.7.3.Nmap.Scripts.webm": {
+            "name": "8.7.3.Nmap.Scripts.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.3.Nmap.Scripts.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.3.Nmap.Scripts.txt",
+            "size": 58385327,
+            "description": "8 7 3 Nmap Scripts",
+            "clean_name": "Nmap.Scripts.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.7.4.Module.Summary.webm": {
+            "name": "8.7.4.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.4.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.7.4.Module.Summary.txt",
+            "size": 5623120,
+            "description": "8 7 4 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.8.1.Introduction.webm": {
+            "name": "8.8.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.1.Introduction.txt",
+            "size": 50912324,
+            "description": "8 8 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.8.2.Modern.Web.Applications.webm": {
+            "name": "8.8.2.Modern.Web.Applications.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.2.Modern.Web.Applications.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.2.Modern.Web.Applications.txt",
+            "size": 12515485,
+            "description": "8 8 2 Modern Web Applications",
+            "clean_name": "Modern.Web.Applications.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.8.3.Web.Application.Attack.Types.webm": {
+            "name": "8.8.3.Web.Application.Attack.Types.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.3.Web.Application.Attack.Types.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.3.Web.Application.Attack.Types.txt",
+            "size": 23850679,
+            "description": "8 8 3 Web Application Attack Types",
+            "clean_name": "Web.Application.Attack.Types.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.8.4.Web.Vulnerability.Exploitation.Tools.webm": {
+            "name": "8.8.4.Web.Vulnerability.Exploitation.Tools.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.4.Web.Vulnerability.Exploitation.Tools.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.4.Web.Vulnerability.Exploitation.Tools.txt",
+            "size": 131235392,
+            "description": "8 8 4 Web Vulnerability Exploitation Tools",
+            "clean_name": "Web.Vulnerability.Exploitation.Tools.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.8.5.Module.Summary.webm": {
+            "name": "8.8.5.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.5.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.8.5.Module.Summary.txt",
+            "size": 44987522,
+            "description": "8 8 5 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.9.1.Module.Introduction.webm": {
+            "name": "8.9.1.Module.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.1.Module.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.1.Module.Introduction.txt",
+            "size": 20736082,
+            "description": "8 9 1 Module Introduction",
+            "clean_name": "Module.Introduction.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.9.2.Brute.Force.Attacks.webm": {
+            "name": "8.9.2.Brute.Force.Attacks.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.2.Brute.Force.Attacks.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.2.Brute.Force.Attacks.txt",
+            "size": 12249627,
+            "description": "8 9 2 Brute Force Attacks",
+            "clean_name": "Brute.Force.Attacks.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.9.3.Brute.Force.on.Network.Services.Part1.webm": {
+            "name": "8.9.3.Brute.Force.on.Network.Services.Part1.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.3.Brute.Force.on.Network.Services.Part1.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.3.Brute.Force.on.Network.Services.Part1.txt",
+            "size": 102152065,
+            "description": "8 9 3 Brute Force on Network Services Part1",
+            "clean_name": "Brute.Force.on.Network.Services.Part1.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.9.3.Brute.Force.on.Network.Services.Part2.webm": {
+            "name": "8.9.3.Brute.Force.on.Network.Services.Part2.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.3.Brute.Force.on.Network.Services.Part2.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.3.Brute.Force.on.Network.Services.Part2.txt",
+            "size": 33217757,
+            "description": "8 9 3 Brute Force on Network Services Part2",
+            "clean_name": "Brute.Force.on.Network.Services.Part2.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.9.4.Brute.Force.on.Hash.Functions.webm": {
+            "name": "8.9.4.Brute.Force.on.Hash.Functions.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.4.Brute.Force.on.Hash.Functions.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.4.Brute.Force.on.Hash.Functions.txt",
+            "size": 108530860,
+            "description": "8 9 4 Brute Force on Hash Functions",
+            "clean_name": "Brute.Force.on.Hash.Functions.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.9.5.Local.Credential.Sources.webm": {
+            "name": "8.9.5.Local.Credential.Sources.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.5.Local.Credential.Sources.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.5.Local.Credential.Sources.txt",
+            "size": 48964071,
+            "description": "8 9 5 Local Credential Sources",
+            "clean_name": "Local.Credential.Sources.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.9.6.Module.Summary.webm": {
+            "name": "8.9.6.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.6.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/8.0.0/8.9.6.Module.Summary.txt",
+            "size": 47539111,
+            "description": "8 9 6 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "8.0.0",
+            "section": "Section 8"
+        },
+        "8.Install.process.webm": {
+            "name": "8.Install.process.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/8.Install.process.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/8.Install.process.txt",
+            "size": 129573097,
+            "description": "8 Install process",
+            "clean_name": "8.Install.process.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "9.1.1.Introduction.webm": {
+            "name": "9.1.1.Introduction.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.1.Introduction.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.1.Introduction.txt",
+            "size": 114350851,
+            "description": "9 1 1 Introduction",
+            "clean_name": "Introduction.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.1.2.Solution.Preparation.Task.Formulation.webm": {
+            "name": "9.1.2.Solution.Preparation.Task.Formulation.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.2.Solution.Preparation.Task.Formulation.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.2.Solution.Preparation.Task.Formulation.txt",
+            "size": 45205406,
+            "description": "9 1 2 Solution Preparation Task Formulation",
+            "clean_name": "Solution.Preparation.Task.Formulation.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.1.3.Security.Solutions.Classification.webm": {
+            "name": "9.1.3.Security.Solutions.Classification.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.3.Security.Solutions.Classification.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.3.Security.Solutions.Classification.txt",
+            "size": 28002015,
+            "description": "9 1 3 Security Solutions Classification",
+            "clean_name": "Security.Solutions.Classification.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.1.4.Implementation.Process.Product.Lifecycle.webm": {
+            "name": "9.1.4.Implementation.Process.Product.Lifecycle.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.4.Implementation.Process.Product.Lifecycle.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.4.Implementation.Process.Product.Lifecycle.txt",
+            "size": 21592076,
+            "description": "9 1 4 Implementation Process Product Lifecycle",
+            "clean_name": "Implementation.Process.Product.Lifecycle.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.1.5.Implementation.Participants.Responsibilities.Resource.Owners.webm": {
+            "name": "9.1.5.Implementation.Participants.Responsibilities.Resource.Owners.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.5.Implementation.Participants.Responsibilities.Resource.Owners.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.5.Implementation.Participants.Responsibilities.Resource.Owners.txt",
+            "size": 22994521,
+            "description": "9 1 5 Implementation Participants Responsibilities Resource Owners",
+            "clean_name": "Implementation.Participants.Responsibilities.Resource.Owners.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.1.6.Module.Summary.webm": {
+            "name": "9.1.6.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.6.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.1.6.Module.Summary.txt",
+            "size": 29005842,
+            "description": "9 1 6 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.1.Attacks.on.Linux.Systems.mp4": {
+            "name": "9.1.Attacks.on.Linux.Systems.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/9.1.Attacks.on.Linux.Systems.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/9.1.Attacks.on.Linux.Systems.txt",
+            "size": 120015734,
+            "description": "9 1 Attacks on Linux Systems",
+            "clean_name": "9.1.Attacks.on.Linux.Systems.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 9"
+        },
+        "9.2.3.Test.Environment.Deployment.Antivirus.webm": {
+            "name": "9.2.3.Test.Environment.Deployment.Antivirus.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.2.3.Test.Environment.Deployment.Antivirus.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.2.3.Test.Environment.Deployment.Antivirus.txt",
+            "size": 164319613,
+            "description": "9 2 3 Test Environment Deployment Antivirus",
+            "clean_name": "Test.Environment.Deployment.Antivirus.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.2.4.Module.Summary.webm": {
+            "name": "9.2.4.Module.Summary.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.2.4.Module.Summary.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.2.4.Module.Summary.txt",
+            "size": 7413722,
+            "description": "9 2 4 Module Summary",
+            "clean_name": "Module.Summary.webm",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.2.Searching.for.Compromise.Traces.in.Linux.OS.mp4": {
+            "name": "9.2.Searching.for.Compromise.Traces.in.Linux.OS.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/9.2.Searching.for.Compromise.Traces.in.Linux.OS.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/9.2.Searching.for.Compromise.Traces.in.Linux.OS.txt",
+            "size": 275629282,
+            "description": "9 2 Searching for Compromise Traces in Linux OS",
+            "clean_name": "9.2.Searching.for.Compromise.Traces.in.Linux.OS.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 9"
+        },
+        "9.3.1.Introduction.mp4": {
+            "name": "9.3.1.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.1.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.1.Introduction.txt",
+            "size": 19954211,
+            "description": "9 3 1 Introduction",
+            "clean_name": "Introduction.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.3.2.System.Testing.Technical.Project.mp4": {
+            "name": "9.3.2.System.Testing.Technical.Project.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.2.System.Testing.Technical.Project.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.2.System.Testing.Technical.Project.txt",
+            "size": 70648863,
+            "description": "9 3 2 System Testing Technical Project",
+            "clean_name": "System.Testing.Technical.Project.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.3.3.Participant.Roles.mp4": {
+            "name": "9.3.3.Participant.Roles.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.3.Participant.Roles.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.3.Participant.Roles.txt",
+            "size": 64726163,
+            "description": "9 3 3 Participant Roles",
+            "clean_name": "Participant.Roles.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.3.4.Documentation.Support.mp4": {
+            "name": "9.3.4.Documentation.Support.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.4.Documentation.Support.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.4.Documentation.Support.txt",
+            "size": 37511112,
+            "description": "9 3 4 Documentation Support",
+            "clean_name": "Documentation.Support.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.3.5.Endpoint.Security.Testing.Program.mp4": {
+            "name": "9.3.5.Endpoint.Security.Testing.Program.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.5.Endpoint.Security.Testing.Program.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.5.Endpoint.Security.Testing.Program.txt",
+            "size": 40386167,
+            "description": "9 3 5 Endpoint Security Testing Program",
+            "clean_name": "Endpoint.Security.Testing.Program.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.3.6.Module.Conclusions.mp4": {
+            "name": "9.3.6.Module.Conclusions.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.6.Module.Conclusions.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.3.6.Module.Conclusions.txt",
+            "size": 25397674,
+            "description": "9 3 6 Module Conclusions",
+            "clean_name": "Module.Conclusions.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.3.Security.Hardening.mp4": {
+            "name": "9.3.Security.Hardening.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/3.0.0/9.3.Security.Hardening.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/3.0.0/9.3.Security.Hardening.txt",
+            "size": 113176997,
+            "description": "9 3 Security Hardening",
+            "clean_name": "9.3.Security.Hardening.mp4",
+            "release_tag": "3.0.0",
+            "section": "Section 9"
+        },
+        "9.4.1.System.Operation.Introduction.mp4": {
+            "name": "9.4.1.System.Operation.Introduction.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.1.System.Operation.Introduction.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.1.System.Operation.Introduction.txt",
+            "size": 44694675,
+            "description": "9 4 1 System Operation Introduction",
+            "clean_name": "System.Operation.Introduction.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.4.2.What.to.Consider.for.System.Adoption.mp4": {
+            "name": "9.4.2.What.to.Consider.for.System.Adoption.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.2.What.to.Consider.for.System.Adoption.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.2.What.to.Consider.for.System.Adoption.txt",
+            "size": 43111902,
+            "description": "9 4 2 What to Consider for System Adoption",
+            "clean_name": "What.to.Consider.for.System.Adoption.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.4.3.Final.Stage.Documentation.mp4": {
+            "name": "9.4.3.Final.Stage.Documentation.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.3.Final.Stage.Documentation.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.3.Final.Stage.Documentation.txt",
+            "size": 33087243,
+            "description": "9 4 3 Final Stage Documentation",
+            "clean_name": "Final.Stage.Documentation.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.4.5.Why.Pay.Special.Attention.to.System.Handover.mp4": {
+            "name": "9.4.5.Why.Pay.Special.Attention.to.System.Handover.mp4",
+            "url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.5.Why.Pay.Special.Attention.to.System.Handover.mp4",
+            "text_url": "https://github.com/st93642/Assets/releases/download/9.0.0/9.4.5.Why.Pay.Special.Attention.to.System.Handover.txt",
+            "size": 25664280,
+            "description": "9 4 5 Why Pay Special Attention to System Handover",
+            "clean_name": "Why.Pay.Special.Attention.to.System.Handover.mp4",
+            "release_tag": "9.0.0",
+            "section": "Section 9"
+        },
+        "9.Linux.structure.webm": {
+            "name": "9.Linux.structure.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/9.Linux.structure.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/9.Linux.structure.txt",
+            "size": 27590865,
+            "description": "9 Linux structure",
+            "clean_name": "9.Linux.structure.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        },
+        "Intro.to.Linux.webm": {
+            "name": "Intro.to.Linux.webm",
+            "url": "https://github.com/st93642/Assets/releases/download/1.0.0/Intro.to.Linux.webm",
+            "text_url": "https://github.com/st93642/Assets/releases/download/1.0.0/Intro.to.Linux.txt",
+            "size": 64723536,
+            "description": "Intro to Linux",
+            "clean_name": "Intro.to.Linux.webm",
+            "release_tag": "1.0.0",
+            "section": "Introduction"
+        }
+    }
+
+
+    @classmethod
+    def get_all_videos(cls) -> Dict[str, Dict[str, Any]]:
+        """Get all videos organized by full name."""
+        return cls.VIDEOS
+
+    @classmethod
+    def get_videos_by_release(cls, release_tag: str) -> Dict[str, Dict[str, Any]]:
+        """Get videos by release."""
+        return {name: data for name, data in cls.VIDEOS.items() if data.get("release_tag") == release_tag}
+
+    @classmethod
+    def get_releases(cls) -> List[str]:
+        """Get all unique releases."""
+        return sorted(list(set(data.get("release_tag", "") for data in cls.VIDEOS.values())))
+
+    @classmethod
+    def get_release_sections(cls, release_tag: str) -> Dict[str, List[str]]:
+        """Get sections within a release."""
+        sections = {}
+        for name, data in cls.VIDEOS.items():
+            if data.get("release_tag") == release_tag:
+                section = data.get("section", "Other")
+                if section not in sections:
+                    sections[section] = []
+                sections[section].append(name)
+        return sections
+
+    @classmethod
+    def get_video_info(cls, video_name: str) -> Optional[Dict[str, Any]]:
+        """Get information for a specific video by full name."""
+        return cls.VIDEOS.get(video_name)
+
+    @classmethod
+    def get_display_name(cls, video_name: str) -> str:
+        """Get the clean display name for a video."""
+        info = cls.get_video_info(video_name)
+        return info.get("clean_name", video_name) if info else video_name
+
+    @classmethod
+    def get_release_title(cls, release_tag: str) -> str:
+        """Get the display title for a release."""
+        return cls.RELEASE_TITLES.get(release_tag, f"Release {release_tag}")
+
+    @classmethod
+    def get_section_name(cls, release_tag: str, section_key: str) -> str:
+        """Get the display name for a section within a release."""
+        release_sections = cls.SECTION_NAMES.get(release_tag, {})
+        return release_sections.get(section_key, section_key)
+
+    @classmethod
+    def get_display_name_without_extension(cls, video_name: str) -> str:
+        """Get the clean display name for a video without file extension."""
+        display_name = cls.get_display_name(video_name)
+        # Remove .mp4, .webm, .txt extensions
+        for ext in ['.mp4', '.webm', '.txt']:
+            if display_name.endswith(ext):
+                display_name = display_name[:-len(ext)]
+                break
+        return display_name

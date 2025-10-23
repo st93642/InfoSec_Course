@@ -17,12 +17,14 @@ class ReleaseVideo:
         body (str): The release body/description in Markdown format
         asset_name (str): The filename of the video asset (e.g., "video.webm")
         asset_url (str): The download URL for the video asset
+        text_url (str): Optional download URL for the paired .txt description file
         description (str): Optional text description from a paired .txt file
     """
     tag: str
     body: str
     asset_name: str
     asset_url: str
+    text_url: Optional[str] = None
     description: Optional[str] = None
 
     @property

@@ -33,10 +33,10 @@ class DownloadService:
         self.config = config
         self.session = requests.Session()
 
-        # Set up headers for downloads
-        self.session.headers.update({
-            'User-Agent': 'VideoTerminal/1.0'
-        })
+        # Set up headers for downloads - use default User-Agent to avoid issues
+        # self.session.headers.update({
+        #     'User-Agent': 'VideoTerminal/1.0'
+        # })
 
     def download_asset(
         self,

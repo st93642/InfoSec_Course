@@ -8,8 +8,8 @@ from PyQt5 import QtCore, QtWidgets
 
 from models.config import ApplicationConfig
 from models.release_video import ReleaseVideo
+from models.video_library import VideoLibrary
 from services.download_service import DownloadService
-from services.github_service import GitHubService
 from services.terminal_service import TerminalService
 from services.video_service import VideoService
 from .playback_controls_widget import PlaybackControlsWidget
@@ -39,21 +39,20 @@ class MainWindow(QtWidgets.QMainWindow):
         terminal_service (TerminalService): Terminal service
     """
 
-    def __init__(self, config: ApplicationConfig, selected_tag: Optional[str] = None):
+    def __init__(self, config: ApplicationConfig):
         """
         Initialize the main window.
 
         Args:
             config (ApplicationConfig): Application configuration
-            selected_tag (Optional[str]): Pre-selected release tag
         """
         super().__init__()
 
         self.config = config
-        self.selected_tag = selected_tag
+        self.selected_tag = None  # Will be set when video is selected from tree
 
         # Initialize services
-        self.github_service = GitHubService(config)
+        self.github_service = None  # No longer needed with static data
         self.download_service = DownloadService(config)
         self.video_service = VideoService()
         self.terminal_service = TerminalService()
@@ -150,9 +149,8 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         logger.info(f"Video selected: {video.display_name}")
 
-        # Update text content
-        content = video.get_content_text()
-        self.text_widget.set_content(content)
+        # Update selected tag for this video
+        self.selected_tag = video.tag
 
         # Start download and playback
         self._download_and_play_video(video)
@@ -177,23 +175,45 @@ class MainWindow(QtWidgets.QMainWindow):
             self.controls_widget.show_download_progress(False)
             self._play_video(video)
 
+        def text_download_complete() -> None:
+            # Load and display text content
+            self._load_and_display_text_content(video)
+
         try:
             self.controls_widget.show_download_progress(True)
             self.status_label.setText(f"Downloading {video.asset_name}...")
 
-            # Check if already cached
+            # Check if video is already cached
             cache_path = self.download_service.get_cached_asset_path(video.asset_name)
             if not self.download_service.is_asset_cached(video.asset_name):
-                # Download in background thread
+                # Download video in background thread
                 threading.Thread(
                     target=self._download_video,
                     args=(video.asset_url, cache_path, download_progress, download_complete),
                     daemon=True
                 ).start()
             else:
-                # Already cached, play directly
-                self.controls_widget.show_download_progress(False)
-                self._play_video(video)
+                # Video already cached, play directly
+                download_complete()
+
+            # Download text file if available
+            if video.text_url:
+                # Extract text filename from URL (e.g., "1.Area.of.use.Linux.txt")
+                text_filename = video.text_url.split('/')[-1]
+                text_cache_path = self.download_service.get_cached_asset_path(text_filename)
+                if not self.download_service.is_asset_cached(text_filename):
+                    # Download text in background thread
+                    threading.Thread(
+                        target=self._download_text_file,
+                        args=(video.text_url, text_cache_path, text_download_complete),
+                        daemon=True
+                    ).start()
+                else:
+                    # Text already cached, load directly
+                    text_download_complete()
+            else:
+                # No text file available, use static description
+                self._load_and_display_text_content(video)
 
         except Exception as e:
             logger.error(f"Error initiating download: {e}")
@@ -203,12 +223,12 @@ class MainWindow(QtWidgets.QMainWindow):
     def _download_video(
         self,
         url: str,
-        destination_path,
+        destination_path: str,
         progress_callback,
         completion_callback
     ) -> None:
         """
-        Download video in background thread.
+        Download video file in background thread.
 
         Args:
             url (str): Download URL
@@ -225,12 +245,113 @@ class MainWindow(QtWidgets.QMainWindow):
                 QtCore.Q_ARG(object, completion_callback)
             )
         except Exception as e:
-            logger.error(f"Download failed: {e}")
+            logger.error(f"Video download failed: {e}")
             QtCore.QMetaObject.invokeMethod(
                 self, "_on_download_error",
                 QtCore.Qt.QueuedConnection,
                 QtCore.Q_ARG(str, str(e))
             )
+
+    def _download_text_file(
+        self,
+        url: str,
+        destination_path: str,
+        completion_callback
+    ) -> None:
+        """
+        Download text file in background thread.
+
+        Args:
+            url (str): Download URL
+            destination_path: Path to save file
+            completion_callback: Function to call when download completes
+        """
+        try:
+            self.download_service.download_asset(url, destination_path, None)
+            # Update UI in main thread
+            QtCore.QMetaObject.invokeMethod(
+                self, "_on_text_download_complete",
+                QtCore.Qt.QueuedConnection,
+                QtCore.Q_ARG(object, completion_callback)
+            )
+        except Exception as e:
+            logger.error(f"Text download failed: {e}")
+            QtCore.QMetaObject.invokeMethod(
+                self, "_on_text_download_error",
+                QtCore.Qt.QueuedConnection,
+                QtCore.Q_ARG(str, str(e))
+            )
+
+    @QtCore.pyqtSlot(object)
+    def _on_text_download_complete(self, completion_callback) -> None:
+        """Handle text download completion in main thread."""
+        completion_callback()
+
+    @QtCore.pyqtSlot(str)
+    def _on_text_download_error(self, error_message: str) -> None:
+        """Handle text download error in main thread."""
+        logger.error(f"Text download error: {error_message}")
+
+    def _load_and_display_text_content(self, video: ReleaseVideo) -> None:
+        """
+        Load and display text content for the video.
+
+        Args:
+            video (ReleaseVideo): Video to load text content for
+        """
+        try:
+            content = None
+
+            # Check if we have a text URL to load from
+            if video.text_url:
+                # Extract text filename from URL (e.g., "1.1.Principles.of.Building.Networks.txt")
+                text_filename = video.text_url.split('/')[-1]
+                text_cache_path = self.download_service.get_cached_asset_path(text_filename)
+
+                # Download text file if not cached
+                if not self.download_service.is_asset_cached(text_filename):
+                    try:
+                        logger.info(f"Downloading text content from {video.text_url}")
+                        self.download_service.download_asset(video.text_url, text_cache_path)
+                    except Exception as e:
+                        logger.warning(f"Failed to download text content: {e}")
+                        content = "Text content not available (download failed)"
+                else:
+                    logger.info(f"Using cached text content: {text_cache_path}")
+
+                # Try to read the text file with multiple encodings
+                if content is None:
+                    try:
+                        # Try UTF-8 first
+                        with open(text_cache_path, 'r', encoding='utf-8') as f:
+                            content = f.read().strip()
+                    except UnicodeDecodeError:
+                        try:
+                            # Try Windows-1252 encoding
+                            with open(text_cache_path, 'r', encoding='windows-1252') as f:
+                                content = f.read().strip()
+                        except UnicodeDecodeError:
+                            try:
+                                # Try latin-1 as fallback
+                                with open(text_cache_path, 'r', encoding='latin-1') as f:
+                                    content = f.read().strip()
+                            except UnicodeDecodeError:
+                                # If all encodings fail, show error message
+                                content = "Error: Unable to decode text file (unsupported encoding)"
+
+            # Fall back to static description if no text URL or if text loading failed
+            if not content:
+                if video.text_url:
+                    content = "No text content available for this video"
+                else:
+                    content = video.description or "No description available"
+
+            logger.info(f"Setting text content: '{content[:100]}...' (length: {len(content)})")
+            self.text_widget.set_content(content)
+
+        except Exception as e:
+            logger.error(f"Error loading text content: {e}")
+            self.text_widget.set_content("Error loading text content")
 
     @QtCore.pyqtSlot(object)
     def _on_download_complete(self, completion_callback) -> None:
@@ -308,69 +429,57 @@ class MainWindow(QtWidgets.QMainWindow):
             position = self.video_service.get_position()
             self.controls_widget.set_position(position)
 
-    def load_videos(self) -> None:
-        """Load videos from GitHub releases."""
-        def load_videos_thread():
-            try:
-                QtCore.QMetaObject.invokeMethod(
-                    self, "_set_loading_state",
-                    QtCore.Qt.QueuedConnection,
-                    QtCore.Q_ARG(bool, True)
-                )
-
-                videos = self.github_service.fetch_releases(self.selected_tag)
-
-                QtCore.QMetaObject.invokeMethod(
-                    self, "_set_loading_state",
-                    QtCore.Qt.QueuedConnection,
-                    QtCore.Q_ARG(bool, False)
-                )
-
-                for video in videos:
-                    QtCore.QMetaObject.invokeMethod(
-                        self, "_add_video_to_playlist",
-                        QtCore.Qt.QueuedConnection,
-                        QtCore.Q_ARG(object, video)
-                    )
-
-                QtCore.QMetaObject.invokeMethod(
-                    self, "_set_status_text",
-                    QtCore.Qt.QueuedConnection,
-                    QtCore.Q_ARG(str, f"Loaded {len(videos)} videos")
-                )
-
-            except Exception as e:
-                logger.error(f"Error loading videos: {e}")
-                QtCore.QMetaObject.invokeMethod(
-                    self, "_set_status_text",
-                    QtCore.Qt.QueuedConnection,
-                    QtCore.Q_ARG(str, f"Error loading videos: {e}")
-                )
-                QtCore.QMetaObject.invokeMethod(
-                    self, "_set_loading_state",
-                    QtCore.Qt.QueuedConnection,
-                    QtCore.Q_ARG(bool, False)
-                )
-
-        # Start loading in background thread
-        threading.Thread(target=load_videos_thread, daemon=True).start()
-
-    @QtCore.pyqtSlot(bool)
-    def _set_loading_state(self, loading: bool) -> None:
-        """Set the loading state of the progress bar."""
-        self.progress_bar.setVisible(loading)
-        if loading:
-            self.progress_bar.setRange(0, 0)  # Indeterminate progress
-
-    @QtCore.pyqtSlot(object)
-    def _add_video_to_playlist(self, video: ReleaseVideo) -> None:
-        """Add a video to the playlist in the main thread."""
-        self.playlist_widget.add_video(video)
-
-    @QtCore.pyqtSlot(str)
-    def _set_status_text(self, text: str) -> None:
-        """Set the status text in the main thread."""
-        self.status_label.setText(text)
+    def load_all_videos_tree(self) -> None:
+        """Load all videos organized in a tree structure by release and section."""
+        try:
+            # Get all releases
+            releases = VideoLibrary.get_releases()
+            
+            # Clear existing playlist
+            self.playlist_widget.clear_playlist()
+            
+            # Add videos organized by release and section
+            total_videos = 0
+            # Sort releases numerically (oldest first)
+            def version_key(version):
+                return tuple(int(x) for x in version.split('.'))
+            
+            for release_tag in sorted(releases, key=version_key):  # Oldest first
+                # Add release as top-level item with title
+                release_title = VideoLibrary.get_release_title(release_tag)
+                release_item = self.playlist_widget.add_category(release_title)
+                
+                # Get sections for this release
+                sections = VideoLibrary.get_release_sections(release_tag)
+                
+                for section_key in sorted(sections.keys()):
+                    # Add section as child of release with proper name
+                    section_name = VideoLibrary.get_section_name(release_tag, section_key)
+                    section_item = self.playlist_widget.add_subcategory(release_item, section_name)
+                    
+                    # Add videos under this section
+                    for full_name in sorted(sections[section_key]):
+                        video_data = VideoLibrary.get_video_info(full_name)
+                        if video_data:
+                            # Use clean name without extension for display
+                            display_name = VideoLibrary.get_display_name_without_extension(full_name)
+                            video = ReleaseVideo(
+                                tag=video_data["release_tag"],
+                                body="",  # No release body in static data
+                                asset_name=video_data["name"],
+                                asset_url=video_data["url"],
+                                text_url=video_data.get("text_url"),  # Include text URL if available
+                                description=video_data["description"]
+                            )
+                            self.playlist_widget.add_video_to_category(section_item, video, display_name)
+                            total_videos += 1
+            
+            self.status_label.setText(f"Loaded {total_videos} videos across {len(releases)} releases")
+            logger.info(f"Loaded {total_videos} videos in tree structure from {len(releases)} releases")
+            
+        except Exception as e:
+            logger.error(f"Error loading videos tree: {e}")
+            self.status_label.setText(f"Error loading videos: {e}")
 
     def closeEvent(self, event) -> None:
         """

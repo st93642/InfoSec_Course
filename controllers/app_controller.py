@@ -7,6 +7,7 @@ from typing import Dict, Optional
 from PyQt5 import QtWidgets
 
 from models.config import ApplicationConfig
+from models.video_library import VideoLibrary
 from ui.main_window import MainWindow
 
 logger = logging.getLogger(__name__)
@@ -64,18 +65,12 @@ class ApplicationController:
             # Create Qt application
             self.app = QtWidgets.QApplication(sys.argv)
 
-            # Show section selection dialog
-            selected_tag = self._show_section_selection_dialog()
-            if selected_tag is None:
-                logger.info("No section selected, exiting")
-                return 0
-
-            # Create and show main window
-            self.main_window = MainWindow(self.config, selected_tag)
+            # Create main window with all videos (no section selection needed)
+            self.main_window = MainWindow(self.config)
             self.main_window.show()
 
-            # Load videos
-            self.main_window.load_videos()
+            # Load all videos in tree structure
+            self.main_window.load_all_videos_tree()
 
             # Start event loop
             logger.info("Starting Qt event loop")

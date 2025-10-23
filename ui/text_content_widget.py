@@ -195,12 +195,15 @@ class TextContentWidget(QtWidgets.QTextEdit):
                     is_html = True
 
             if is_html:
+                # Decode HTML entities before setting HTML content
+                content = html.unescape(content)
                 self.setHtml(content)
             else:
                 # Plain text
                 self.setPlainText(content)
 
             logger.debug(f"Set content ({len(content)} characters, HTML: {is_html})")
+            logger.info(f"Text widget content set to: '{content[:50]}...' (visible: {self.isVisible()}, has content: {self.has_content()})")
 
         except Exception as e:
             logger.error(f"Error setting content: {e}")
