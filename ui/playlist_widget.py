@@ -33,18 +33,38 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
         """
         super().__init__(parent)
 
-        # Configure tree widget
-        self.setHeaderHidden(True)
-        self.setColumnCount(1)
-        self.setRootIsDecorated(True)  # Show expansion indicators
-        self.setItemsExpandable(True)  # Allow items to be expandable
+        # Create main layout
+        main_layout = QtWidgets.QVBoxLayout(self)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+
+        # Add search/filter box
+        self.search_box = QtWidgets.QLineEdit()
+        self.search_box.setPlaceholderText("Search videos...")
+        self.search_box.textChanged.connect(self._filter_videos)
+        self.search_box.setStyleSheet("""
+            QLineEdit {
+                background-color: #333;
+                color: white;
+                border: 1px solid #666;
+                padding: 5px;
+                border-radius: 3px;
+            }
+        """)
+        main_layout.addWidget(self.search_box)
+
+        # Create tree widget
+        self.tree_widget = QtWidgets.QTreeWidget()
+        self.tree_widget.setHeaderHidden(True)
+        self.tree_widget.setColumnCount(1)
+        self.tree_widget.setRootIsDecorated(True)
+        self.tree_widget.setItemsExpandable(True)
 
         # Set up icons for different item types
         self.folder_icon = self.style().standardIcon(QtWidgets.QStyle.SP_DirIcon)
         self.file_icon = self.style().standardIcon(QtWidgets.QStyle.SP_FileIcon)
 
-        # Configure appearance
-        self.setStyleSheet("""
+        # Configure tree widget appearance
+        self.tree_widget.setStyleSheet("""
             QTreeWidget {
                 background-color: black;
                 color: white;
@@ -71,12 +91,17 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
         """)
 
         # Set size policy
-        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        self.setMinimumWidth(200)
+        self.tree_widget.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.tree_widget.setMinimumWidth(200)
 
-        # Connect signals
-        self.itemActivated.connect(self._on_item_activated)
-        self.itemClicked.connect(self._on_item_clicked)
+        main_layout.addWidget(self.tree_widget)
+
+        # Connect tree widget signals
+        self.tree_widget.itemActivated.connect(self._on_item_activated)
+        self.tree_widget.itemClicked.connect(self._on_item_clicked)
+
+        # Store all items for filtering
+        self.all_items = []
 
     def set_videos(self, videos: List[ReleaseVideo]) -> None:
         """
@@ -85,12 +110,14 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
         Args:
             videos (List[ReleaseVideo]): List of video items to display
         """
-        self.clear()
+        self.tree_widget.clear()
+        self.all_items = []
 
         for video in videos:
             item = QtWidgets.QTreeWidgetItem([video.display_name])
             item.setData(0, QtCore.Qt.UserRole, video)
-            self.addTopLevelItem(item)
+            self.tree_widget.addTopLevelItem(item)
+            self.all_items.append(item)
 
         logger.info(f"Loaded {len(videos)} videos into playlist")
 
@@ -101,62 +128,66 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
         Args:
             video (ReleaseVideo): Video to add
         """
-        # Create display name with release information
-        display_name = f"[{video.tag}] {video.display_name}"
+        # Create display name without release tag
+        display_name = video.display_name
         item = QtWidgets.QTreeWidgetItem([display_name])
         item.setData(0, QtCore.Qt.UserRole, video)
-        self.addTopLevelItem(item)
+        # Set file icon for video items
+        item.setIcon(0, self.style().standardIcon(QtWidgets.QStyle.SP_FileIcon))
+        self.tree_widget.addTopLevelItem(item)
+        self.all_items.append(item)
 
     def add_category(self, category_name: str) -> QtWidgets.QTreeWidgetItem:
         """
-        Add a category as a top-level item.
+        Add a category (top-level item) to the playlist.
 
         Args:
             category_name (str): Name of the category
 
         Returns:
-            QTreeWidgetItem: The category item for adding children
+            QtWidgets.QTreeWidgetItem: The created category item
         """
         category_item = QtWidgets.QTreeWidgetItem([category_name])
-        category_item.setData(0, QtCore.Qt.UserRole, None)  # No video data for categories
-        category_item.setFlags(category_item.flags() | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
-        category_item.setIcon(0, self.folder_icon)  # Folder icon for categories
-        self.addTopLevelItem(category_item)
+        # Set folder icon for category items
+        category_item.setIcon(0, self.style().standardIcon(QtWidgets.QStyle.SP_DirIcon))
+        self.tree_widget.addTopLevelItem(category_item)
+        self.all_items.append(category_item)
         return category_item
 
     def add_subcategory(self, parent_item: QtWidgets.QTreeWidgetItem, subcategory_name: str) -> QtWidgets.QTreeWidgetItem:
         """
-        Add a subcategory as a child of a parent item.
+        Add a subcategory under a parent item.
 
         Args:
-            parent_item (QTreeWidgetItem): The parent item
+            parent_item (QtWidgets.QTreeWidgetItem): Parent item to add subcategory under
             subcategory_name (str): Name of the subcategory
 
         Returns:
-            QTreeWidgetItem: The subcategory item for adding children
+            QtWidgets.QTreeWidgetItem: The created subcategory item
         """
         subcategory_item = QtWidgets.QTreeWidgetItem([subcategory_name])
-        subcategory_item.setData(0, QtCore.Qt.UserRole, None)  # No video data for categories
-        subcategory_item.setFlags(subcategory_item.flags() | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
-        subcategory_item.setIcon(0, self.folder_icon)  # Folder icon for subcategories
+        # Set folder icon for subcategory items
+        subcategory_item.setIcon(0, self.style().standardIcon(QtWidgets.QStyle.SP_DirIcon))
         parent_item.addChild(subcategory_item)
+        self.all_items.append(subcategory_item)
         return subcategory_item
 
-    def add_video_to_category(self, category_item: QtWidgets.QTreeWidgetItem, video: ReleaseVideo, display_name: Optional[str] = None) -> None:
+    def add_video_to_category(self, parent_item: QtWidgets.QTreeWidgetItem, video: ReleaseVideo) -> None:
         """
-        Add a video as a child of a category item.
+        Add a video under a category or subcategory.
 
         Args:
-            category_item (QTreeWidgetItem): The parent category item
+            parent_item (QtWidgets.QTreeWidgetItem): Parent item to add video under
             video (ReleaseVideo): Video to add
-            display_name (Optional[str]): Custom display name, defaults to video.display_name
         """
-        # Use custom display name if provided, otherwise use video's display name
-        final_display_name = display_name if display_name is not None else video.display_name
-        video_item = QtWidgets.QTreeWidgetItem([final_display_name])
+        # Create display name without release tag
+        display_name = video.display_name
+        video_item = QtWidgets.QTreeWidgetItem([display_name])
         video_item.setData(0, QtCore.Qt.UserRole, video)
-        video_item.setIcon(0, self.file_icon)  # File icon for videos
-        category_item.addChild(video_item)
+        # Set file icon for video items
+        video_item.setIcon(0, self.style().standardIcon(QtWidgets.QStyle.SP_FileIcon))
+        parent_item.addChild(video_item)
+        self.all_items.append(video_item)
 
     def get_selected_video(self) -> Optional[ReleaseVideo]:
         """
@@ -165,7 +196,7 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
         Returns:
             Optional[ReleaseVideo]: The selected video, or None if none selected
         """
-        current_item = self.currentItem()
+        current_item = self.tree_widget.currentItem()
         if current_item and current_item.data(0, QtCore.Qt.UserRole):
             return current_item.data(0, QtCore.Qt.UserRole)
         return None
@@ -190,16 +221,16 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
             return None
 
         # Search all top-level items
-        for i in range(self.topLevelItemCount()):
-            item = self.topLevelItem(i)
+        for i in range(self.tree_widget.topLevelItemCount()):
+            item = self.tree_widget.topLevelItem(i)
             result = find_video_item(item)
             if result:
-                self.setCurrentItem(result)
+                self.tree_widget.setCurrentItem(result)
                 break
 
     def clear_playlist(self) -> None:
         """Clear all items from the playlist."""
-        self.clear()
+        self.tree_widget.clear()
 
     def _on_item_clicked(self, item: QtWidgets.QTreeWidgetItem, column: int) -> None:
         """
@@ -213,9 +244,9 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
         if not video:
             # Category item clicked - expand/collapse
             if item.isExpanded():
-                self.collapseItem(item)
+                self.tree_widget.collapseItem(item)
             else:
-                self.expandItem(item)
+                self.tree_widget.expandItem(item)
 
     def _on_item_activated(self, item: QtWidgets.QTreeWidgetItem, column: int) -> None:
         """
@@ -239,9 +270,50 @@ class PlaylistWidget(QtWidgets.QTreeWidget):
             event (QKeyEvent): The key event
         """
         if event.key() == QtCore.Qt.Key_Return or event.key() == QtCore.Qt.Key_Enter:
-            current_item = self.currentItem()
+            current_item = self.tree_widget.currentItem()
             if current_item:
                 self._on_item_activated(current_item, 0)
             event.accept()
         else:
             super().keyPressEvent(event)
+
+    def _filter_videos(self, text: str) -> None:
+        """
+        Filter videos based on search text. Shows items that contain the search text
+        in their display name (case-insensitive).
+
+        Args:
+            text (str): Search text to filter by
+        """
+        search_text = text.lower().strip()
+
+        def filter_item(item: QtWidgets.QTreeWidgetItem) -> bool:
+            """Recursively filter an item and its children. Returns True if item should be visible."""
+            item_text = item.text(0).lower()
+            has_match = search_text in item_text
+
+            # Check children
+            child_visible = False
+            for i in range(item.childCount()):
+                child = item.child(i)
+                if filter_item(child):
+                    child_visible = True
+
+            # Item is visible if it matches or has visible children
+            visible = has_match or child_visible
+            item.setHidden(not visible)
+            return visible
+
+        # Apply filter to all top-level items
+        for i in range(self.tree_widget.topLevelItemCount()):
+            filter_item(self.tree_widget.topLevelItem(i))
+
+        # Expand all visible items to show matches
+        def expand_visible_items(item: QtWidgets.QTreeWidgetItem) -> None:
+            if not item.isHidden():
+                item.setExpanded(True)
+                for i in range(item.childCount()):
+                    expand_visible_items(item.child(i))
+
+        for i in range(self.tree_widget.topLevelItemCount()):
+            expand_visible_items(self.tree_widget.topLevelItem(i))

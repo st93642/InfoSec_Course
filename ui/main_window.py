@@ -430,7 +430,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.controls_widget.set_position(position)
 
     def load_all_videos_tree(self) -> None:
-        """Load all videos organized in a tree structure by release and section."""
+        """Load all videos organized in a concise tree: 13 main folders (releases) with sections underneath."""
         try:
             # Get all releases
             releases = VideoLibrary.get_releases()
@@ -438,48 +438,110 @@ class MainWindow(QtWidgets.QMainWindow):
             # Clear existing playlist
             self.playlist_widget.clear_playlist()
             
-            # Add videos organized by release and section
+            # Add videos organized by release (top-level) and section (nested)
             total_videos = 0
+            
             # Sort releases numerically (oldest first)
             def version_key(version):
                 return tuple(int(x) for x in version.split('.'))
             
-            for release_tag in sorted(releases, key=version_key):  # Oldest first
-                # Add release as top-level item with title
+            for release_tag in sorted(releases, key=version_key):
+                # Add release as MAIN top-level folder with title and count
                 release_title = VideoLibrary.get_release_title(release_tag)
-                release_item = self.playlist_widget.add_category(release_title)
-                
-                # Get sections for this release
                 sections = VideoLibrary.get_release_sections(release_tag)
+                section_count = len(sections)
+                video_count = sum(len(v) for v in sections.values())
+                release_item = self.playlist_widget.add_category(f"{release_title} ({section_count} sections, {video_count} videos)")
                 
-                for section_key in sorted(sections.keys()):
-                    # Add section as child of release with proper name
+                # Sort sections within release
+                for section_key in sorted(sections.keys(), key=self._sort_section_key):
+                    # Add section as subcategory with count
                     section_name = VideoLibrary.get_section_name(release_tag, section_key)
-                    section_item = self.playlist_widget.add_subcategory(release_item, section_name)
+                    section_videos = sections[section_key]
+                    section_item = self.playlist_widget.add_subcategory(
+                        release_item, 
+                        f"{section_name} ({len(section_videos)} videos)"
+                    )
                     
-                    # Add videos under this section
-                    for full_name in sorted(sections[section_key]):
+                    # Add videos under this section (sorted)
+                    for full_name in sorted(section_videos, key=self._sort_video_key):
                         video_data = VideoLibrary.get_video_info(full_name)
                         if video_data:
-                            # Use clean name without extension for display
-                            display_name = VideoLibrary.get_display_name_without_extension(full_name)
+                            # Create concise display name
+                            display_name = self._create_concise_video_name(video_data)
+                            
                             video = ReleaseVideo(
                                 tag=video_data["release_tag"],
-                                body="",  # No release body in static data
+                                body="",
                                 asset_name=video_data["name"],
                                 asset_url=video_data["url"],
-                                text_url=video_data.get("text_url"),  # Include text URL if available
+                                text_url=video_data.get("text_url"),
                                 description=video_data["description"]
                             )
-                            self.playlist_widget.add_video_to_category(section_item, video, display_name)
+                            video._display_name = display_name
+                            self.playlist_widget.add_video_to_category(section_item, video)
                             total_videos += 1
             
-            self.status_label.setText(f"Loaded {total_videos} videos across {len(releases)} releases")
-            logger.info(f"Loaded {total_videos} videos in tree structure from {len(releases)} releases")
+            self.status_label.setText(f"Loaded {total_videos} videos from {len(releases)} main folders")
+            logger.info(f"Loaded {total_videos} videos in concise tree structure from {len(releases)} main folders")
             
         except Exception as e:
             logger.error(f"Error loading videos tree: {e}")
             self.status_label.setText(f"Error loading videos: {e}")
+    
+    @staticmethod
+    def _sort_section_key(section_key: str) -> tuple:
+        """Extract numeric part from section key for proper sorting."""
+        import re
+        match = re.search(r'(\d+)', section_key)
+        if match:
+            return (int(match.group(1)),)
+        return (999,)
+    
+    @staticmethod
+    def _sort_video_key(video_name: str) -> tuple:
+        """Extract numeric parts from video name for proper sorting."""
+        import re
+        numbers = re.findall(r'\d+', video_name)
+        return tuple(int(n) for n in numbers) if numbers else (999,)
+    
+    @staticmethod
+    def _create_concise_video_name(video_data: dict) -> str:
+        """Create a concise video name from metadata."""
+        description = video_data.get("description", "")
+        
+        if not description:
+            # Fallback to filename-based extraction
+            clean_name = VideoLibrary.get_display_name_without_extension(video_data["name"])
+            return clean_name.replace(".", " ")
+        
+        # Extract and format description
+        # Description format: "13 1 1 Git Introduction" -> "1.1 Git Introduction"
+        parts = description.split()
+        
+        # Find numeric prefix and text
+        numbering_parts = []
+        text_start_idx = 0
+        
+        for i, part in enumerate(parts):
+            if part.isdigit():
+                numbering_parts.append(part)
+            else:
+                text_start_idx = i
+                break
+        
+        # Create display name
+        if numbering_parts:
+            # Skip first number (release) for display, use rest as numbering
+            if len(numbering_parts) > 1:
+                display_numbers = '.'.join(numbering_parts[1:])
+                text_part = ' '.join(parts[text_start_idx:])
+                return f"{display_numbers} {text_part}".strip()
+            else:
+                text_part = ' '.join(parts[text_start_idx:])
+                return text_part.strip()
+        
+        return description
 
     def closeEvent(self, event) -> None:
         """

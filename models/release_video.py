@@ -26,10 +26,13 @@ class ReleaseVideo:
     asset_url: str
     text_url: Optional[str] = None
     description: Optional[str] = None
+    _display_name: Optional[str] = None  # Custom display name for clean presentation
 
     @property
     def display_name(self) -> str:
         """Get a display-friendly name for the video."""
+        if self._display_name:
+            return self._display_name
         return f"{self.tag} — {self.asset_name}"
 
     @property
