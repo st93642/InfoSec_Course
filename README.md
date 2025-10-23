@@ -50,7 +50,7 @@ This installs Python, video player software, and terminal emulator.
 In the same terminal, go to the app folder and install the required libraries:
 
 ```bash
-cd /home/altin/Desktop/InfoSec_Course
+cd /path/to/InfoSec_Course
 pip3 install -r requirements.txt
 ```
 
@@ -62,7 +62,7 @@ pip3 install -r requirements.txt
 2. Go to the app folder:
 
    ```bash
-   cd /home/altin/Desktop/InfoSec_Course
+   cd /path/to/InfoSec_Course
    ```
 
 3. Make the launcher script executable:
@@ -83,7 +83,7 @@ pip3 install -r requirements.txt
 2. Go to the app folder:
 
    ```bash
-   cd /home/altin/Desktop/InfoSec_Course
+   cd /path/to/InfoSec_Course
    ```
 
 3. Run the app:
