@@ -29,14 +29,12 @@ The app has 4 main sections:
 
 **Easiest way - no installation required!**
 
-**Note**: AppImage will be available in GitHub releases once uploaded. For now, use the source code installation below.
-
-When available, the download command will be:
-
 ```bash
 # Download and run in one command
-wget -O InfoSec_Course.AppImage https://github.com/st93642/InfoSec_Course/releases/download/latest/InfoSec_Course-x86_64.AppImage && chmod +x InfoSec_Course.AppImage && ./InfoSec_Course.AppImage
+wget -O InfoSec_Course.AppImage https://github.com/st93642/InfoSec_Course/releases/download/1.0.0/InfoSec_Course-x86_64.AppImage && chmod +x InfoSec_Course.AppImage && ./InfoSec_Course.AppImage
 ```
+
+**That's it!** The AppImage includes everything needed and works on any Ubuntu/Debian system.
 
 ## System Requirements
 
@@ -95,13 +93,23 @@ The easiest way to run the app is using the **AppImage** - a self-contained exec
 
 #### Download & Run AppImage
 
-**Note**: The AppImage will be available for download from GitHub releases once uploaded. For now, please use the source code installation method below.
+1. **Download the AppImage**:
 
-When available, the download steps will be:
+   ```bash
+   wget https://github.com/st93642/InfoSec_Course/releases/download/1.0.0/InfoSec_Course-x86_64.AppImage
+   ```
 
-1. **Download the AppImage** (command will be provided)
-2. **Make it executable** (command will be provided)  
-3. **Run the app** (command will be provided)
+2. **Make it executable**:
+
+   ```bash
+   chmod +x InfoSec_Course-x86_64.AppImage
+   ```
+
+3. **Run the app**:
+
+   ```bash
+   ./InfoSec_Course-x86_64.AppImage
+   ```
 
 #### AppImage Features
 
