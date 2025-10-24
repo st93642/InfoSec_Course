@@ -25,6 +25,19 @@ The app has 4 main sections:
 - **Bottom Left**: List of available videos you can choose from
 - **Bottom Right**: Built-in terminal (command line) for practicing commands
 
+## 🚀 Quick Start (AppImage)
+
+**Easiest way - no installation required!**
+
+**Note**: AppImage will be available in GitHub releases once uploaded. For now, use the source code installation below.
+
+When available, the download command will be:
+
+```bash
+# Download and run in one command
+wget -O InfoSec_Course.AppImage https://github.com/st93642/InfoSec_Course/releases/download/latest/InfoSec_Course-x86_64.AppImage && chmod +x InfoSec_Course.AppImage && ./InfoSec_Course.AppImage
+```
+
 ## System Requirements
 
 You need a Linux computer with:
@@ -76,7 +89,51 @@ This installs:
 
 ## How to Run the App
 
-### Method 1: Using the Launcher Script (Easiest)
+### Method 1: AppImage (Easiest - No Installation Required)
+
+The easiest way to run the app is using the **AppImage** - a self-contained executable that works on any Ubuntu/Debian-based Linux system.
+
+#### Download & Run AppImage
+
+**Note**: The AppImage will be available for download from GitHub releases once uploaded. For now, please use the source code installation method below.
+
+When available, the download steps will be:
+
+1. **Download the AppImage** (command will be provided)
+2. **Make it executable** (command will be provided)  
+3. **Run the app** (command will be provided)
+
+#### AppImage Features
+
+- ✅ **No installation required** - just download and run
+- ✅ **Self-contained** - includes all dependencies
+- ✅ **Portable** - works on any Ubuntu/Debian system
+- ✅ **Safe** - runs in sandboxed environment
+- ✅ **Small** - only ~288KB download
+- ✅ **Green terminal** - classic green-on-black terminal colors
+
+#### Customize AppImage Settings
+
+You can customize the terminal appearance by setting environment variables:
+
+```bash
+# Green on black (default)
+./InfoSec_Course-x86_64.AppImage
+
+# Custom colors
+export TERMINAL_BG_COLOR="#002B36"    # Solarized dark background
+export TERMINAL_FG_COLOR="#93A1A1"    # Solarized light text
+export TERMINAL_CURSOR_COLOR="#DC322F" # Solarized red cursor
+./InfoSec_Course-x86_64.AppImage
+
+# Larger terminal font
+export TERMINAL_FONT_SIZE="16"
+./InfoSec_Course-x86_64.AppImage
+```
+
+Commands shown for when AppImage is available
+
+### Method 2: Using the Launcher Script (Source Code)
 
 1. Make the launcher script executable (you're already in the InfoSec_Course directory):
 
